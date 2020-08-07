@@ -8,7 +8,9 @@ const App = () => (
   <Router>
     <Route>
       <Navbar />
-      <Landing />
+      <Switch>
+        <Route path="/" component={Landing} />
+      </Switch>
     </Route>
   </Router>
 );

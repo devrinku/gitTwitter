@@ -3,8 +3,17 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="container">
-      <p className="medium fw-700">Welcome Back!</p>
+    <div className="auth card">
+      <p className="medium fw-600">Welcome Back! </p>
+      <form className="my-1">
+        <input type="text" name="" placeholder="Email" id="" />
+        <input type="text" name="" placeholder="Password" id="" />
+        <input type="submit" value="Login" className="btn block" />
+      </form>
+      <div className="auth-links ">
+        <Link to="/register">I am not registered yet! </Link>
+        <Link to="#!">Forgot Password?</Link>
+      </div>
     </div>
   );
 };

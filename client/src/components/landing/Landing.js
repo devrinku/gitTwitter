@@ -8,7 +8,7 @@ const Landing = () => {
   return (
     <header>
       <div className="overlay"></div>
-      <div className="content">
+      <div className="content padding-top">
         <Switch>
           <Route exact path="/" component={Heading} />
           <Route exact path="/login" component={Login} />

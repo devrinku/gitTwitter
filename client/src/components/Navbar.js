@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav>
       <div className="nav-wrapper">
         <div className="left-nav">
-          <Link to="/" className="medium fw-700 ">
+          <Link to="/" style={{ fontSize: "2.1rem" }} className=" fw-700 ">
             <i class="fab fa-github-alt mx orange"></i>
             Git<span className="orange">Tweet</span>
           </Link>

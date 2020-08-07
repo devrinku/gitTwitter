@@ -14,7 +14,10 @@ const Heading = () => {
           <Link to="/register" className="btn mx-1">
             SignUp
           </Link>
-          <Link to="/login" className="btn white black-text">
+          <Link
+            style={{ backgroundColor: "white", color: "black" }}
+            to="/login"
+            className="btn white black-text">
             Login
           </Link>
         </div>
