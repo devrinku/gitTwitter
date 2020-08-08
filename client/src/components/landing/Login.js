@@ -11,8 +11,12 @@ const Login = () => {
         <input type="submit" value="Login" className="btn block" />
       </form>
       <div className="auth-links ">
-        <Link to="/register">I am not registered yet! </Link>
-        <Link to="#!">Forgot Password?</Link>
+        <p>
+          <Link to="/register">I am already registered! </Link>
+        </p>
+        <p>
+          <Link to="#!">Forgot Password?</Link>
+        </p>
       </div>
     </div>
   );

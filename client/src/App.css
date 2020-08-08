@@ -269,10 +269,13 @@ input[type="submit"] {
 
 .auth-links a {
   padding-bottom: 0.3rem;
+  border-bottom: 1px solid white;
   transition: all 0.3s;
 }
+
 .auth-links a:hover {
   color: #f03a02;
+  border-bottom: 1px solid transparent;
 }
 
 .auth-links {

@@ -13,8 +13,12 @@ const Register = () => {
         <input type="submit" value="Register" className="btn block" />
       </form>
       <div className="auth-links ">
-        <Link to="/login">I am already registered! </Link>
-        <Link to="#!">Forgot Password?</Link>
+        <p>
+          <Link to="/login">I am already registered! </Link>
+        </p>
+        <p>
+          <Link to="#!">Forgot Password?</Link>
+        </p>
       </div>
     </div>
   );
