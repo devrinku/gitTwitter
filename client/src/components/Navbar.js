@@ -1,7 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { showSideDrawer } from "./../actions/utils";
+import { hideSideDrawer } from "./../actions/utils";
 
-const Navbar = () => {
+const Navbar = ({ utils, showSideDrawer, hideSideDrawer }) => {
+  const onClick = () => {
+    if (utils.sideDrawer === false) {
+      showSideDrawer();
+    } else {
+      hideSideDrawer();
+    }
+  };
   return (
     <nav>
       <div className="nav-wrapper">
@@ -12,25 +22,41 @@ const Navbar = () => {
           </Link>
         </div>
         <ul className="right-nav">
+          {utils.menubar && (
+            <Fragment>
+              <li className="hide ">
+                <a onClick={onClick} href="#!">
+                  <i className="fas fa-bars small "></i>
+                </a>
+              </li>
+              <li className="hide">
+                <span className="divider small">|</span>
+              </li>
+            </Fragment>
+          )}
           <li>
             <a href="#!">Login</a>
           </li>
-          <li className="mx">
-            <span className="small">|</span>
+          <li>
+            <span className="divider small">|</span>
           </li>
           <li>
             <a href="#!">Register</a>
           </li>
-          <li className="mx">
-            <span className="small">|</span>
+          <li>
+            <span className="divider small">|</span>
           </li>
           <li>
-            <a href="#!">Enter as guest</a>
+            <Link to="/dashboard/profile">Enter as guest</Link>
           </li>
         </ul>
       </div>
     </nav>
   );
 };
-
-export default Navbar;
+const mapStateToProps = (state) => ({
+  utils: state.utils,
+});
+export default connect(mapStateToProps, { showSideDrawer, hideSideDrawer })(
+  Navbar
+);

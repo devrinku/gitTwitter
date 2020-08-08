@@ -12,7 +12,7 @@ const Login = () => {
       </form>
       <div className="auth-links ">
         <p>
-          <Link to="/register">I am already registered! </Link>
+          <Link to="/register">I am not registered yet! </Link>
         </p>
         <p>
           <Link to="#!">Forgot Password?</Link>

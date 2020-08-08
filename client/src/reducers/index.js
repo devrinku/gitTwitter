@@ -1,3 +1,6 @@
 import { combineReducers } from "redux";
+import utils from "./utils";
 
-export default combineReducers({});
+export default combineReducers({
+  utils,
+});

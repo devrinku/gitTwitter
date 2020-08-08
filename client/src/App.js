@@ -14,9 +14,8 @@ const App = () => (
     <Router>
       <Navbar />
       <Switch>
-        {" "}
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/create" component={Forms} />{" "}
+        <Route path="/create" component={Forms} />
         <Route path="/" component={Landing} />
       </Switch>
     </Router>
