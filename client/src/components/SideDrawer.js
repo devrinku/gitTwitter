@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { showSideDrawer } from "./../actions/utils";
-
+import { Link } from "react-router-dom";
 import user from "./../images/1.jpg";
 import { hideSideDrawer } from "./../actions/utils";
 import { hideBackDrop } from "./../actions/utils";
@@ -46,16 +46,16 @@ const SideDrawer = ({
             <p>rajesh@gmail.com</p>
           </li>
           <li>
-            <a href="#!">Followers</a>
+            <Link to="/dashboard/followers">Followers</Link>
           </li>
           <li>
-            <a href="#!">Followings</a>
+            <Link to="/dashboard/followings">Followings</Link>
           </li>
           <li>
-            <a href="#!">Posts</a>
+            <Link to="/dashboard/posts">Posts</Link>
           </li>
           <li>
-            <a href="#!">Education</a>
+            <Link to="/dashboard/education">Education</Link>
           </li>
           <li>
             <a href="#!">Experience</a>

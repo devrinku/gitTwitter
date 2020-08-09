@@ -1,6 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Post from "./Post";
+import Post from "./Posts";
 import Profile from "./Profile";
+import Followers from "./Followers";
+import Followings from "./Followings";
+import Posts from "./Posts";
+import Education from "./Education";
 import SideDrawer from "./../SideDrawer";
 import Aside from "./../Aside";
 import { Switch, Route } from "react-router-dom";
@@ -30,7 +34,10 @@ const Dashboard = ({
       {aside && <Aside />}
       <Switch>
         <Route exact path="/dashboard/profile" component={Profile} />
-        <Route exact path="/dashboard/post" component={Post} />
+        <Route exact path="/dashboard/posts" component={Posts} />
+        <Route exact path="/dashboard/followers" component={Followers} />
+        <Route exact path="/dashboard/followings" component={Followings} />
+        <Route exact path="/dashboard/education" component={Education} />
       </Switch>
     </Fragment>
   );
