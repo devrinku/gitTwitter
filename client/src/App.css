@@ -171,8 +171,8 @@ nav {
 .divider {
   margin: 0 0.3rem;
 }
-.orange {
-  color: #f03a02;
+.teal {
+  color: teal;
 }
 .nav-wrapper {
   display: grid;
@@ -225,6 +225,13 @@ header {
 .container {
   max-width: 80%;
   margin: auto;
+}
+.mid-container {
+  padding-left: 250px;
+  padding-right: 275px;
+}
+.bg-teal {
+  background-color: teal;
 }
 .padding-top {
   padding-top: 5rem;
@@ -294,9 +301,22 @@ input[type="submit"] {
   top: 0;
   bottom: 0;
   overflow-x: hidden;
-  background-color: tomato;
+  background-color: rgb(238, 236, 236);
   transition: all 0.2s;
   z-index: 15;
+}
+/* ---------------------Aside--------------------------- */
+
+.aside {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  background-color: rgb(238, 236, 236);
+  transition: all 0.2s;
+  z-index: 15;
+  width: 275px;
 }
 
 /* ---------------------Backdrop-------------------- */
@@ -308,9 +328,43 @@ input[type="submit"] {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
 }
+/* ----------------------Profile-------------------------- */
+.image {
+  display: flex;
+  justify-content: center;
+}
+.image img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+.pro-content p {
+  display: flex;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-size: 1.3rem;
+  align-items: center;
+
+  font-weight: 500;
+}
+.pro-content .fas {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-right: 0.2rem;
+  align-items: center;
+  width: 2rem;
+}
 @media (max-width: 992px) {
   .auth {
     width: 80%;
+  }
+  .aside {
+    display: none;
+  }
+  .mid-container {
+    padding-right: 0px;
   }
 
   .auth-links {
@@ -322,6 +376,10 @@ input[type="submit"] {
   }
 }
 @media (max-width: 768px) {
+  .mid-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
   .container {
     max-width: 93%;
   }

@@ -27,8 +27,9 @@ const Navbar = ({
       <div className="nav-wrapper">
         <div className="left-nav">
           <Link to="/" style={{ fontSize: "2.1rem" }} className=" fw-700 ">
-            <i className="fab fa-github-alt mx orange"></i>
-            Git<span className="orange">Tweet</span>
+            <i style={{ color: "teal" }} className="fab fa-github-alt mx "></i>
+            Git
+            <span style={{ color: "teal" }}>Tweet</span>
           </Link>
         </div>
         <ul className="right-nav">
