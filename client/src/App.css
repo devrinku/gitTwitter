@@ -304,6 +304,7 @@ input[type="submit"] {
   background-color: rgb(238, 236, 236);
   transition: all 0.2s;
   z-index: 15;
+  overflow-y: auto;
 }
 /* ---------------------Aside--------------------------- */
 
@@ -317,6 +318,7 @@ input[type="submit"] {
   transition: all 0.2s;
   z-index: 15;
   width: 275px;
+  overflow-y: auto;
 }
 
 /* ---------------------Backdrop-------------------- */
@@ -356,6 +358,44 @@ input[type="submit"] {
   align-items: center;
   width: 2rem;
 }
+.background-img {
+  background-image: url(./images//back.jpg);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  color: white;
+}
+.user-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 0.3rem;
+}
+.side-drawer ul li a {
+  padding: 1rem;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid rgb(224, 224, 224);
+  color: rgb(90, 86, 86);
+}
+
+.list {
+  display: flex;
+  -webkit-scrollbar: none;
+  cursor: pointer;
+  justify-content: space-around;
+  border: 1px solid rgb(196, 194, 194);
+  border-right: none;
+  padding: 0.5rem 0;
+  color: rgb(90, 86, 86);
+}
+.list img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
 @media (max-width: 992px) {
   .auth {
     width: 80%;

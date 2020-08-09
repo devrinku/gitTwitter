@@ -3,7 +3,7 @@ import user from "./../../images/1.jpg";
 
 const Profile = () => {
   return (
-    <div className="mid-container bg-teal padding-top">
+    <div className=" mid-container bg-teal padding-top">
       <div className="profile">
         <div className="image my-2">
           <img src={user} alt="" />
