@@ -2,3 +2,5 @@ export const SHOW_MENU_BAR = "SHOW_MENU_BAR";
 export const HIDE_MENU_BAR = "HIDE_MENU_BAR";
 export const SHOW_SIDE_DRAWER = "SHOW_SIDE_DRAWER";
 export const HIDE_SIDE_DRAWER = "HIDE_SIDE_DRAWER";
+export const SHOW_BACKDROP = "SHOW_BACKDROP";
+export const HIDE_BACKDROP = "HIDE_BACKDROP";

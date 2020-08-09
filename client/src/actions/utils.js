@@ -3,6 +3,8 @@ import {
   HIDE_MENU_BAR,
   SHOW_SIDE_DRAWER,
   HIDE_SIDE_DRAWER,
+  SHOW_BACKDROP,
+  HIDE_BACKDROP,
 } from "./../constants";
 
 export const showMenuBar = () => {
@@ -26,5 +28,17 @@ export const showSideDrawer = () => {
 export const hideSideDrawer = () => {
   return {
     type: HIDE_SIDE_DRAWER,
+  };
+};
+
+export const showBackDrop = () => {
+  return {
+    type: SHOW_BACKDROP,
+  };
+};
+
+export const hideBackDrop = () => {
+  return {
+    type: HIDE_BACKDROP,
   };
 };

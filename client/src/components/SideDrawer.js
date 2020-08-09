@@ -2,17 +2,19 @@ import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { showSideDrawer } from "./../actions/utils";
 import { hideSideDrawer } from "./../actions/utils";
+import { hideBackDrop } from "./../actions/utils";
 import Backdrop from "./Backdrop";
-const SideDrawer = ({ utils, showSideDrawer, hideSideDrawer }) => {
-  const [backdrop, backdropHandler] = useState(false);
-
+const SideDrawer = ({
+  utils,
+  showSideDrawer,
+  hideBackDrop,
+  hideSideDrawer,
+}) => {
   useEffect(() => {
     if (window.innerWidth > 768) {
       showSideDrawer();
-      backdropHandler(false);
     } else {
       hideSideDrawer();
-      backdropHandler(true);
     }
     //eslint-disable-next-line
   }, []);
@@ -20,26 +22,30 @@ const SideDrawer = ({ utils, showSideDrawer, hideSideDrawer }) => {
     window.addEventListener("resize", () => {
       if (window.innerWidth > 768) {
         showSideDrawer();
-        backdropHandler(false);
+        hideBackDrop();
       } else {
         hideSideDrawer();
-        backdropHandler(true);
+        hideBackDrop();
       }
     });
+
     //eslint-disable-next-line
   }, []);
+
   return (
     <Fragment>
       <div
         style={utils.sideDrawer ? { width: "250px" } : { width: "0px" }}
         className="side-drawer"></div>
-      {utils.sideDrawer && backdrop && <Backdrop />}
+      {utils.backdrop && <Backdrop />}
     </Fragment>
   );
 };
 const mapStatetoProps = (state) => ({
   utils: state.utils,
 });
-export default connect(mapStatetoProps, { showSideDrawer, hideSideDrawer })(
-  SideDrawer
-);
+export default connect(mapStatetoProps, {
+  showSideDrawer,
+  hideSideDrawer,
+  hideBackDrop,
+})(SideDrawer);

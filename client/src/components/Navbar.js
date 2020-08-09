@@ -2,14 +2,24 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { showSideDrawer } from "./../actions/utils";
+import { showBackDrop } from "./../actions/utils";
+import { hideBackDrop } from "./../actions/utils";
 import { hideSideDrawer } from "./../actions/utils";
 
-const Navbar = ({ utils, showSideDrawer, hideSideDrawer }) => {
+const Navbar = ({
+  utils,
+  showSideDrawer,
+  showBackDrop,
+  hideBackDrop,
+  hideSideDrawer,
+}) => {
   const onClick = () => {
     if (utils.sideDrawer === false) {
       showSideDrawer();
+      showBackDrop();
     } else {
       hideSideDrawer();
+      hideBackDrop();
     }
   };
   return (
@@ -57,6 +67,9 @@ const Navbar = ({ utils, showSideDrawer, hideSideDrawer }) => {
 const mapStateToProps = (state) => ({
   utils: state.utils,
 });
-export default connect(mapStateToProps, { showSideDrawer, hideSideDrawer })(
-  Navbar
-);
+export default connect(mapStateToProps, {
+  showSideDrawer,
+  showBackDrop,
+  hideBackDrop,
+  hideSideDrawer,
+})(Navbar);

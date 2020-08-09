@@ -313,9 +313,7 @@ input[type="submit"] {
   .auth {
     width: 80%;
   }
-  header {
-    height: 109vh;
-  }
+
   .auth-links {
     grid-template-columns: 1fr;
   }
@@ -355,6 +353,9 @@ input[type="submit"] {
 
   .auth {
     width: 90%;
+  }
+  .padding-top {
+    padding-top: 8rem;
   }
 }
 @media (min-width: 768px) {

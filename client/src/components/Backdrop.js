@@ -1,7 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
+import { hideSideDrawer } from "./../actions/utils";
+import { hideBackDrop } from "./../actions/utils";
 
-const Backdrop = () => {
-  return <div className="backdrop"></div>;
+const Backdrop = ({ hideSideDrawer, hideBackDrop }) => {
+  const onClick = () => {
+    hideBackDrop();
+    hideSideDrawer();
+  };
+  return <div onClick={onClick} className="backdrop"></div>;
 };
 
-export default Backdrop;
+export default connect(null, { hideSideDrawer, hideBackDrop })(Backdrop);

@@ -3,11 +3,14 @@ import {
   HIDE_MENU_BAR,
   SHOW_SIDE_DRAWER,
   HIDE_SIDE_DRAWER,
+  SHOW_BACKDROP,
+  HIDE_BACKDROP,
 } from "./../constants";
 
 const initialState = {
   menubar: false,
   sideDrawer: false,
+  backdrop: false,
 };
 
 export default (state = initialState, action) => {
@@ -32,6 +35,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         sideDrawer: false,
+      };
+    case SHOW_BACKDROP:
+      return {
+        ...state,
+        backdrop: true,
+      };
+    case HIDE_BACKDROP:
+      return {
+        ...state,
+        backdrop: false,
       };
     default:
       return state;
