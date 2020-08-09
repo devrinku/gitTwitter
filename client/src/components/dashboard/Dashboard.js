@@ -23,12 +23,10 @@ const Dashboard = ({
   return (
     <Fragment>
       <SideDrawer />
-      <div className="padding-top">
-        <Switch>
-          <Route exact path="/dashboard/profile" component={Profile} />
-          <Route exact path="/dashboard/post" component={Post} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/dashboard/profile" component={Profile} />
+        <Route exact path="/dashboard/post" component={Post} />
+      </Switch>
     </Fragment>
   );
 };
