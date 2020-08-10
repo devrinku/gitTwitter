@@ -4,3 +4,6 @@ export const SHOW_SIDE_DRAWER = "SHOW_SIDE_DRAWER";
 export const HIDE_SIDE_DRAWER = "HIDE_SIDE_DRAWER";
 export const SHOW_BACKDROP = "SHOW_BACKDROP";
 export const HIDE_BACKDROP = "HIDE_BACKDROP";
+export const SHOW_MODAL = "SHOW_MODAL";
+export const HIDE_MODAL = "HIDE_MODAL";
+export const SET_BACKDROP_TYPE = "SET_BACKDROP_TYPE";

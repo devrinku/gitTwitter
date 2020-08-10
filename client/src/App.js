@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Landing from "./components/landing/Landing";
 import Dashboard from "./components/dashboard/Dashboard";
 import Forms from "./components/Forms/Forms";
-import Heading from "././components/landing/Landing";
 import store from "./store";
 import { Provider } from "react-redux";
 

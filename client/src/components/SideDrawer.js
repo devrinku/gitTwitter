@@ -1,16 +1,25 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { showSideDrawer } from "./../actions/utils";
 import { Link } from "react-router-dom";
 import user from "./../images/1.jpg";
 import { hideSideDrawer } from "./../actions/utils";
 import { hideBackDrop } from "./../actions/utils";
-import Backdrop from "./Backdrop";
+import { showBackDrop } from "./../actions/utils";
+import { setBackdropType } from "./../actions/utils";
+import { hideModal } from "./../actions/utils";
+import { showModal } from "./../actions/utils";
+import Modal from "./Modal";
+
 const SideDrawer = ({
   utils,
   showSideDrawer,
+  showBackDrop,
+  showModal,
   hideBackDrop,
   hideSideDrawer,
+  setBackdropType,
+  hideModal,
 }) => {
   useEffect(() => {
     if (window.innerWidth > 768) {
@@ -25,9 +34,11 @@ const SideDrawer = ({
       if (window.innerWidth > 768) {
         showSideDrawer();
         hideBackDrop();
+        hideModal();
       } else {
         hideSideDrawer();
         hideBackDrop();
+        hideModal();
       }
     });
 
@@ -81,18 +92,31 @@ const SideDrawer = ({
             </Link>
           </li>
           <li>
-            <Link onClick={onClick} to="#!">
+            <Link onClick={onClick} to="/dashboard/settings">
               Settings
             </Link>
           </li>
           <li>
-            <Link onClick={onClick} to="#!">
+            <Link
+              onClick={() => {
+                onClick();
+                setBackdropType("logout");
+                showBackDrop();
+                showModal();
+              }}
+              to="#!">
               Logout
-            </Link>
+            </Link>{" "}
           </li>
         </ul>
       </div>
-      {utils.backdrop && <Backdrop />}
+      {utils.backdrop && utils.modal && utils.backdropType === "logout" && (
+        <Modal index={90} action="logout">
+          <a style={{ color: "white" }} href="#!" className="btn orange">
+            Confirm
+          </a>
+        </Modal>
+      )}
     </Fragment>
   );
 };
@@ -102,5 +126,9 @@ const mapStatetoProps = (state) => ({
 export default connect(mapStatetoProps, {
   showSideDrawer,
   hideSideDrawer,
+  showBackDrop,
+  showModal,
   hideBackDrop,
+  hideModal,
+  setBackdropType,
 })(SideDrawer);

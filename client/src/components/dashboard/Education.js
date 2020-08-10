@@ -1,6 +1,11 @@
 import React from "react";
+import Modal from "./../Modal";
+import { connect } from "react-redux";
+import { showBackDrop } from "./../../actions/utils";
+import { showModal } from "./../../actions/utils";
+import { setBackdropType } from "./../../actions/utils";
 
-const Education = () => {
+const Education = ({ utils, showBackDrop, showModal, setBackdropType }) => {
   return (
     <div className="padding-top mid-container">
       <div className="my teal">
@@ -13,19 +18,38 @@ const Education = () => {
           <tr>
             <td>School</td>
             <td>Degree</td>
-            <td>Years</td> <td>Action</td>
+            <td>Years</td>
+            <td>Action</td>
           </tr>
         </thead>
-
         <tbody>
           <tr>
             <td>Eve</td>
             <td>Jackson</td>
             <td>94</td>
             <td>
-              <a href="#!" className="btn orange">
+              <a
+                onClick={() => {
+                  setBackdropType("education");
+                  showBackDrop();
+                  showModal();
+                }}
+                href="#!"
+                className="btn orange">
                 Delete
               </a>
+              {utils.backdrop &&
+                utils.modal &&
+                utils.backdropType === "education" && (
+                  <Modal index={90} action="delete this education credential">
+                    <a
+                      style={{ color: "white" }}
+                      href="#!"
+                      className="btn orange">
+                      Confirm
+                    </a>
+                  </Modal>
+                )}
             </td>
           </tr>
           <tr>
@@ -53,5 +77,11 @@ const Education = () => {
     </div>
   );
 };
-
-export default Education;
+const mapStateToProps = (state) => ({
+  utils: state.utils,
+});
+export default connect(mapStateToProps, {
+  showBackDrop,
+  showModal,
+  setBackdropType,
+})(Education);

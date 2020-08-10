@@ -5,12 +5,17 @@ import {
   HIDE_SIDE_DRAWER,
   SHOW_BACKDROP,
   HIDE_BACKDROP,
+  SHOW_MODAL,
+  SET_BACKDROP_TYPE,
+  HIDE_MODAL,
 } from "./../constants";
 
 const initialState = {
   menubar: false,
   sideDrawer: false,
   backdrop: false,
+  modal: false,
+  backdropType: null,
 };
 
 export default (state = initialState, action) => {
@@ -45,6 +50,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         backdrop: false,
+      };
+    case SHOW_MODAL:
+      return {
+        ...state,
+        modal: true,
+      };
+    case HIDE_MODAL:
+      return {
+        ...state,
+        modal: false,
+      };
+    case SET_BACKDROP_TYPE:
+      return {
+        ...state,
+        backdropType: payload,
       };
     default:
       return state;

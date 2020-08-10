@@ -5,6 +5,7 @@ import { showSideDrawer } from "./../actions/utils";
 import { showBackDrop } from "./../actions/utils";
 import { hideBackDrop } from "./../actions/utils";
 import { hideSideDrawer } from "./../actions/utils";
+import { setBackdropType } from "./../actions/utils";
 
 const Navbar = ({
   utils,
@@ -12,13 +13,16 @@ const Navbar = ({
   showBackDrop,
   hideBackDrop,
   hideSideDrawer,
+  setBackdropType,
 }) => {
   const onClick = () => {
     if (utils.sideDrawer === false) {
       showSideDrawer();
+      setBackdropType("sideNav");
       showBackDrop();
     } else {
       hideSideDrawer();
+      setBackdropType("sideNav");
       hideBackDrop();
     }
   };
@@ -73,4 +77,5 @@ export default connect(mapStateToProps, {
   showBackDrop,
   hideBackDrop,
   hideSideDrawer,
+  setBackdropType,
 })(Navbar);

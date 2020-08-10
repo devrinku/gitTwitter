@@ -5,6 +5,9 @@ import {
   HIDE_SIDE_DRAWER,
   SHOW_BACKDROP,
   HIDE_BACKDROP,
+  SHOW_MODAL,
+  SET_BACKDROP_TYPE,
+  HIDE_MODAL,
 } from "./../constants";
 
 export const showMenuBar = () => {
@@ -40,5 +43,24 @@ export const showBackDrop = () => {
 export const hideBackDrop = () => {
   return {
     type: HIDE_BACKDROP,
+  };
+};
+
+export const showModal = () => {
+  return {
+    type: SHOW_MODAL,
+  };
+};
+
+export const hideModal = () => {
+  return {
+    type: HIDE_MODAL,
+  };
+};
+
+export const setBackdropType = (backdropType) => {
+  return {
+    type: SET_BACKDROP_TYPE,
+    payload: backdropType,
   };
 };

@@ -488,7 +488,7 @@ input[type="submit"] {
   background-color: #c70039;
 }
 
-/* ------------------Education------------------------- */
+/* ------------------Education & Experience------------------------- */
 table {
   width: 98%;
   margin: auto;
@@ -507,6 +507,37 @@ tbody td {
 tbody tr {
   border-bottom: 1px solid gray;
 }
+/* ------------Settings------------------- */
+.settings {
+  width: 95%;
+  margin: 2rem auto;
+}
+.settings li {
+  text-align: center;
+  margin-bottom: 0.6rem;
+} /* ------------------Modal------------------------- */
+.modal {
+  position: fixed;
+  top: 30vh;
+  z-index: 100;
+  width: 50%;
+  left: 25%;
+}
+.modal-heading {
+  background-color: #077c70;
+  padding: 0.5rem;
+  color: white;
+}
+.modal-content {
+  background-color: gainsboro;
+  padding: 1rem 0.5rem;
+}
+.modal-links {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
 @media (max-width: 992px) {
   .auth {
     width: 80%;
@@ -524,6 +555,10 @@ tbody tr {
 
   .auth-links a {
     margin-bottom: 0.5rem;
+  }
+  .modal {
+    width: 70%;
+    left: 15%;
   }
 }
 
@@ -573,6 +608,10 @@ tbody tr {
   .heading {
     margin-top: 8rem;
   }
+  .modal {
+    width: 80%;
+    left: 10%;
+  }
 }
 @media (min-width: 768px) {
   .hide {
@@ -586,5 +625,8 @@ tbody tr {
 
   .pencil {
     font-size: 1.2rem;
+  }
+  .small {
+    font-size: 1rem;
   }
 }
