@@ -1,6 +1,6 @@
 import React from "react";
 
-const EducationForm = () => {
+const ExperienceForm = () => {
   return (
     <div className="container">
       <div className="my ">
@@ -13,7 +13,7 @@ const EducationForm = () => {
       <form className="education-form ">
         <div className="input-field">
           <input type="text" name="" placeholder="School" id="" />
-          <span className="x-small ">Name of school/college.</span>
+          <span className="x-small ">Job Title.</span>
         </div>
         <div className="input-field">
           <input type="text" name="" placeholder="Degree" id="" />
@@ -68,4 +68,4 @@ const EducationForm = () => {
   );
 };
 
-export default EducationForm;
+export default ExperienceForm;
