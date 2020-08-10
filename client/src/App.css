@@ -457,7 +457,56 @@ input[type="submit"] {
   color: teal;
   border-top: 1px solid gray;
 }
+/* ---------------Github content---------------- */
+.github-content {
+  width: 98%;
+  margin: auto;
+  display: grid;
+  grid-gap: 1rem;
+  align-items: flex-start;
+  grid-template-columns: 3fr 1fr;
+}
+.git-strazers {
+  justify-self: flex-end;
+}
+.github-content {
+  background-color: rgb(219, 219, 219);
+  margin-bottom: 1rem;
+}
+.badge {
+  padding: 0.4rem;
+  margin: 0.3rem;
+  color: white;
+}
+.navy {
+  background-color: #222831;
+}
+.tomato {
+  background-color: #222831;
+}
+.orange {
+  background-color: #c70039;
+}
+
 /* ------------------Education------------------------- */
+table {
+  width: 98%;
+  margin: auto;
+  border-collapse: separate;
+}
+tr:nth-child(even) {
+  background-color: #ececec;
+}
+thead td {
+  background-color: rgb(206, 206, 206);
+  padding: 0.5rem;
+}
+tbody td {
+  padding: 0.5rem;
+}
+tbody tr {
+  border-bottom: 1px solid gray;
+}
 @media (max-width: 992px) {
   .auth {
     width: 80%;
@@ -477,6 +526,7 @@ input[type="submit"] {
     margin-bottom: 0.5rem;
   }
 }
+
 @media (max-width: 768px) {
   .mid-container {
     padding-left: 0px;

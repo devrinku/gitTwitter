@@ -3,6 +3,11 @@ import user from "./../../images/1.jpg";
 const Posts = () => {
   return (
     <div className="mid-container padding-top">
+      <div className="my teal">
+        <span className="pencil fw-500 ">
+          <i className="fas fa-blog mx"></i>Posts
+        </span>
+      </div>
       <div className="post">
         <div className="post-info">
           <div className="post-img">

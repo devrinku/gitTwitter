@@ -1,11 +1,11 @@
 import React from "react";
 
-const Education = () => {
+const Experience = () => {
   return (
     <div className="padding-top mid-container">
       <div className="my teal">
         <span className="pencil fw-500 ">
-          <i className="fas fa-graduation-cap mx"></i>Education Credentials
+          <i className="fas fa-users-cog mx"></i>Experience Credentials
         </span>
       </div>
       <table>
@@ -54,4 +54,4 @@ const Education = () => {
   );
 };
 
-export default Education;
+export default Experience;

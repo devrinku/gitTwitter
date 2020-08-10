@@ -33,7 +33,12 @@ const SideDrawer = ({
 
     //eslint-disable-next-line
   }, []);
-
+  const onClick = () => {
+    if (window.innerWidth < 768) {
+      hideSideDrawer();
+      hideBackDrop();
+    }
+  };
   return (
     <Fragment>
       <div
@@ -46,28 +51,44 @@ const SideDrawer = ({
             <p>rajesh@gmail.com</p>
           </li>
           <li>
-            <Link to="/dashboard/followers">Followers</Link>
+            <Link onClick={onClick} to="/dashboard/followers">
+              Followers
+            </Link>
           </li>
           <li>
-            <Link to="/dashboard/followings">Followings</Link>
+            <Link onClick={onClick} to="/dashboard/followings">
+              Followings
+            </Link>
           </li>
           <li>
-            <Link to="/dashboard/posts">Posts</Link>
+            <Link onClick={onClick} to="/dashboard/posts">
+              Posts
+            </Link>
           </li>
           <li>
-            <Link to="/dashboard/education">Education</Link>
+            <Link onClick={onClick} to="/dashboard/education">
+              Education
+            </Link>
           </li>
           <li>
-            <a href="#!">Experience</a>
+            <Link onClick={onClick} to="/dashboard/experience">
+              Experience
+            </Link>
           </li>
           <li>
-            <a href="#!">Github</a>
+            <Link onClick={onClick} to="/dashboard/github">
+              Github
+            </Link>
           </li>
           <li>
-            <a href="#!">Settings</a>
+            <Link onClick={onClick} to="#!">
+              Settings
+            </Link>
           </li>
           <li>
-            <a href="#!">Logout</a>
+            <Link onClick={onClick} to="#!">
+              Logout
+            </Link>
           </li>
         </ul>
       </div>

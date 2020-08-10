@@ -3,8 +3,10 @@ import Post from "./Posts";
 import Profile from "./Profile";
 import Followers from "./Followers";
 import Followings from "./Followings";
+import Github from "./Github";
 import Posts from "./Posts";
 import Education from "./Education";
+import Experience from "./Experience";
 import SideDrawer from "./../SideDrawer";
 import Aside from "./../Aside";
 import { Switch, Route } from "react-router-dom";
@@ -38,6 +40,8 @@ const Dashboard = ({
         <Route exact path="/dashboard/followers" component={Followers} />
         <Route exact path="/dashboard/followings" component={Followings} />
         <Route exact path="/dashboard/education" component={Education} />
+        <Route exact path="/dashboard/experience" component={Experience} />
+        <Route exact path="/dashboard/github" component={Github} />
       </Switch>
     </Fragment>
   );
