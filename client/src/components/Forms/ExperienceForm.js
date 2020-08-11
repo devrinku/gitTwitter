@@ -5,45 +5,42 @@ const ExperienceForm = () => {
     <div className="container">
       <div className="my ">
         <span className="teal pencil fw-500 ">
-          <i className="fas fa-graduation-cap mx"></i>Add Education
+          <i className="fas fa-cogs mx"></i>Add Experience
         </span>
         <br />
         <span className="mx">* = required Field.</span>
       </div>
       <form className="education-form ">
         <div className="input-field">
-          <input type="text" name="" placeholder="School" id="" />
-          <span className="x-small ">Job Title.</span>
-        </div>
-        <div className="input-field">
-          <input type="text" name="" placeholder="Degree" id="" />
+          <input type="text" name="" placeholder="* Job title." id="" />
           <span className="x-small ">
-            Type of degree like masters,graduation,under graduation.
+            Job title like manager,quality analysts etc.
           </span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="Field of Study" id="" />
-          <span className="x-small ">Your branch of specilization.</span>
+          <input type="text" name="" placeholder="* Name of Company" id="" />
+          <span className="x-small ">Company you were working for.</span>
         </div>
         <div className="input-field">
-          <input type="date" name="" placeholder="From" id="" />
-          <span className="x-small ">Date of joining the course</span>
+          <input type="text" name="" placeholder="* From" id="" />
+          <span className="x-small ">Date of joining company.</span>
         </div>
+
         <div className="input-field check">
           <input type="checkbox" />
           <p className="mx">
-            <span style={{ color: "initial" }} className="small ">
-              I am currently studying here.
+            <span style={{ color: "initial" }}>
+              I am currently working here.
             </span>
           </p>
         </div>
         <div className="input-field">
-          <input type="date" name="" placeholder="To" id="" />
-          <span className="x-small ">Date of completion of course</span>
+          <input type="date" name="" placeholder="* To" id="" />
+          <span className="x-small ">Date of resign.</span>
         </div>
         <div className="input-field">
           <textarea type="text" name="" placeholder="Description" id="" />
-          <span className="x-small ">Tell us about your course</span>
+          <span className="x-small ">Tell us about your job</span>
         </div>
         <div className="links">
           <p>

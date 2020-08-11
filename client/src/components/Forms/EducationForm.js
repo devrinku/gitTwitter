@@ -12,38 +12,38 @@ const EducationForm = () => {
       </div>
       <form className="education-form ">
         <div className="input-field">
-          <input type="text" name="" placeholder="School" id="" />
+          <input type="text" name="" placeholder="* School" id="" />
           <span className="x-small ">Name of school/college.</span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="Degree" id="" />
+          <input type="text" name="" placeholder="* Degree" id="" />
           <span className="x-small ">
             Type of degree like masters,graduation,under graduation.
           </span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="Field of Study" id="" />
+          <input type="text" name="" placeholder="* Field of Study" id="" />
           <span className="x-small ">Your branch of specilization.</span>
         </div>
         <div className="input-field">
-          <input type="date" name="" placeholder="From" id="" />
-          <span className="x-small ">Date of joining the course</span>
+          <input type="date" name="" placeholder="* From" id="" />
+          <span className="x-small ">Date of joining the course.</span>
         </div>
         <div className="input-field check">
           <input type="checkbox" />
           <p className="mx">
-            <span style={{ color: "initial" }} className="small ">
+            <span style={{ color: "initial" }}>
               I am currently studying here.
             </span>
           </p>
         </div>
         <div className="input-field">
-          <input type="date" name="" placeholder="To" id="" />
-          <span className="x-small ">Date of completion of course</span>
+          <input type="date" name="" placeholder="* To" id="" />
+          <span className="x-small ">Date of completion of course.</span>
         </div>
         <div className="input-field">
           <textarea type="text" name="" placeholder="Description" id="" />
-          <span className="x-small ">Tell us about your course</span>
+          <span className="x-small ">Tell us about your course.</span>
         </div>
         <div className="links">
           <p>

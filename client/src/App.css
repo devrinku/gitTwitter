@@ -262,13 +262,27 @@ input {
   width: 100%;
   height: 2.5rem;
   font-size: 1rem;
-  padding: 0 0.5rem;
+  padding: 0 2.7rem 0 2rem;
   margin: 1rem 0;
   background-color: transparent;
   border: none;
   border: 1px solid white;
   border-radius: 3px;
   color: wheat;
+}
+.input-wrapper {
+  position: relative;
+}
+
+.eyeslash-wrapper {
+  position: absolute;
+  right: 10px;
+  top: 26px;
+}
+.icon-wrapper {
+  position: absolute;
+  left: 10px;
+  top: 26px;
 }
 input::placeholder {
   color: white;
@@ -555,6 +569,13 @@ textarea {
   width: 100%;
   height: 7rem;
   padding: 0.5rem;
+}
+input[type="file"] {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  color: initial;
+  border: 1px solid black;
 }
 .input-field span {
   margin: 0.5rem 0 0 0.2rem;

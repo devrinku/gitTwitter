@@ -6,8 +6,23 @@ const Login = () => {
     <div className="auth card">
       <p className="medium fw-600">Welcome Back! </p>
       <form className="my-1">
-        <input type="text" name="" placeholder="Email" id="" />
-        <input type="text" name="" placeholder="Password" id="" />
+        <div className="input-wrapper">
+          <input type="email" name="" placeholder="Email" id="" />
+          <div className="icon-wrapper">
+            <i className="fas fa-envelope"></i>
+          </div>
+        </div>
+        <div className="input-wrapper">
+          <input type="text" name="" placeholder="Password" id="" />
+          <div className="icon-wrapper">
+            <i className="fas fa-lock"></i>
+          </div>
+          <div className="eyeslash-wrapper">
+            <a href="#!">
+              <i className="fas fa-eye-slash"></i>
+            </a>
+          </div>
+        </div>
         <input type="submit" value="Login" className="btn block" />
       </form>
       <div className="auth-links ">
