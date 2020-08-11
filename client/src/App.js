@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -7,17 +7,32 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Forms from "./components/Forms/Forms";
 import store from "./store";
 import { Provider } from "react-redux";
+import { toast } from "react-toastify";
+import setAuthToken from "./utils/setAuthToken";
+import { loadUser } from "./actions/auth";
 
-const App = () => (
-  <Provider store={store}>
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/create" component={Forms} />
-        <Route path="/" component={Landing} />
-      </Switch>
-    </Router>
-  </Provider>
-);
+import "react-toastify/dist/ReactToastify.css";
+
+if (localStorage.getItem("token")) {
+  setAuthToken(localStorage.getItem("token"));
+}
+
+const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+  toast.configure();
+  return (
+    <Provider store={store}>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/create" component={Forms} />
+          <Route path="/" component={Landing} />
+        </Switch>
+      </Router>
+    </Provider>
+  );
+};
 export default App;

@@ -8,7 +8,6 @@ import { setBackdropType } from "./../../actions/utils";
 const Settings = ({ utils, showBackDrop, showModal, setBackdropType }) => {
   return (
     <Fragment>
-      {" "}
       <div className="mid-container padding-top">
         <div className="my teal ">
           <span className="pencil fw-500 ">

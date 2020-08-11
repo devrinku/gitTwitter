@@ -7,6 +7,7 @@ import { hideSideDrawer } from "./../actions/utils";
 import { hideBackDrop } from "./../actions/utils";
 import { showBackDrop } from "./../actions/utils";
 import { setBackdropType } from "./../actions/utils";
+import { logout } from "./../actions/auth";
 import { hideModal } from "./../actions/utils";
 import { showModal } from "./../actions/utils";
 import Modal from "./Modal";
@@ -18,6 +19,7 @@ const SideDrawer = ({
   showModal,
   hideBackDrop,
   hideSideDrawer,
+  logout,
   setBackdropType,
   hideModal,
 }) => {
@@ -41,7 +43,6 @@ const SideDrawer = ({
         hideModal();
       }
     });
-
     //eslint-disable-next-line
   }, []);
   const onClick = () => {
@@ -112,7 +113,15 @@ const SideDrawer = ({
       </div>
       {utils.backdrop && utils.modal && utils.backdropType === "logout" && (
         <Modal index={90} action="logout">
-          <a style={{ color: "white" }} href="#!" className="btn orange">
+          <a
+            onClick={() => {
+              logout();
+              hideBackDrop();
+              hideModal();
+            }}
+            style={{ color: "white" }}
+            href="#!"
+            className="btn orange">
             Confirm
           </a>
         </Modal>
@@ -131,4 +140,5 @@ export default connect(mapStatetoProps, {
   hideBackDrop,
   hideModal,
   setBackdropType,
+  logout,
 })(SideDrawer);

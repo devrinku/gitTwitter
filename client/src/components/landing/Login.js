@@ -1,29 +1,65 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { login } from "./../../actions/auth";
+import Preloader from "./../Preloader";
+import spinner from "./../../images/25B.gif";
 
-const Login = () => {
+const Login = ({ login, auth: { isLoggedIn, loadingAuth } }) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [blur, setBlur] = useState(false);
+  const { email, password } = formData;
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    login({ email, password });
+  };
+  if (isLoggedIn === true && loadingAuth === false) {
+    return <Redirect to="/dashboard/profile" />;
+  }
   return (
     <div className="auth card">
+      {loadingAuth && <Preloader spinner={spinner} />}
       <p className="medium fw-600">Welcome Back! </p>
-      <form className="my-1">
+      <form onSubmit={(e) => onSubmit(e)} className="my-1">
+        <input
+          onChange={(e) => onChange(e)}
+          value={email}
+          type="text"
+          name="email"
+          placeholder="Email"
+        />
         <div className="input-wrapper">
-          <input type="email" name="" placeholder="Email" id="" />
-          <div className="icon-wrapper">
-            <i className="fas fa-envelope"></i>
-          </div>
-        </div>
-        <div className="input-wrapper">
-          <input type="text" name="" placeholder="Password" id="" />
-          <div className="icon-wrapper">
-            <i className="fas fa-lock"></i>
-          </div>
+          <input
+            onChange={(e) => onChange(e)}
+            value={password}
+            type={blur ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+          />
           <div className="eyeslash-wrapper">
-            <a href="#!">
+            <a onClick={() => setBlur(!blur)} href="#!">
               <i className="fas fa-eye-slash"></i>
             </a>
           </div>
         </div>
-        <input type="submit" value="Login" className="btn block" />
+        {loadingAuth === true ? (
+          <input
+            disabled
+            type="submit"
+            style={{ backgroundColor: "red" }}
+            value="Loading..."
+            className="btn block"
+          />
+        ) : (
+          <input type="submit" value="Register" className="btn block" />
+        )}
       </form>
       <div className="auth-links ">
         <p>
@@ -36,5 +72,8 @@ const Login = () => {
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-export default Login;
+export default connect(mapStateToProps, { login })(Login);

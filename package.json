@@ -25,6 +25,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
     "nodemailer": "^6.4.10",
+    "react-toastify": "^6.0.8",
+    "uuid": "^8.3.0",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {

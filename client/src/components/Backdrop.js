@@ -4,19 +4,11 @@ import { hideSideDrawer } from "./../actions/utils";
 import { hideBackDrop } from "./../actions/utils";
 import { hideModal } from "./../actions/utils";
 
-const Backdrop = ({
-  hideSideDrawer,
-  hideModal,
-  index,
-  closeModal,
-  hideBackDrop,
-}) => {
+const Backdrop = ({ hideSideDrawer, hideModal, index, hideBackDrop }) => {
   const onClick = () => {
     hideBackDrop();
     hideModal();
-    if (closeModal) {
-      closeModal();
-    }
+
     if (window.innerWidth < 768) {
       hideSideDrawer();
     }

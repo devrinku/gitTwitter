@@ -4,26 +4,17 @@ import { hideSideDrawer } from "./../actions/utils";
 import { hideBackDrop } from "./../actions/utils";
 import { hideModal } from "./../actions/utils";
 import Backdrop from "./Backdrop";
-const Modal = ({
-  hideSideDrawer,
-  hideModal,
-  closeModal,
-  hideBackDrop,
-  ...props
-}) => {
+const Modal = ({ hideSideDrawer, hideModal, hideBackDrop, ...props }) => {
   const close = () => {
     hideBackDrop();
     hideModal();
-    if (closeModal) {
-      closeModal();
-    }
     if (window.innerWidth < 768) {
       hideSideDrawer();
     }
   };
   return (
     <Fragment>
-      <Backdrop closeModal={props.closeModal} index={props.index} />
+      <Backdrop index={props.index} />
       <div className="modal">
         <div className="modal-heading fw-500 small">Confirm Your Action</div>
         <div className="modal-content">
