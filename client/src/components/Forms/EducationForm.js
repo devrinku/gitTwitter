@@ -38,7 +38,7 @@ const EducationForm = ({
         <div className="input-field">
           <input
             onChange={(e) => onChange(e)}
-            value={school || ""}
+            value={school}
             type="text"
             name="school"
             placeholder="* School"
@@ -48,7 +48,7 @@ const EducationForm = ({
         <div className="input-field">
           <input
             onChange={(e) => onChange(e)}
-            value={degree || ""}
+            value={degree}
             type="text"
             name="degree"
             placeholder="* Degree"
@@ -60,7 +60,7 @@ const EducationForm = ({
         <div className="input-field">
           <input
             onChange={(e) => onChange(e)}
-            value={fieldofstudy || ""}
+            value={fieldofstudy}
             type="text"
             name="fieldofstudy"
             placeholder="* Field of Study"
@@ -70,7 +70,7 @@ const EducationForm = ({
         <div className="input-field">
           <input
             onChange={(e) => onChange(e)}
-            value={from || ""}
+            value={from}
             type="date"
             name="from"
             placeholder="* From"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Link, useHistory, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createProfile } from "./../../actions/profile";
@@ -35,6 +35,7 @@ const ProfileForm = ({ createProfile, history }) => {
     hometown,
     currentcity,
   } = profileData;
+  const [socialLinks, socialLinksHandler] = useState(false);
   const onChange = (e) => {
     setProfileData({ ...profileData, [e.target.name]: e.target.value });
   };
@@ -89,18 +90,6 @@ const ProfileForm = ({ createProfile, history }) => {
         <div className="input-field">
           <input
             onChange={(e) => onChange(e)}
-            name="company"
-            value={company || ""}
-            type="text"
-            placeholder="Company"
-          />
-          <span className="x-small ">
-            It can be your company ,or the company you are working for.
-          </span>
-        </div>
-        <div className="input-field">
-          <input
-            onChange={(e) => onChange(e)}
             value={website || ""}
             name="website"
             type="text"
@@ -144,69 +133,83 @@ const ProfileForm = ({ createProfile, history }) => {
             Your name on github,to showcase your your work.
           </span>
         </div>
-        <a href="#!" className="btn">
+        <a
+          onClick={() => socialLinksHandler(!socialLinks)}
+          href="#!"
+          className="btn">
           Add Social Links
         </a>
-        <div className="social-links">
-          <div className="input my-2">
-            <input
-              onChange={(e) => onChange(e)}
-              value={github || ""}
-              name="github"
-              type="text"
-              placeholder="Github"
-            />
-            <i className="fab fa-github"></i>
-          </div>
-        </div>
-        <div className="social-links">
-          <div className="input my-2">
-            <input
-              onChange={(e) => onChange(e)}
-              value={twitter || ""}
-              name="twitter"
-              type="text"
-              placeholder="Twitter"
-            />
-            <i style={{ color: "  #00acee" }} className="fab fa-twitter"></i>
-          </div>
-        </div>
-        <div className="social-links">
-          <div className="input my-2">
-            <input
-              onChange={(e) => onChange(e)}
-              value={facebook || ""}
-              name="facebook"
-              type="text"
-              placeholder="Facebook"
-            />
-            <i style={{ color: " #3b5998" }} className="fab fa-facebook"></i>
-          </div>
-        </div>
-        <div className="social-links">
-          <div className="input my-2">
-            <input
-              onChange={(e) => onChange(e)}
-              value={linkedin || ""}
-              name="linkedin"
-              type="text"
-              placeholder="Linkedin"
-            />
-            <i style={{ color: "#0e76a8" }} className="fab fa-linkedin"></i>
-          </div>
-        </div>
-        <div className="social-links">
-          <div className="input my-1">
-            <input
-              onChange={(e) => onChange(e)}
-              value={instagram || ""}
-              name="instagram"
-              type="text"
-              placeholder="Instagram"
-            />
-            <i style={{ color: "#E1306C" }} className="fab fa-instagram "></i>
-          </div>
-        </div>
+        {socialLinks && (
+          <Fragment>
+            {" "}
+            <div className="social-links">
+              <div className="input my-2">
+                <input
+                  onChange={(e) => onChange(e)}
+                  value={github || ""}
+                  name="github"
+                  type="text"
+                  placeholder="Github"
+                />
+                <i className="fab fa-github"></i>
+              </div>
+            </div>
+            <div className="social-links">
+              <div className="input my-2">
+                <input
+                  onChange={(e) => onChange(e)}
+                  value={twitter || ""}
+                  name="twitter"
+                  type="text"
+                  placeholder="Twitter"
+                />
+                <i
+                  style={{ color: "  #00acee" }}
+                  className="fab fa-twitter"></i>
+              </div>
+            </div>
+            <div className="social-links">
+              <div className="input my-2">
+                <input
+                  onChange={(e) => onChange(e)}
+                  value={facebook || ""}
+                  name="facebook"
+                  type="text"
+                  placeholder="Facebook"
+                />
+                <i
+                  style={{ color: " #3b5998" }}
+                  className="fab fa-facebook"></i>
+              </div>
+            </div>
+            <div className="social-links">
+              <div className="input my-2">
+                <input
+                  onChange={(e) => onChange(e)}
+                  value={linkedin || ""}
+                  name="linkedin"
+                  type="text"
+                  placeholder="Linkedin"
+                />
+                <i style={{ color: "#0e76a8" }} className="fab fa-linkedin"></i>
+              </div>
+            </div>
+            <div className="social-links">
+              <div className="input my-1">
+                <input
+                  onChange={(e) => onChange(e)}
+                  value={instagram || ""}
+                  name="instagram"
+                  type="text"
+                  placeholder="Instagram"
+                />
+                <i
+                  style={{ color: "#E1306C" }}
+                  className="fab fa-instagram "></i>
+              </div>
+            </div>
+          </Fragment>
+        )}
         <div className="links">
           <p>
             <input

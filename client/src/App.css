@@ -418,6 +418,13 @@ input[type="submit"] {
   height: 80px;
   border-radius: 50%;
 }
+.follow-links .fab {
+  transition: all 0.3s;
+}
+.follow-links .fab:hover {
+  color: black;
+  transform: scale(1.1);
+}
 /* -------------------Followers----------------------- */
 .follower {
   display: flex;

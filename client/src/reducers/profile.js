@@ -8,6 +8,8 @@ import {
   ADD_EXPERIENCE,
   CLEAR_PROFILE,
   SET_CURRENT_PROFILE,
+  GET_FOLLOWERS,
+  GET_FOLLOWINGS,
 } from "./../constants";
 
 const initialState = {
@@ -15,8 +17,8 @@ const initialState = {
   currentProfile: null,
   profiles: [],
   repos: [],
-  education: [],
-  experience: [],
+  followers: [],
+  followings: [],
   loadingProfile: false,
   error: {},
 };
@@ -41,15 +43,15 @@ export default (state = initialState, action) => {
         loadingProfile: false,
         error: payload,
       };
-    case ADD_EDUCATION:
+    case GET_FOLLOWERS:
       return {
         ...state,
-        education: [...state.education, payload],
+        followers: payload,
       };
-    case ADD_EXPERIENCE:
+    case GET_FOLLOWINGS:
       return {
         ...state,
-        experience: [...state.experience, payload],
+        followings: payload,
       };
     case CLEAR_PROFILE:
       return {
@@ -58,8 +60,8 @@ export default (state = initialState, action) => {
         currentProfile: null,
         profiles: [],
         repos: [],
-        education: [],
-        experience: [],
+        followers: [],
+        followings: [],
         loadingProfile: false,
         error: {},
       };

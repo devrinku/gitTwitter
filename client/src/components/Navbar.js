@@ -55,17 +55,17 @@ const Navbar = ({
         <span className="divider small">|</span>
       </li>
       <li>
-        <a href="#!">
+        <Link to="/dashboard/profile">
           <i className="fas fa-user"></i>
-        </a>
+        </Link>
       </li>
       <li>
         <span className="divider small">|</span>
       </li>
       <li>
-        <a href="#!">
+        <Link to="#!">
           <i className="fas fa-plus-circle"></i>
-        </a>
+        </Link>
       </li>
       <li>
         <span className="divider small">|</span>

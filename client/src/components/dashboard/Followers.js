@@ -1,7 +1,9 @@
 import React from "react";
-import user from "./../../images/1.jpg";
+import FriendList from "./FriendList";
 
-const Followers = () => {
+import { connect } from "react-redux";
+
+const Followers = ({ profile: { loggedProfile } }) => {
   return (
     <div className="mid-container padding-top">
       <div className="my teal">
@@ -9,20 +11,13 @@ const Followers = () => {
           <i className="fas fa-users mx"></i>Followers
         </span>
       </div>
-      <ul>
-        <li className="follower border-div ">
-          <div>
-            <img src={user} alt="" />
-          </div>
-          <div className="info">
-            <p>Rajesh</p>
-            <p>Senior Developer</p>
-            <p>Location</p>
-          </div>
-        </li>
-      </ul>
+      {loggedProfile.followers.length > 0 && (
+        <FriendList followers={"followers"} />
+      )}
     </div>
   );
 };
-
-export default Followers;
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+export default connect(mapStateToProps)(Followers);

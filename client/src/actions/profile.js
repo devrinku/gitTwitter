@@ -7,8 +7,9 @@ import {
   SET_LOADING_PROFILE,
   ADD_EDUCATION,
   ADD_EXPERIENCE,
-  CLEAR_PROFILE,
   SET_CURRENT_PROFILE,
+  GET_FOLLOWERS,
+  GET_FOLLOWINGS,
 } from "./../constants";
 
 import { toast } from "react-toastify";
@@ -97,16 +98,7 @@ export const addEducation = (formData, id, history) => async (dispatch) => {
     },
   };
   try {
-    let res = await axios.post(
-      `/api/v1/profile/${id}/education`,
-      formData,
-      config
-    );
-
-    dispatch({
-      type: ADD_EDUCATION,
-      payload: res.data.data,
-    });
+    await axios.post(`/api/v1/profile/${id}/education`, formData, config);
     toast(`Education Added`, {
       className: "black-background",
       bodyClassName: "grow-font-size",
@@ -146,16 +138,7 @@ export const addExperience = (formData, id, history) => async (dispatch) => {
     },
   };
   try {
-    let res = await axios.post(
-      `/api/v1/profile/${id}/experience`,
-      formData,
-      config
-    );
-
-    dispatch({
-      type: ADD_EXPERIENCE,
-      payload: res.data.data,
-    });
+    await axios.post(`/api/v1/profile/${id}/experience`, formData, config);
     toast(`Experience Added`, {
       className: "black-background",
       bodyClassName: "grow-font-size",
@@ -175,6 +158,37 @@ export const addExperience = (formData, id, history) => async (dispatch) => {
         );
       }
     } else if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const getFriends = (id, type) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/profile/${id}/${type}`);
+
+    if (type === "followers") {
+      dispatch({
+        type: GET_FOLLOWERS,
+        payload: res.data.data,
+      });
+    }
+    if (type === "followings") {
+      dispatch({
+        type: GET_FOLLOWINGS,
+        payload: res.data.data,
+      });
+    }
+  } catch (error) {
+    if (error && error.response && error.response.statusText) {
       dispatch({
         type: PROFILE_ERROR,
         payload: {

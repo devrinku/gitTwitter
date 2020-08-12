@@ -120,3 +120,32 @@ export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
   dispatch({ type: CLEAR_PROFILE });
 };
+
+export const uploadDP = (data, history) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append("file", data);
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  try {
+    await axios.put("/api/v1/auth/uploadprofileimage", formData, config);
+    dispatch(loadUser());
+    history.push("/dashboard/profile");
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.error) {
+      toast(`${error.response.data.error}`, {
+        className: "black-background",
+        bodyClassName: "grow-font-size",
+        progressClassName: "Toastify__progress-bar--dark",
+      });
+    } else {
+      toast(`Image not uploaded`, {
+        className: "black-background",
+        bodyClassName: "grow-font-size",
+        progressClassName: "Toastify__progress-bar--dark",
+      });
+    }
+  }
+};

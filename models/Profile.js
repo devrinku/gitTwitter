@@ -7,9 +7,6 @@ const ProfileSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    company: {
-      type: String,
-    },
     website: {
       type: String,
     },
@@ -29,7 +26,7 @@ const ProfileSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter your github username"],
     },
-    youtube: {
+    github: {
       type: String,
     },
     twitter: {
