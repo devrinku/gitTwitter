@@ -14,7 +14,7 @@ import Modal from "./Modal";
 
 const SideDrawer = ({
   utils,
-  profile: { loggedProfile, followers, followings },
+  profile: { loggedProfile },
   showSideDrawer,
   showBackDrop,
   showModal,
@@ -66,20 +66,12 @@ const SideDrawer = ({
             </li>
             <li>
               <Link onClick={onClick} to="/dashboard/followers">
-                {followers.length > 0 ? (
-                  <Fragment>Followers : {followers.length}</Fragment>
-                ) : (
-                  <Fragment>Followers</Fragment>
-                )}
+                Followers
               </Link>
             </li>
             <li>
               <Link onClick={onClick} to="/dashboard/followings">
-                {followings.length > 0 ? (
-                  <Fragment>Followings : {followings.length}</Fragment>
-                ) : (
-                  <Fragment>Followings</Fragment>
-                )}
+                Followings
               </Link>
             </li>
             <li>

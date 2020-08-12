@@ -44,7 +44,6 @@ export const getMyProfile = () => async (dispatch) => {
     }
   }
 };
-
 export const createProfile = (formData, history) => async (dispatch) => {
   try {
     const config = {
@@ -91,20 +90,31 @@ export const createProfile = (formData, history) => async (dispatch) => {
   }
 };
 
-export const addEducation = (formData, id, history) => async (dispatch) => {
+export const addEducation = (formData, id, param, history) => async (
+  dispatch
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
   try {
-    await axios.post(`/api/v1/profile/${id}/education`, formData, config);
+    const res = await axios.post(
+      `/api/v1/profile/${id}/education`,
+      formData,
+      config
+    );
     toast(`Education Added`, {
       className: "black-background",
       bodyClassName: "grow-font-size",
       progressClassName: "Toastify__progress-bar--dark",
     });
-    history.push("/create/experienceform");
+    if (param === true) {
+      history(false);
+      dispatch(getMyProfile());
+    } else {
+      history.push("/create/experienceform");
+    }
   } catch (error) {
     if (error.response && error.response.data && error.response.data.error) {
       const errors = error.response.data.error.split(",");
@@ -131,7 +141,9 @@ export const addEducation = (formData, id, history) => async (dispatch) => {
   }
 };
 
-export const addExperience = (formData, id, history) => async (dispatch) => {
+export const addExperience = (formData, id, param, history) => async (
+  dispatch
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -144,7 +156,12 @@ export const addExperience = (formData, id, history) => async (dispatch) => {
       bodyClassName: "grow-font-size",
       progressClassName: "Toastify__progress-bar--dark",
     });
-    history.push("/create/uploadimage");
+    if (param === true) {
+      history(false);
+      dispatch(getMyProfile());
+    } else {
+      history.push("/create/uploadimage");
+    }
   } catch (error) {
     if (error.response && error.response.data && error.response.data.error) {
       const errors = error.response.data.error.split(",");

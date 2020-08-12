@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { addEducation } from "./../../actions/profile";
 
 const EducationForm = ({
   profile: { loggedProfile },
   addEducation,
+  showComponent,
   history,
 }) => {
+  const location = useLocation();
   const [formData, setFormData] = useState({
     school: "",
     degree: "",
@@ -23,10 +25,17 @@ const EducationForm = ({
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    addEducation(formData, loggedProfile._id, history);
+    if (location.pathname === "/dashboard/education") {
+      addEducation(formData, loggedProfile._id, true, showComponent);
+    } else {
+      addEducation(formData, loggedProfile._id, false, history);
+    }
   };
   return (
-    <div className="container">
+    <div
+      className={
+        location.pathname === "/dashboard/education" ? " " : "container"
+      }>
       <div className="my ">
         <span className="teal pencil fw-500 ">
           <i className="fas fa-graduation-cap mx"></i>Add Education
@@ -106,23 +115,28 @@ const EducationForm = ({
           />
           <span className="x-small ">Tell us about your course.</span>
         </div>
-        <div className="links">
+        <div
+          className={
+            location.pathname === "/dashboard/education" ? " " : "links"
+          }>
           <p>
             <input
               style={{ color: "white" }}
               type="submit"
               value="Submit"
-              className="btn "
+              className="btn block "
             />
           </p>
-          <p>
-            <Link
-              to="/create/experienceform"
-              style={{ backgroundColor: "grey" }}
-              className="btn mx-2">
-              Skip
-            </Link>
-          </p>
+          {location.pathname === "/dashboard/education" ? null : (
+            <p>
+              <Link
+                to="/create/experienceform"
+                style={{ backgroundColor: "grey" }}
+                className="btn mx-2">
+                Skip
+              </Link>
+            </p>
+          )}
         </div>
       </form>
     </div>

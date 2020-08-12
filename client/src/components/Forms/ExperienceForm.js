@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { addExperience } from "./../../actions/profile";
 
 const ExperienceForm = ({
   profile: { loggedProfile },
-
+  showComponent,
   addExperience,
   history,
 }) => {
+  const Location = useLocation();
   const [formData, setFormData] = useState({
     title: "",
     company: "",
@@ -24,10 +25,17 @@ const ExperienceForm = ({
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    addExperience(formData, loggedProfile._id, history);
+    if (Location.pathname === "/dashboard/experience") {
+      addExperience(formData, loggedProfile._id, true, showComponent);
+    } else {
+      addExperience(formData, loggedProfile._id, false, history);
+    }
   };
   return (
-    <div className="container">
+    <div
+      className={
+        Location.pathname === "/dashboard/experience" ? " " : "container"
+      }>
       <div className="my ">
         <span className="teal pencil fw-500 ">
           <i className="fas fa-cogs mx"></i>Add Experience
@@ -108,23 +116,28 @@ const ExperienceForm = ({
           />
           <span className="x-small ">Tell us about your job</span>
         </div>
-        <div className="links">
+        <div
+          className={
+            Location.pathname === "/dashboard/experience" ? " " : "links"
+          }>
           <p>
             <input
               style={{ color: "white" }}
               type="submit"
               value="Submit"
-              className="btn "
+              className="btn block"
             />
           </p>
-          <p>
-            <Link
-              to="/create/uploadimage"
-              style={{ backgroundColor: "grey" }}
-              className="btn mx-2">
-              Skip
-            </Link>
-          </p>
+          {Location.pathname === "/dashboard/experience" ? null : (
+            <p>
+              <Link
+                to="/create/uploadimage"
+                style={{ backgroundColor: "grey" }}
+                className="btn mx-2">
+                Skip
+              </Link>
+            </p>
+          )}
         </div>
       </form>
     </div>

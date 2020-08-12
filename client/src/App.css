@@ -433,7 +433,7 @@ input[type="submit"] {
   width: 95%;
   background-color: rgb(243, 243, 243);
   color: rgb(102, 102, 102);
-  margin: auto;
+  margin: 0.5rem auto;
   cursor: pointer;
 }
 .info {
