@@ -7,6 +7,7 @@ import {
   AUTH_ERROR,
   USER_LOADED,
   UPLOAD_PHOTO,
+  CLEAR_PROFILE,
   LOGOUT,
 } from "./../constants";
 import { toast } from "react-toastify";
@@ -110,13 +111,12 @@ export const login = (formData) => async (dispatch) => {
       });
     }
     dispatch({
-      type: REGISTER_FAIL,
+      type: LOGIN_FAIL,
     });
   }
 };
 
-export const logout = () => {
-  return {
-    type: LOGOUT,
-  };
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+  dispatch({ type: CLEAR_PROFILE });
 };

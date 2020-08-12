@@ -1,6 +1,13 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { addExperience } from "./../../actions/profile";
 
-const ExperienceForm = () => {
+const ExperienceForm = ({
+  profile: { loggedProfile },
+  addEducation,
+  history,
+}) => {
   return (
     <div className="container">
       <div className="my ">
@@ -12,17 +19,17 @@ const ExperienceForm = () => {
       </div>
       <form className="education-form ">
         <div className="input-field">
-          <input type="text" name="" placeholder="* Job title." id="" />
+          <input type="text" name="" placeholder="* Job title." />
           <span className="x-small ">
             Job title like manager,quality analysts etc.
           </span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="* Name of Company" id="" />
+          <input type="text" name="" placeholder="* Name of Company" />
           <span className="x-small ">Company you were working for.</span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="* From" id="" />
+          <input type="text" name="" placeholder="* From" />
           <span className="x-small ">Date of joining company.</span>
         </div>
 
@@ -35,11 +42,11 @@ const ExperienceForm = () => {
           </p>
         </div>
         <div className="input-field">
-          <input type="date" name="" placeholder="* To" id="" />
+          <input type="date" name="" placeholder="* To" />
           <span className="x-small ">Date of resign.</span>
         </div>
         <div className="input-field">
-          <textarea type="text" name="" placeholder="Description" id="" />
+          <textarea type="text" name="" placeholder="Description" />
           <span className="x-small ">Tell us about your job</span>
         </div>
         <div className="links">

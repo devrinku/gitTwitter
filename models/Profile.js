@@ -47,6 +47,7 @@ const ProfileSchema = new mongoose.Schema(
 
     hometown: {
       type: String,
+      required: [true, "Please enter your hometown"],
     },
     currentCity: {
       type: String,

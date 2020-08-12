@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { addEducation } from "./../../actions/profile";
 
-const EducationForm = () => {
+const EducationForm = ({
+  profile: { loggedProfile },
+  addEducation,
+  history,
+}) => {
+  const [formData, setFormData] = useState({
+    school: "",
+    degree: "",
+    fieldofstudy: "",
+    from: "",
+    to: "",
+    description: "",
+  });
+  const { school, description, degree, from, to, fieldofstudy } = formData;
+  const [current, currenthandler] = useState(false);
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addEducation(formData, loggedProfile._id, history);
+  };
   return (
     <div className="container">
       <div className="my ">
@@ -10,27 +34,51 @@ const EducationForm = () => {
         <br />
         <span className="mx">* = required Field.</span>
       </div>
-      <form className="education-form ">
+      <form onSubmit={(e) => onSubmit(e)} className="education-form ">
         <div className="input-field">
-          <input type="text" name="" placeholder="* School" id="" />
+          <input
+            onChange={(e) => onChange(e)}
+            value={school || ""}
+            type="text"
+            name="school"
+            placeholder="* School"
+          />
           <span className="x-small ">Name of school/college.</span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="* Degree" id="" />
+          <input
+            onChange={(e) => onChange(e)}
+            value={degree || ""}
+            type="text"
+            name="degree"
+            placeholder="* Degree"
+          />
           <span className="x-small ">
             Type of degree like masters,graduation,under graduation.
           </span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="* Field of Study" id="" />
+          <input
+            onChange={(e) => onChange(e)}
+            value={fieldofstudy || ""}
+            type="text"
+            name="fieldofstudy"
+            placeholder="* Field of Study"
+          />
           <span className="x-small ">Your branch of specilization.</span>
         </div>
         <div className="input-field">
-          <input type="date" name="" placeholder="* From" id="" />
+          <input
+            onChange={(e) => onChange(e)}
+            value={from || ""}
+            type="date"
+            name="from"
+            placeholder="* From"
+          />
           <span className="x-small ">Date of joining the course.</span>
         </div>
         <div className="input-field check">
-          <input type="checkbox" />
+          <input onChange={() => currenthandler(!current)} type="checkbox" />
           <p className="mx">
             <span style={{ color: "initial" }}>
               I am currently studying here.
@@ -38,11 +86,24 @@ const EducationForm = () => {
           </p>
         </div>
         <div className="input-field">
-          <input type="date" name="" placeholder="* To" id="" />
+          <input
+            disabled={current ? true : false}
+            onChange={(e) => onChange(e)}
+            value={to || ""}
+            type="date"
+            name="to"
+            placeholder="* To"
+          />
           <span className="x-small ">Date of completion of course.</span>
         </div>
         <div className="input-field">
-          <textarea type="text" name="" placeholder="Description" id="" />
+          <textarea
+            onChange={(e) => onChange(e)}
+            value={description || ""}
+            type="text"
+            name="description"
+            placeholder="Description"
+          />
           <span className="x-small ">Tell us about your course.</span>
         </div>
         <div className="links">
@@ -55,17 +116,21 @@ const EducationForm = () => {
             />
           </p>
           <p>
-            <a
-              href="#!"
+            <Link
+              to="/create/experienceform"
               style={{ backgroundColor: "grey" }}
               className="btn mx-2">
-              Go Back
-            </a>
+              Skip
+            </Link>
           </p>
         </div>
       </form>
     </div>
   );
 };
-
-export default EducationForm;
+const mapStatetoprops = (state) => ({
+  profile: state.profile,
+});
+export default connect(mapStatetoprops, { addEducation })(
+  withRouter(EducationForm)
+);

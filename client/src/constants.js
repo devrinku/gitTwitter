@@ -19,3 +19,14 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const USER_LOADED = "USER_LOADED";
 export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
 export const LOGOUT = "LOGOUT";
+
+// Profile
+export const GET_PROFILE = "GET_PROFILE";
+export const PROFILE_ERROR = "PROFILE_ERROR";
+export const SET_LOADING_PROFILE = "SET_LOADING_PROFILE";
+export const CLEAR_PROFILE = "CLEAR_PROFILE";
+export const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
+export const GET_EDUCATION = "GET_EDUCATION";
+export const GET_EXPERIENCE = "GET_EXPERIENCE";
+export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
+export const ADD_EDUCATION = "ADD_EDUCATION";

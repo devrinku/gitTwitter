@@ -14,6 +14,7 @@ import Modal from "./Modal";
 
 const SideDrawer = ({
   utils,
+  profile: { loggedProfile },
   showSideDrawer,
   showBackDrop,
   showModal,
@@ -52,85 +53,88 @@ const SideDrawer = ({
     }
   };
   return (
-    <Fragment>
-      <div
-        style={utils.sideDrawer ? { width: "250px" } : { width: "0px" }}
-        className="side-drawer">
-        <ul>
-          <li className="background-img padding-top">
-            <img className="user-img" src={user} alt="" />
-            <p className="my">rajesh</p>
-            <p>rajesh@gmail.com</p>
-          </li>
-          <li>
-            <Link onClick={onClick} to="/dashboard/followers">
-              Followers
-            </Link>
-          </li>
-          <li>
-            <Link onClick={onClick} to="/dashboard/followings">
-              Followings
-            </Link>
-          </li>
-          <li>
-            <Link onClick={onClick} to="/dashboard/posts">
-              Posts
-            </Link>
-          </li>
-          <li>
-            <Link onClick={onClick} to="/dashboard/education">
-              Education
-            </Link>
-          </li>
-          <li>
-            <Link onClick={onClick} to="/dashboard/experience">
-              Experience
-            </Link>
-          </li>
-          <li>
-            <Link onClick={onClick} to="/dashboard/github">
-              Github
-            </Link>
-          </li>
-          <li>
-            <Link onClick={onClick} to="/dashboard/settings">
-              Settings
-            </Link>
-          </li>
-          <li>
-            <Link
+    loggedProfile !== null && (
+      <Fragment>
+        <div
+          style={utils.sideDrawer ? { width: "250px" } : { width: "0px" }}
+          className="side-drawer">
+          <ul>
+            <li className="background-img padding-top">
+              <img className="user-img" src={user} alt="" />
+              <p className="my">rajesh</p>
+              <p>rajesh@gmail.com</p>
+            </li>
+            <li>
+              <Link onClick={onClick} to="/dashboard/followers">
+                Followers
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onClick} to="/dashboard/followings">
+                Followings
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onClick} to="/dashboard/posts">
+                Posts
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onClick} to="/dashboard/education">
+                Education
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onClick} to="/dashboard/experience">
+                Experience
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onClick} to="/dashboard/github">
+                Github
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onClick} to="/dashboard/settings">
+                Settings
+              </Link>
+            </li>
+            <li>
+              <Link
+                onClick={() => {
+                  onClick();
+                  setBackdropType("logout");
+                  showBackDrop();
+                  showModal();
+                }}
+                to="#!">
+                Logout
+              </Link>{" "}
+            </li>
+          </ul>
+        </div>
+        {utils.backdrop && utils.modal && utils.backdropType === "logout" && (
+          <Modal index={90} action="logout">
+            <a
               onClick={() => {
-                onClick();
-                setBackdropType("logout");
-                showBackDrop();
-                showModal();
+                logout();
+                hideBackDrop();
+                hideModal();
               }}
-              to="#!">
-              Logout
-            </Link>{" "}
-          </li>
-        </ul>
-      </div>
-      {utils.backdrop && utils.modal && utils.backdropType === "logout" && (
-        <Modal index={90} action="logout">
-          <a
-            onClick={() => {
-              logout();
-              hideBackDrop();
-              hideModal();
-            }}
-            style={{ color: "white" }}
-            href="#!"
-            className="btn orange">
-            Confirm
-          </a>
-        </Modal>
-      )}
-    </Fragment>
+              style={{ color: "white" }}
+              href="#!"
+              className="btn orange">
+              Confirm
+            </a>
+          </Modal>
+        )}
+      </Fragment>
+    )
   );
 };
 const mapStatetoProps = (state) => ({
   utils: state.utils,
+  profile: state.profile,
 });
 export default connect(mapStatetoProps, {
   showSideDrawer,

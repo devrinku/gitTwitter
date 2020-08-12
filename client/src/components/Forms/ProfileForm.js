@@ -1,6 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useHistory, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { createProfile } from "./../../actions/profile";
 
-const ProfileForm = () => {
+const ProfileForm = ({ createProfile, history }) => {
+  const History = useHistory();
+  const [profileData, setProfileData] = useState({
+    company: "",
+    website: "",
+    status: "",
+    skills: "",
+    bio: "",
+    githubusername: "",
+    github: "",
+    twitter: "",
+    facebook: "",
+    linkedin: "",
+    instagram: "",
+    hometown: "",
+    currentcity: "",
+  });
+  const {
+    company,
+    website,
+    status,
+    skills,
+    bio,
+    githubusername,
+    github,
+    twitter,
+    facebook,
+    linkedin,
+    instagram,
+    hometown,
+    currentcity,
+  } = profileData;
+  const onChange = (e) => {
+    setProfileData({ ...profileData, [e.target.name]: e.target.value });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    createProfile(profileData, history);
+  };
   return (
     <div className="container">
       <div className="my ">
@@ -10,21 +51,35 @@ const ProfileForm = () => {
         <br />
         <span className="mx">* = required Field.</span>
       </div>
-      <form className="education-form ">
+      <form onSubmit={(e) => onSubmit(e)} className="education-form ">
         <div className="input-field">
-          <input type="text" name="" placeholder="Current City" id="" />
-          <span className="x-small ">Your current City.</span>
-        </div>
-        <div className="input-field">
-          <input type="text" name="" placeholder="Hometown" id="" />
+          <input
+            type="text"
+            onChange={(e) => onChange(e)}
+            value={hometown}
+            name="hometown"
+            placeholder="* Hometown"
+          />
           <span className="x-small ">Your hometown.</span>
         </div>
         <div className="input-field">
           <input
+            onChange={(e) => onChange(e)}
             type="text"
-            name=""
+            value={currentcity || ""}
+            name="currentcity"
+            placeholder="Current City"
+          />
+          <span className="x-small ">Your current City.</span>
+        </div>
+
+        <div className="input-field">
+          <input
+            onChange={(e) => onChange(e)}
+            name="status"
+            value={status}
+            type="text"
             placeholder="* Professional Status"
-            id=""
           />
           <span className="x-small ">
             Give us an idea of where you are in your career like junior/senior
@@ -32,34 +87,59 @@ const ProfileForm = () => {
           </span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="Company" id="" />
+          <input
+            onChange={(e) => onChange(e)}
+            name="company"
+            value={company || ""}
+            type="text"
+            placeholder="Company"
+          />
           <span className="x-small ">
             It can be your company ,or the company you are working for.
           </span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder=" Personal Website" id="" />
+          <input
+            onChange={(e) => onChange(e)}
+            value={website || ""}
+            name="website"
+            type="text"
+            placeholder=" Personal Website"
+          />
           <span className="x-small ">
             Your website address,if you have one.
           </span>
         </div>
         <div className="input-field">
           <input
+            onChange={(e) => onChange(e)}
+            value={skills}
+            name="skills"
             type="text"
-            name=""
             placeholder="* Your Professional Skills"
-            id=""
           />
           <span className="x-small ">
             Use coma to seprate elements like HTML,CSS .
           </span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="Bio" id="" />
+          <input
+            onChange={(e) => onChange(e)}
+            value={bio || ""}
+            type="text"
+            name="bio"
+            placeholder="Bio"
+          />
           <span className="x-small ">Tell us something about youself.</span>
         </div>
         <div className="input-field">
-          <input type="text" name="" placeholder="Github Username" id="" />
+          <input
+            onChange={(e) => onChange(e)}
+            value={githubusername}
+            type="text"
+            name="githubusername"
+            placeholder="* Github Username"
+          />
           <span className="x-small ">
             Your name on github,to showcase your your work.
           </span>
@@ -69,31 +149,61 @@ const ProfileForm = () => {
         </a>
         <div className="social-links">
           <div className="input my-2">
-            <input type="text" placeholder="Github" />
+            <input
+              onChange={(e) => onChange(e)}
+              value={github || ""}
+              name="github"
+              type="text"
+              placeholder="Github"
+            />
             <i className="fab fa-github"></i>
           </div>
         </div>
         <div className="social-links">
           <div className="input my-2">
-            <input type="text" placeholder="Twitter" />
+            <input
+              onChange={(e) => onChange(e)}
+              value={twitter || ""}
+              name="twitter"
+              type="text"
+              placeholder="Twitter"
+            />
             <i style={{ color: "  #00acee" }} className="fab fa-twitter"></i>
           </div>
         </div>
         <div className="social-links">
           <div className="input my-2">
-            <input type="text" placeholder="Facebook" />
+            <input
+              onChange={(e) => onChange(e)}
+              value={facebook || ""}
+              name="facebook"
+              type="text"
+              placeholder="Facebook"
+            />
             <i style={{ color: " #3b5998" }} className="fab fa-facebook"></i>
           </div>
         </div>
         <div className="social-links">
           <div className="input my-2">
-            <input type="text" placeholder="Linkedin" />
+            <input
+              onChange={(e) => onChange(e)}
+              value={linkedin || ""}
+              name="linkedin"
+              type="text"
+              placeholder="Linkedin"
+            />
             <i style={{ color: "#0e76a8" }} className="fab fa-linkedin"></i>
           </div>
         </div>
         <div className="social-links">
           <div className="input my-1">
-            <input type="text" placeholder="Instagram" />
+            <input
+              onChange={(e) => onChange(e)}
+              value={instagram || ""}
+              name="instagram"
+              type="text"
+              placeholder="Instagram"
+            />
             <i style={{ color: "#E1306C" }} className="fab fa-instagram "></i>
           </div>
         </div>
@@ -108,6 +218,7 @@ const ProfileForm = () => {
           </p>
           <p>
             <a
+              onClick={() => History.goBack()}
               href="#!"
               style={{ backgroundColor: "grey" }}
               className="btn mx-2">
@@ -120,4 +231,4 @@ const ProfileForm = () => {
   );
 };
 
-export default ProfileForm;
+export default connect(null, { createProfile })(withRouter(ProfileForm));

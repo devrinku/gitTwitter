@@ -28,23 +28,21 @@ export default (state = initialState, action) => {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
-
       return {
         ...state,
         ...payload,
-        loadingAuth: false,
-        isLoggedIn: true,
       };
     case USER_LOADED:
       return {
         ...state,
+        user: payload,
         loadingAuth: false,
         isLoggedIn: true,
-        user: payload,
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
     case LOGOUT:
+    case AUTH_ERROR:
       localStorage.removeItem("token");
       return {
         token: null,
