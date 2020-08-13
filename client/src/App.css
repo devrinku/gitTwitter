@@ -722,7 +722,27 @@ input[type="checkbox"] {
     left: 10%;
   }
 }
-
+/* ---------------------Change Password--------------------- */
+.change-password {
+  margin-top: 2rem;
+}
+.feild {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.feild input[type="password"] {
+  border: 1px solid gray;
+  color: gray;
+  margin: 0;
+  padding: 0 0.5rem;
+}
+label {
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
 @media (min-width: 768px) {
   .hide {
     display: none;

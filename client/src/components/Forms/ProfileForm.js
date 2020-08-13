@@ -7,7 +7,7 @@ import { updateProfile } from "./../../actions/profile";
 const ProfileForm = ({
   createProfile,
   history,
-  profile: { loggedProfile, currentProfile },
+  profile: { currentProfile },
   updateProfile,
 }) => {
   const History = useHistory();

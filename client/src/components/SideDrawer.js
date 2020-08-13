@@ -55,7 +55,8 @@ const SideDrawer = ({
     }
   };
   return (
-    loggedProfile !== null && (
+    loggedProfile !== null &&
+    user !== null && (
       <Fragment>
         <div
           style={utils.sideDrawer ? { width: "250px" } : { width: "0px" }}

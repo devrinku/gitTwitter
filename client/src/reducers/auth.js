@@ -6,8 +6,10 @@ import {
   LOGIN_FAIL,
   AUTH_ERROR,
   USER_LOADED,
-  UPLOAD_PHOTO,
+  CHANGE_PASSWORD,
   LOGOUT,
+  SET_FETCH,
+  UNSET_FETCH,
 } from "./../constants";
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
   loadingAuth: null,
   user: null,
   isLoggedIn: null,
+  fetch: false,
 };
 
 export default (state = initialState, action) => {
@@ -25,6 +28,16 @@ export default (state = initialState, action) => {
         ...state,
         loadingAuth: true,
       };
+    case SET_FETCH:
+      return {
+        ...state,
+        fetch: true,
+      };
+    case UNSET_FETCH:
+      return {
+        ...state,
+        fetch: false,
+      };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
@@ -32,6 +45,13 @@ export default (state = initialState, action) => {
         ...state,
         ...payload,
       };
+    case CHANGE_PASSWORD:
+      localStorage.setItem("token", payload.token);
+      return {
+        ...state,
+        ...payload,
+      };
+
     case USER_LOADED:
       return {
         ...state,

@@ -49,11 +49,13 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
 
 exports.changePassword = asyncHandler(async (req, res, next) => {
   const { newPassword, oldPassword } = req.body;
+
   if (!newPassword || !oldPassword) {
     return next(
       new ErrorResponse("Please enter your old  password and new password", 401)
     );
   }
+
   const user = await User.findById(req.user.id).select("+password");
   if (!(await user.matchPassword(oldPassword))) {
     return next(new ErrorResponse("Incorrect password", 401));
@@ -131,11 +133,11 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 
 exports.uploadDi = asyncHandler(async (req, res, next) => {
   if (!req.files) {
-    return next(new ErrorResponse("Please upload a image ", 400));
+    return next(new ErrorResponse("Please select a file first", 400));
   }
   const file = req.files.file;
   if (!file.mimetype.startsWith("image")) {
-    return next(new ErrorResponse("Please upload a image file", 400));
+    return next(new ErrorResponse("Please select a image file", 400));
   }
   if (file.size > process.env.FILE_SIZE) {
     return next(new ErrorResponse("File size must be less then 1mb", 400));

@@ -6,8 +6,10 @@ import {
   LOGIN_FAIL,
   AUTH_ERROR,
   USER_LOADED,
-  UPLOAD_PHOTO,
   CLEAR_PROFILE,
+  CHANGE_PASSWORD,
+  SET_FETCH,
+  UNSET_FETCH,
   LOGOUT,
 } from "./../constants";
 import { toast } from "react-toastify";
@@ -141,11 +143,88 @@ export const uploadDP = (data, history) => async (dispatch) => {
         progressClassName: "Toastify__progress-bar--dark",
       });
     } else {
-      toast(`Image not uploaded`, {
+      console.log(error);
+      toast(`Image not uploaded,try after sometime`, {
         className: "black-background",
         bodyClassName: "grow-font-size",
         progressClassName: "Toastify__progress-bar--dark",
       });
     }
+  }
+};
+
+export const deleteDP = (history) => async (dispatch) => {
+  try {
+    await axios.delete("/api/v1/auth/deleteprofileimage");
+    dispatch(loadUser());
+    history.push("/dashboard/profile");
+    toast(`Profile Image Deleted`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changePassword = (data, history) => async (dispatch) => {
+  dispatch({
+    type: SET_FETCH,
+  });
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    let res = await axios.post("/api/v1/auth/changepassword", data, config);
+    dispatch({
+      type: CHANGE_PASSWORD,
+      payload: res.data.data,
+    });
+    dispatch(loadUser());
+    history.push("/dashboard/profile");
+    toast(`Password changed successfully`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
+    dispatch({
+      type: UNSET_FETCH,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_FETCH,
+    });
+    if (error.response && error.response.data && error.response.data.error) {
+      toast(`${error.response.data.error}`, {
+        className: "black-background",
+        bodyClassName: "grow-font-size",
+        progressClassName: "Toastify__progress-bar--dark",
+      });
+    } else {
+      console.log(error);
+      toast(`Password not changed,try after sometime`, {
+        className: "black-background",
+        bodyClassName: "grow-font-size",
+        progressClassName: "Toastify__progress-bar--dark",
+      });
+    }
+  }
+};
+
+export const deleteAccount = () => async (dispatch) => {
+  try {
+    await axios.delete("/api/v1/auth");
+    dispatch(logout());
+    toast(`Account Deleted`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
+  } catch (error) {
+    console.log(error);
   }
 };

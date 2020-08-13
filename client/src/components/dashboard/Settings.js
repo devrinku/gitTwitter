@@ -5,6 +5,7 @@ import { showBackDrop } from "./../../actions/utils";
 import { showModal } from "./../../actions/utils";
 import { setBackdropType } from "./../../actions/utils";
 import { setCurrentProfile } from "./../../actions/profile";
+import { deleteAccount } from "./../../actions/auth";
 import { Link } from "react-router-dom";
 
 const Settings = ({
@@ -14,6 +15,7 @@ const Settings = ({
   showModal,
   setCurrentProfile,
   setBackdropType,
+  deleteAccount,
 }) => {
   return (
     <Fragment>
@@ -38,9 +40,9 @@ const Settings = ({
             </Link>
           </li>
           <li>
-            <a className="btn block " href="#!">
+            <Link className="btn block " to="/create/changepassword">
               Change Password
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -58,7 +60,11 @@ const Settings = ({
       </div>
       {utils.backdrop && utils.modal && utils.backdropType === "deleteAccount" && (
         <Modal index={90} action="delete your account ,this can't be undone !!">
-          <a style={{ color: "white" }} href="#!" className="btn orange">
+          <a
+            onClick={() => deleteAccount()}
+            style={{ color: "white" }}
+            href="#!"
+            className="btn orange">
             Confirm
           </a>
         </Modal>
@@ -76,4 +82,5 @@ export default connect(mapStateToProps, {
   showModal,
   setBackdropType,
   setCurrentProfile,
+  deleteAccount,
 })(Settings);

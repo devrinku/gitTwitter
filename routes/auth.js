@@ -29,7 +29,7 @@ router.put("/forgotpassword", forgotPassword, response);
 router.put("/resetpassword/:salt", resetPassword, response);
 //Private Routes
 router.use(authenticate);
-router.get("/changepassword", changePassword, response);
+router.post("/changepassword", changePassword, response);
 router.put("/uploadprofileimage", uploadDi, response);
 router.delete("/deleteprofileimage", deleteDi, response);
 router

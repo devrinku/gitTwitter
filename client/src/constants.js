@@ -17,8 +17,10 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const USER_LOADED = "USER_LOADED";
-export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
 export const LOGOUT = "LOGOUT";
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
+export const SET_FETCH = "SET_FETCH";
+export const UNSET_FETCH = "UNSET_FETCH";
 
 // Profile
 export const GET_PROFILE = "GET_PROFILE";

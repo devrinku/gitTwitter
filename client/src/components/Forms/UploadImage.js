@@ -2,8 +2,22 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { uploadDP } from "./../../actions/auth";
+import { deleteDP } from "./../../actions/auth";
+import Modal from "./../Modal";
+import { showBackDrop } from "./../../actions/utils";
+import { showModal } from "./../../actions/utils";
+import { setBackdropType } from "./../../actions/utils";
 
-const UploadImage = ({ uploadDP, history }) => {
+const UploadImage = ({
+  uploadDP,
+  history,
+  auth: { user },
+  utils,
+  setBackdropType,
+  showModal,
+  showBackDrop,
+  deleteDP,
+}) => {
   const [file, setFile] = useState("");
   const onChange = (e) => {
     setFile(e.target.files[0]);
@@ -27,7 +41,28 @@ const UploadImage = ({ uploadDP, history }) => {
             type="file"
             placeholder="Description"
           />
-          <input className="btn block" type="submit" value="Upload" />
+          <input
+            className="btn block"
+            type="submit"
+            value={
+              user && user.image !== "no-image.png"
+                ? "Change Profile Image"
+                : "Upload"
+            }
+          />
+          {user && user.image !== "no-image.png" && (
+            <a
+              href="#!"
+              className="btn block orange my-1"
+              style={{ textAlign: "center" }}
+              onClick={() => {
+                setBackdropType(`image`);
+                showBackDrop();
+                showModal();
+              }}>
+              Delete Current Profile Image
+            </a>
+          )}
           <Link
             to="/dashboard/profile"
             style={{
@@ -40,8 +75,28 @@ const UploadImage = ({ uploadDP, history }) => {
           </Link>
         </div>
       </form>
+      {utils.backdrop && utils.modal && utils.backdropType === `image` && (
+        <Modal index={90} action="delete your  profile image">
+          <a
+            onClick={() => deleteDP(history)}
+            style={{ color: "white" }}
+            href="#!"
+            className="btn orange">
+            Confirm
+          </a>
+        </Modal>
+      )}
     </div>
   );
 };
-
-export default connect(null, { uploadDP })(withRouter(UploadImage));
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  utils: state.utils,
+});
+export default connect(mapStateToProps, {
+  uploadDP,
+  deleteDP,
+  setBackdropType,
+  showModal,
+  showBackDrop,
+})(withRouter(UploadImage));
