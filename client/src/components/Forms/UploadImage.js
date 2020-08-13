@@ -25,9 +25,7 @@ const UploadImage = ({ uploadDP, history }) => {
           <input
             onChange={(e) => onChange(e)}
             type="file"
-            name=""
             placeholder="Description"
-            id=""
           />
           <input className="btn block" type="submit" value="Upload" />
           <Link

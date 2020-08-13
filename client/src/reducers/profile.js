@@ -1,15 +1,12 @@
 import {
   GET_PROFILE,
-  GET_EXPERIENCE,
-  GET_EDUCATION,
   PROFILE_ERROR,
   SET_LOADING_PROFILE,
-  ADD_EDUCATION,
-  ADD_EXPERIENCE,
   CLEAR_PROFILE,
   SET_CURRENT_PROFILE,
   GET_FOLLOWERS,
   GET_FOLLOWINGS,
+  CLEAR_CURRENT_PROFILE,
 } from "./../constants";
 
 const initialState = {
@@ -36,6 +33,16 @@ export default (state = initialState, action) => {
         ...state,
         loggedProfile: payload,
         loadingProfile: false,
+      };
+    case SET_CURRENT_PROFILE:
+      return {
+        ...state,
+        currentProfile: payload,
+      };
+    case CLEAR_CURRENT_PROFILE:
+      return {
+        ...state,
+        currentProfile: null,
       };
     case PROFILE_ERROR:
       return {

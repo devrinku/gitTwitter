@@ -166,7 +166,6 @@ nav {
   left: 0;
   right: 0;
   color: white;
-
   z-index: 20;
 }
 .divider {
@@ -243,6 +242,7 @@ header {
 .mid-container {
   padding-left: 250px;
   padding-right: 275px;
+  overflow-x: hidden;
 }
 .bg-teal {
   background-color: teal;
@@ -520,24 +520,20 @@ input[type="submit"] {
 }
 
 /* ------------------Education & Experience------------------------- */
-table {
-  width: 98%;
-  margin: auto;
-  border-collapse: separate;
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: rgb(219, 219, 219);
 }
-tr:nth-child(even) {
-  background-color: #ececec;
+
+.head p {
+  padding: 1rem 0 1rem 0.5rem;
+  word-wrap: break-word;
 }
-thead td {
-  background-color: rgb(206, 206, 206);
-  padding: 0.5rem;
-}
-tbody td {
-  padding: 0.5rem;
-}
-tbody tr {
-  border-bottom: 1px solid gray;
-}
+
 /* ------------Settings------------------- */
 .settings {
   width: 95%;
@@ -655,7 +651,10 @@ input[type="checkbox"] {
   .mid-container {
     padding-right: 0px;
   }
-
+  .td {
+    display: flex;
+    flex-direction: column;
+  }
   .auth-links {
     grid-template-columns: 1fr;
   }
@@ -741,6 +740,13 @@ input[type="checkbox"] {
     font-size: 1rem;
   }
   .search-bar {
-    width: 15rem;
+    width: 13rem;
+  }
+  .head p {
+    font-size: 85%;
+    word-wrap: break-word;
+    border-right: 1px solid grey;
+    height: 100%;
+    padding: 1rem 0;
   }
 }

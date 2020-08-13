@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema(
     resetTokenExpire: Date,
     image: {
       type: String,
-      default: "no-image",
+      default: "no-image.png",
     },
     createdAt: {
       type: Date,

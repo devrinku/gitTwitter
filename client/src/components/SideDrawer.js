@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { showSideDrawer } from "./../actions/utils";
 import { Link } from "react-router-dom";
-import user from "./../images/1.jpg";
+
 import { hideSideDrawer } from "./../actions/utils";
 import { hideBackDrop } from "./../actions/utils";
 import { showBackDrop } from "./../actions/utils";
@@ -10,10 +10,12 @@ import { setBackdropType } from "./../actions/utils";
 import { logout } from "./../actions/auth";
 import { hideModal } from "./../actions/utils";
 import { showModal } from "./../actions/utils";
+
 import Modal from "./Modal";
 
 const SideDrawer = ({
   utils,
+  auth: { user },
   profile: { loggedProfile },
   showSideDrawer,
   showBackDrop,
@@ -60,9 +62,13 @@ const SideDrawer = ({
           className="side-drawer">
           <ul>
             <li className="background-img padding-top">
-              <img className="user-img" src={user} alt="" />
-              <p className="my">rajesh</p>
-              <p>rajesh@gmail.com</p>
+              <img
+                className="user-img"
+                src={`./../uploads/${user.image}`}
+                alt=""
+              />
+              <p className="my">{user.name}</p>
+              <p>{user.email}</p>
             </li>
             <li>
               <Link onClick={onClick} to="/dashboard/followers">
@@ -118,8 +124,6 @@ const SideDrawer = ({
             <a
               onClick={() => {
                 logout();
-                hideBackDrop();
-                hideModal();
               }}
               style={{ color: "white" }}
               href="#!"
@@ -135,6 +139,7 @@ const SideDrawer = ({
 const mapStatetoProps = (state) => ({
   utils: state.utils,
   profile: state.profile,
+  auth: state.auth,
 });
 export default connect(mapStatetoProps, {
   showSideDrawer,

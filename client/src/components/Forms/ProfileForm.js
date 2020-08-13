@@ -1,10 +1,17 @@
-import React, { useState, Fragment } from "react";
-import { Link, useHistory, withRouter } from "react-router-dom";
+import React, { useState, Fragment, useEffect } from "react";
+import { useHistory, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createProfile } from "./../../actions/profile";
+import { updateProfile } from "./../../actions/profile";
 
-const ProfileForm = ({ createProfile, history }) => {
+const ProfileForm = ({
+  createProfile,
+  history,
+  profile: { loggedProfile, currentProfile },
+  updateProfile,
+}) => {
   const History = useHistory();
+
   const [profileData, setProfileData] = useState({
     company: "",
     website: "",
@@ -21,7 +28,6 @@ const ProfileForm = ({ createProfile, history }) => {
     currentcity: "",
   });
   const {
-    company,
     website,
     status,
     skills,
@@ -33,7 +39,7 @@ const ProfileForm = ({ createProfile, history }) => {
     linkedin,
     instagram,
     hometown,
-    currentcity,
+    currentCity,
   } = profileData;
   const [socialLinks, socialLinksHandler] = useState(false);
   const onChange = (e) => {
@@ -41,8 +47,19 @@ const ProfileForm = ({ createProfile, history }) => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    createProfile(profileData, history);
+    if (currentProfile) {
+      updateProfile(profileData, history);
+    } else {
+      createProfile(profileData, history);
+    }
   };
+  useEffect(() => {
+    if (currentProfile) {
+      setProfileData(currentProfile);
+    }
+    //eslint-disable-net-line
+  }, []);
+
   return (
     <div className="container">
       <div className="my ">
@@ -67,8 +84,8 @@ const ProfileForm = ({ createProfile, history }) => {
           <input
             onChange={(e) => onChange(e)}
             type="text"
-            value={currentcity || ""}
-            name="currentcity"
+            value={currentCity || ""}
+            name="currentCity"
             placeholder="Current City"
           />
           <span className="x-small ">Your current City.</span>
@@ -137,11 +154,10 @@ const ProfileForm = ({ createProfile, history }) => {
           onClick={() => socialLinksHandler(!socialLinks)}
           href="#!"
           className="btn">
-          Add Social Links
+          {currentProfile ? "Update social-links" : "Add social-links"}
         </a>
         {socialLinks && (
           <Fragment>
-            {" "}
             <div className="social-links">
               <div className="input my-2">
                 <input
@@ -215,10 +231,11 @@ const ProfileForm = ({ createProfile, history }) => {
             <input
               style={{ color: "white" }}
               type="submit"
-              value="Submit"
+              value={currentProfile ? "Update Profile" : "Create Profile"}
               className="btn "
             />
           </p>
+
           <p>
             <a
               onClick={() => History.goBack()}
@@ -233,5 +250,10 @@ const ProfileForm = ({ createProfile, history }) => {
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
 
-export default connect(null, { createProfile })(withRouter(ProfileForm));
+export default connect(mapStateToProps, { createProfile, updateProfile })(
+  withRouter(ProfileForm)
+);

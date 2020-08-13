@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import user from "./../../images/1.jpg";
 import { getFriends } from "./../../actions/profile";
 import { connect } from "react-redux";
@@ -10,11 +10,13 @@ const FriendList = ({ followers, followings, profile, getFriends }) => {
     if (followings) {
       getFriends(profile.loggedProfile._id, followings);
     }
+    //eslint-disable-next-line
   }, []);
   return (
     <ul>
       {followers
-        ? profile.followers.map((follower) => (
+        ? profile.followers.length > 0 &&
+          profile.followers.map((follower) => (
             <li key={follower._id} className="follower border-div ">
               <div>
                 <img src={user} alt="" />
@@ -26,7 +28,8 @@ const FriendList = ({ followers, followings, profile, getFriends }) => {
               </div>
             </li>
           ))
-        : profile.followings.map((following) => (
+        : profile.followings.length > 0 &&
+          profile.followings.map((following) => (
             <li key={following._id} className="follower border-div ">
               <div>
                 <img src={user} alt="" />

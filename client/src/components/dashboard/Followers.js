@@ -1,9 +1,7 @@
 import React from "react";
 import FriendList from "./FriendList";
 
-import { connect } from "react-redux";
-
-const Followers = ({ profile: { loggedProfile } }) => {
+const Followers = () => {
   return (
     <div className="mid-container padding-top">
       <div className="my teal">
@@ -11,13 +9,9 @@ const Followers = ({ profile: { loggedProfile } }) => {
           <i className="fas fa-users mx"></i>Followers
         </span>
       </div>
-      {loggedProfile.followers.length > 0 && (
-        <FriendList followers={"followers"} />
-      )}
+      <FriendList followers={"followers"} />
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  profile: state.profile,
-});
-export default connect(mapStateToProps)(Followers);
+
+export default Followers;

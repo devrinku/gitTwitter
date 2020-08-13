@@ -46,7 +46,7 @@ app.use(express.json());
 app.use(fileupload());
 
 //Making Public folder static
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "client", "src", "public")));
 
 //Using routeMap
 if (process.env.NODE_ENV === "development") {

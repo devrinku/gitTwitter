@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getMyProfile, addExperience } from "./../../actions/profile";
+import { getMyProfile } from "./../../actions/profile";
 import Preloader from "./../Preloader";
 import spinner from "./../../images/25C.gif";
 
@@ -41,7 +41,7 @@ const Profile = ({
     <div className=" mid-container bg-teal padding-top">
       <div className="profile">
         <div className="image my-2">
-          <img src={user.image} alt="" />
+          <img src={`./../../uploads/${user.image}`} alt="" />
         </div>
         <div className="pro-content">
           <p>
@@ -94,11 +94,11 @@ const Profile = ({
               </p>
             </Fragment>
           )}
-          {loggedProfile.currentcity && (
+          {loggedProfile.currentCity && (
             <Fragment>
               <p>
                 <i className="fas fa-map-marker-alt"></i>Lives in ,{" "}
-                {loggedProfile.currentcity}
+                {loggedProfile.currentCity}
               </p>
             </Fragment>
           )}

@@ -4,8 +4,17 @@ import { connect } from "react-redux";
 import { showBackDrop } from "./../../actions/utils";
 import { showModal } from "./../../actions/utils";
 import { setBackdropType } from "./../../actions/utils";
+import { setCurrentProfile } from "./../../actions/profile";
+import { Link } from "react-router-dom";
 
-const Settings = ({ utils, showBackDrop, showModal, setBackdropType }) => {
+const Settings = ({
+  utils,
+  profile: { loggedProfile },
+  showBackDrop,
+  showModal,
+  setCurrentProfile,
+  setBackdropType,
+}) => {
   return (
     <Fragment>
       <div className="mid-container padding-top">
@@ -16,14 +25,17 @@ const Settings = ({ utils, showBackDrop, showModal, setBackdropType }) => {
         </div>
         <ul className="settings ">
           <li>
-            <a className="btn block " href="#!">
+            <Link className="btn block " to="/create/uploadimage">
               Change/Delete/Upload Profile Image
-            </a>
+            </Link>
           </li>
           <li>
-            <a className="btn block " href="#!">
+            <Link
+              onClick={() => setCurrentProfile(loggedProfile)}
+              className="btn block "
+              to="/create/profileform">
               Edit Profile
-            </a>
+            </Link>
           </li>
           <li>
             <a className="btn block " href="#!">
@@ -57,9 +69,11 @@ const Settings = ({ utils, showBackDrop, showModal, setBackdropType }) => {
 
 const mapStateToProps = (state) => ({
   utils: state.utils,
+  profile: state.profile,
 });
 export default connect(mapStateToProps, {
   showBackDrop,
   showModal,
   setBackdropType,
+  setCurrentProfile,
 })(Settings);

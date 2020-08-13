@@ -20,7 +20,7 @@ export const setLoading = () => {
     type: SET_LOADING_AUTH,
   };
 };
-export const loadUser = (formData) => async (dispatch) => {
+export const loadUser = () => async (dispatch) => {
   if (localStorage.getItem("token")) {
     setAuthToken(localStorage.getItem("token"));
   }

@@ -29,7 +29,9 @@ const Modal = ({ hideSideDrawer, hideModal, hideBackDrop, ...props }) => {
                 Close
               </a>
             </p>
-            <p className="mx">{props.children}</p>
+            <p onClick={close} className="mx">
+              {props.children}
+            </p>
           </div>
         </div>
       </div>
