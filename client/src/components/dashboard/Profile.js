@@ -1,20 +1,12 @@
 import React, { useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getMyProfile } from "./../../actions/profile";
+
 import Preloader from "./../Preloader";
 import spinner from "./../../images/25C.gif";
 
-const Profile = ({
-  getMyProfile,
-  auth: { user },
-  profile: { loggedProfile, loadingProfile },
-}) => {
-  useEffect(() => {
-    getMyProfile();
-    //eslint-disable-next-line
-  }, []);
-  return loadingProfile === true ? (
+const Profile = ({ auth: { user }, myprofile, myLoadingprofile }) => {
+  return myLoadingprofile === true ? (
     <Fragment>
       <div className="container padding-top text-center">
         <div className="my-3">
@@ -22,7 +14,7 @@ const Profile = ({
         </div>
       </div>
     </Fragment>
-  ) : loggedProfile === null ? (
+  ) : myprofile === null ? (
     <div className="container">
       <div className="my-2">
         <p className="padding-top fw-500 small">
@@ -47,109 +39,91 @@ const Profile = ({
           <p>
             <i className="fas fa-user-tie"></i> {user.name && user.name}
           </p>
-          {loggedProfile.status && (
+          {myprofile.status && (
             <Fragment>
               <p>
                 <i className="fas fa-laptop"></i>
-                {loggedProfile.status}
+                {myprofile.status}
               </p>
             </Fragment>
           )}
-          {loggedProfile.experience && loggedProfile.experience.length > 0 && (
+          {myprofile.experience && myprofile.experience.length > 0 && (
             <Fragment>
               <p>
                 <i className="fas fa-briefcase"></i>
                 {
-                  loggedProfile.experience[loggedProfile.experience.length - 1]
-                    .title
-                }{" "}
-                at{" "}
-                {
-                  loggedProfile.experience[loggedProfile.experience.length - 1]
-                    .company
-                }
+                  myprofile.experience[myprofile.experience.length - 1].title
+                } at{" "}
+                {myprofile.experience[myprofile.experience.length - 1].company}
               </p>
             </Fragment>
           )}
-          {loggedProfile.education && loggedProfile.education.length > 0 && (
+          {myprofile.education && myprofile.education.length > 0 && (
             <Fragment>
               <p>
                 <i className="fas fa-graduation-cap"></i>
                 {
-                  loggedProfile.education[loggedProfile.education.length - 1]
-                    .degree
-                }{" "}
-                at{" "}
-                {
-                  loggedProfile.education[loggedProfile.education.length - 1]
-                    .school
-                }
+                  myprofile.education[myprofile.education.length - 1].degree
+                } at{" "}
+                {myprofile.education[myprofile.education.length - 1].school}
               </p>
             </Fragment>
           )}
-          {loggedProfile.hometown && (
+          {myprofile.hometown && (
             <Fragment>
               <p>
-                <i className="fas fa-home"></i>From {loggedProfile.hometown}
+                <i className="fas fa-home"></i>From {myprofile.hometown}
               </p>
             </Fragment>
           )}
-          {loggedProfile.currentCity && (
+          {myprofile.currentCity && (
             <Fragment>
               <p>
                 <i className="fas fa-map-marker-alt"></i>Lives in ,{" "}
-                {loggedProfile.currentCity}
+                {myprofile.currentCity}
               </p>
             </Fragment>
           )}
-          {loggedProfile.website && (
+          {myprofile.website && (
             <Fragment>
               <p>
                 <i className="fas fa-blog"></i>Personal Website :{" "}
-                {loggedProfile.website}
+                {myprofile.website}
               </p>
             </Fragment>
           )}
-          {(loggedProfile.github ||
-            loggedProfile.twitter ||
-            loggedProfile.facebook ||
-            loggedProfile.instagram ||
-            loggedProfile.linkedin) && (
+          {(myprofile.github ||
+            myprofile.twitter ||
+            myprofile.facebook ||
+            myprofile.instagram ||
+            myprofile.linkedin) && (
             <Fragment>
               <p>
                 <i className="fas fa-link"></i> Follow me :
-                {loggedProfile.github && (
-                  <a
-                    className="mx follow-links"
-                    href={`${loggedProfile.github}`}>
+                {myprofile.github && (
+                  <a className="mx follow-links" href={`${myprofile.github}`}>
                     <i className="fab fa-github"></i>
                   </a>
                 )}
-                {loggedProfile.facebook && (
-                  <a
-                    className="mx follow-links"
-                    href={`${loggedProfile.facebook}`}>
+                {myprofile.facebook && (
+                  <a className="mx follow-links" href={`${myprofile.facebook}`}>
                     <i className="fab fa-facebook"></i>
                   </a>
                 )}{" "}
-                {loggedProfile.linkedin && (
-                  <a
-                    className="mx follow-links"
-                    href={`${loggedProfile.linkedin}`}>
+                {myprofile.linkedin && (
+                  <a className="mx follow-links" href={`${myprofile.linkedin}`}>
                     <i className="fab fa-linkedin"></i>
                   </a>
                 )}{" "}
-                {loggedProfile.twitter && (
-                  <a
-                    className="mx follow-links"
-                    href={`${loggedProfile.twitter}`}>
+                {myprofile.twitter && (
+                  <a className="mx follow-links" href={`${myprofile.twitter}`}>
                     <i className="fab fa-twitter"></i>
                   </a>
                 )}{" "}
-                {loggedProfile.instagram && (
+                {myprofile.instagram && (
                   <a
                     className="mx follow-links"
-                    href={`${loggedProfile.instagarm}`}>
+                    href={`${myprofile.instagarm}`}>
                     <i className="fab fa-instagram"></i>
                   </a>
                 )}
@@ -162,7 +136,6 @@ const Profile = ({
   );
 };
 const mapStateToProps = (state) => ({
-  profile: state.profile,
   auth: state.auth,
 });
-export default connect(mapStateToProps, { getMyProfile })(Profile);
+export default connect(mapStateToProps)(Profile);

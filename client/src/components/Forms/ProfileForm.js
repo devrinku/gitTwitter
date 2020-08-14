@@ -7,7 +7,7 @@ import { updateProfile } from "./../../actions/profile";
 const ProfileForm = ({
   createProfile,
   history,
-  profile: { currentProfile },
+  profile: { currentProfile, progress },
   updateProfile,
 }) => {
   const History = useHistory();
@@ -42,6 +42,7 @@ const ProfileForm = ({
     currentCity,
   } = profileData;
   const [socialLinks, socialLinksHandler] = useState(false);
+
   const onChange = (e) => {
     setProfileData({ ...profileData, [e.target.name]: e.target.value });
   };
@@ -57,7 +58,7 @@ const ProfileForm = ({
     if (currentProfile) {
       setProfileData(currentProfile);
     }
-    //eslint-disable-net-line
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -229,18 +230,35 @@ const ProfileForm = ({
         <div className="links">
           <p>
             <input
-              style={{ color: "white" }}
+              disabled={progress === true ? true : false}
+              style={
+                progress === true
+                  ? { color: "white", background: "red" }
+                  : { color: "white" }
+              }
               type="submit"
-              value={currentProfile ? "Update Profile" : "Create Profile"}
+              value={
+                currentProfile
+                  ? progress === true
+                    ? "Updating Profile..."
+                    : "Update Profile"
+                  : progress === true
+                  ? "Creating Profile..."
+                  : "Create Profile"
+              }
               className="btn "
             />
           </p>
 
           <p>
             <a
-              onClick={() => History.goBack()}
+              onClick={() => {
+                if (progress === false) {
+                  History.goBack();
+                }
+              }}
               href="#!"
-              style={{ backgroundColor: "grey" }}
+              style={{ background: "grey" }}
               className="btn mx-2">
               Go Back
             </a>

@@ -1,26 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getAllPosts } from "./../../actions/post";
 import Moment from "react-moment";
 import { connect } from "react-redux";
-const Posts = ({ myprofile, auth: { user } }) => {
+const Home = ({ getAllPosts, post: { posts } }) => {
+  useEffect(() => {
+    getAllPosts();
+  }, []);
   return (
-    <div className="mid-container padding-top">
-      <div className="my teal">
-        <span className="pencil fw-500 ">
-          <i className="fas fa-blog mx"></i>Posts
-        </span>
-      </div>
-      {myprofile.post.length > 0 &&
-        myprofile.post.map((text) => (
+    posts !== null &&
+    posts.length > 0 && (
+      <div className="mid-container padding-top">
+        {posts.map((text) => (
           <div key={text._id} className="post  ">
             <div className="post-info ">
               <div className="post-img">
-                <img src={`./../../uploads/${user.image}`} alt="" />
+                <img src={`./../../uploads/${text.user.image}`} alt="" />
               </div>
               <div className="post-name">
-                <p className="my fw-500">{user.name}</p>
+                <p className="my fw-500">{text.user.name}</p>
 
                 <p>
-                  <Moment format="YYYY/MM/DD">{text.date}</Moment>
+                  <Moment format="YYYY/MM/DD">{text.text.date}</Moment>
                 </p>
               </div>
             </div>
@@ -41,12 +41,12 @@ const Posts = ({ myprofile, auth: { user } }) => {
             </div>
           </div>
         ))}
-    </div>
+      </div>
+    )
   );
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  post: state.post,
 });
-
-export default connect(mapStateToProps)(Posts);
+export default connect(mapStateToProps, { getAllPosts })(Home);

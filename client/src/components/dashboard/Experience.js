@@ -12,10 +12,11 @@ import { Fragment } from "react";
 const Experience = ({
   utils,
   showBackDrop,
-  profile: { loggedProfile },
+  myprofile,
   setBackdropType,
   deleteExperience,
   showModal,
+  profile: { progress },
 }) => {
   const [component, showComponent] = useState(false);
   return (
@@ -25,7 +26,7 @@ const Experience = ({
           <i className="fas fa-users-cog mx"></i>Experience Credentials
         </span>
       </div>
-      {loggedProfile.experience && loggedProfile.experience.length > 0 && (
+      {myprofile.experience && myprofile.experience.length > 0 && (
         <div className="edu">
           <div
             style={{ background: "rgb(243, 243, 243)" }}
@@ -43,7 +44,7 @@ const Experience = ({
           </div>
         </div>
       )}
-      {loggedProfile.experience.map((exp) => (
+      {myprofile.experience.map((exp) => (
         <div
           key={exp._id}
           style={{ background: "rgb(243, 243, 243)" }}
@@ -60,6 +61,7 @@ const Experience = ({
               </Fragment>
             )}
           </p>
+
           <p className="text-center" style={{ width: "10%" }}>
             <a
               onClick={() => {
@@ -71,6 +73,7 @@ const Experience = ({
               <i style={{ color: "red" }} className="small  fas fa-trash"></i>
             </a>
           </p>
+
           {utils.backdrop &&
             utils.modal &&
             utils.backdropType === `experience-${exp._id}` && (

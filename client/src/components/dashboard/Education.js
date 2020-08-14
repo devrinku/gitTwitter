@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import Modal from "./../Modal";
 import { connect } from "react-redux";
 import { showBackDrop } from "./../../actions/utils";
 import { showModal } from "./../../actions/utils";
+
 import { setBackdropType } from "./../../actions/utils";
 import EducationForm from "./../Forms/EducationForm";
 import { deleteEducation } from "./../../actions/profile";
@@ -11,12 +12,14 @@ import Moment from "react-moment";
 const Education = ({
   utils,
   showBackDrop,
-  profile: { loggedProfile },
+  myprofile,
   showModal,
   deleteEducation,
+  profile: { progress },
   setBackdropType,
 }) => {
   const [component, showComponent] = useState(false);
+
   return (
     <div className="padding-top mid-container">
       <div className="my teal">
@@ -24,7 +27,7 @@ const Education = ({
           <i className="fas fa-users-cog mx"></i>Education Credentials
         </span>
       </div>
-      {loggedProfile.education && loggedProfile.education.length > 0 && (
+      {myprofile.education && myprofile.education.length > 0 && (
         <div className="edu">
           <div
             style={{ background: "rgb(243, 243, 243)" }}
@@ -42,7 +45,7 @@ const Education = ({
           </div>
         </div>
       )}
-      {loggedProfile.education.map((edu) => (
+      {myprofile.education.map((edu) => (
         <div
           key={edu._id}
           style={{ background: "rgb(243, 243, 243)" }}
@@ -79,9 +82,9 @@ const Education = ({
             utils.backdropType === `education-${edu._id}` && (
               <Modal index={90} action="delete this education credential">
                 <a
+                  href="#!"
                   onClick={() => deleteEducation(edu._id)}
                   style={{ color: "white" }}
-                  href="#!"
                   className="btn orange">
                   Confirm
                 </a>
@@ -91,7 +94,7 @@ const Education = ({
       ))}
       <div className="mx py">
         <a onClick={() => showComponent(!component)} href="#!" className="btn">
-          {component ? "Close" : "Add Experience"}
+          {component ? "Close" : "Add Education"}
         </a>
       </div>
       {component && (

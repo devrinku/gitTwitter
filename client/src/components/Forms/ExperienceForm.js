@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { addExperience } from "./../../actions/profile";
 
 const ExperienceForm = ({
-  profile: { loggedProfile },
+  profile: { loggedProfile, progress },
   showComponent,
   addExperience,
   history,
@@ -122,16 +122,23 @@ const ExperienceForm = ({
           }>
           <p>
             <input
-              style={{ color: "white" }}
+              disabled={progress === true ? true : false}
+              style={
+                progress === true
+                  ? { color: "white", background: "red" }
+                  : { color: "white" }
+              }
               type="submit"
-              value="Submit"
-              className="btn block"
+              value={
+                progress === true ? "Addding Experience..." : "Add Experience"
+              }
+              className="btn block "
             />
           </p>
           {Location.pathname === "/dashboard/experience" ? null : (
             <p>
               <Link
-                to="/create/uploadimage"
+                to={progress === true ? "#!" : "/create/uploadimage"}
                 style={{ backgroundColor: "grey" }}
                 className="btn mx-2">
                 Skip

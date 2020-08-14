@@ -21,10 +21,6 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     })
     .populate({
       path: "post",
-      populate: {
-        path: "user",
-        select: "name image",
-      },
     });
 
   if (!profile) {
@@ -37,13 +33,24 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 });
 
 exports.getProfile = asyncHandler(async (req, res, next) => {
-  const profile = await Profile.findById(req.params.id).populate({
-    path: "post",
-    populate: {
+  const profile = await Profile.findById(req.params.id)
+    .populate({
+      path: "post",
+      populate: {
+        path: "user",
+        select: "name image",
+      },
+    })
+    .populate({
       path: "user",
       select: "name image",
-    },
-  });
+    })
+    .populate({
+      path: "education",
+    })
+    .populate({
+      path: "experience",
+    });
   res.response = new Response(200, profile);
   next();
 });
@@ -169,7 +176,7 @@ exports.getFollowings = asyncHandler(async (req, res, next) => {
 
 exports.useGithubRepos = asyncHandler(async (req, res, next) => {
   gitHub(
-    `https://api.github.com/users/${req.params.name}/repos?per_page=5&sort=created:asc`,
+    `https://api.github.com/users/${req.params.name}/repos?per_page=10&sort=created:asc`,
     res,
     next
   );

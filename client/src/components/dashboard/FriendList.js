@@ -1,14 +1,21 @@
 import React, { useEffect } from "react";
-import user from "./../../images/1.jpg";
+
 import { getFriends } from "./../../actions/profile";
 import { connect } from "react-redux";
-const FriendList = ({ followers, followings, profile, getFriends }) => {
+const FriendList = ({
+  followers,
+  followings,
+  myprofileFollowings,
+  myprofileFollowers,
+  getFriends,
+  profile,
+}) => {
   useEffect(() => {
     if (followers) {
-      getFriends(profile.loggedProfile._id, followers);
+      getFriends(myprofileFollowers._id, followers);
     }
     if (followings) {
-      getFriends(profile.loggedProfile._id, followings);
+      getFriends(myprofileFollowings._id, followings);
     }
     //eslint-disable-next-line
   }, []);
@@ -19,7 +26,7 @@ const FriendList = ({ followers, followings, profile, getFriends }) => {
           profile.followers.map((follower) => (
             <li key={follower._id} className="follower border-div ">
               <div>
-                <img src={user} alt="" />
+                <img src={`./../../uploads/${follower.user.image}`} alt="" />
               </div>
               <div className="info">
                 <p>{follower.user.name}</p>
@@ -32,7 +39,7 @@ const FriendList = ({ followers, followings, profile, getFriends }) => {
           profile.followings.map((following) => (
             <li key={following._id} className="follower border-div ">
               <div>
-                <img src={user} alt="" />
+                <img src={`./../../uploads/${following.user.image}`} alt="" />
               </div>
               <div className="info">
                 <p>{following.user.name}</p>

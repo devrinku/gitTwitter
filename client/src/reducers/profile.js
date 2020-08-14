@@ -7,22 +7,37 @@ import {
   GET_FOLLOWERS,
   GET_FOLLOWINGS,
   CLEAR_CURRENT_PROFILE,
+  SET_PROGRESS,
+  UNSET_PROGRESS,
+  GITHUB_REPOS,
 } from "./../constants";
 
 const initialState = {
   loggedProfile: null,
   currentProfile: null,
   profiles: [],
-  repos: [],
+  repos: null,
   followers: [],
   followings: [],
   loadingProfile: false,
   error: {},
+  progress: false,
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case SET_PROGRESS:
+      return {
+        ...state,
+        progress: true,
+      };
+    case UNSET_PROGRESS:
+      return {
+        ...state,
+        progress: false,
+      };
+
     case SET_LOADING_PROFILE:
       return {
         ...state,
@@ -60,13 +75,18 @@ export default (state = initialState, action) => {
         ...state,
         followings: payload,
       };
+    case GITHUB_REPOS:
+      return {
+        ...state,
+        repos: payload,
+      };
     case CLEAR_PROFILE:
       return {
         ...state,
         loggedProfile: null,
         currentProfile: null,
         profiles: [],
-        repos: [],
+        repos: null,
         followers: [],
         followings: [],
         loadingProfile: false,

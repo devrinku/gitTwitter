@@ -2,6 +2,10 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
+const renderMergedProps = (component, ...rest) => {
+  const finalProps = Object.assign({}, ...rest);
+  return React.createElement(component, finalProps);
+};
 const PrivateRoute = ({
   component: Component,
   auth: { isLoggedIn, loadingAuth },
@@ -12,7 +16,7 @@ const PrivateRoute = ({
       {...rest}
       render={(props) =>
         isLoggedIn === true && loadingAuth === false ? (
-          <Component {...props} />
+          renderMergedProps(Component, props, rest)
         ) : (
           <Redirect to="/login" />
         )

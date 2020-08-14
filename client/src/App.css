@@ -460,6 +460,7 @@ input[type="submit"] {
 .post {
   width: 98%;
   margin: auto;
+  margin-bottom: 1rem;
   border: 1px dotted rgb(179, 179, 179);
   background-color: rgb(231, 231, 231);
 }

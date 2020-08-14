@@ -46,9 +46,9 @@ const Navbar = ({
         <span className="divider small">|</span>
       </li>
       <li>
-        <a href="#!">
+        <Link to="/dashboard/home">
           <i className="fas fa-home"></i>
-        </a>
+        </Link>
       </li>
 
       <li>

@@ -124,6 +124,9 @@ export const logout = () => (dispatch) => {
 };
 
 export const uploadDP = (data, history) => async (dispatch) => {
+  dispatch({
+    type: SET_FETCH,
+  });
   const formData = new FormData();
   formData.append("file", data);
   const config = {
@@ -135,7 +138,13 @@ export const uploadDP = (data, history) => async (dispatch) => {
     await axios.put("/api/v1/auth/uploadprofileimage", formData, config);
     dispatch(loadUser());
     history.push("/dashboard/profile");
+    dispatch({
+      type: UNSET_FETCH,
+    });
   } catch (error) {
+    dispatch({
+      type: UNSET_FETCH,
+    });
     if (error.response && error.response.data && error.response.data.error) {
       toast(`${error.response.data.error}`, {
         className: "black-background",
@@ -154,6 +163,9 @@ export const uploadDP = (data, history) => async (dispatch) => {
 };
 
 export const deleteDP = (history) => async (dispatch) => {
+  dispatch({
+    type: SET_FETCH,
+  });
   try {
     await axios.delete("/api/v1/auth/deleteprofileimage");
     dispatch(loadUser());
@@ -163,7 +175,13 @@ export const deleteDP = (history) => async (dispatch) => {
       bodyClassName: "grow-font-size",
       progressClassName: "Toastify__progress-bar--dark",
     });
+    dispatch({
+      type: UNSET_FETCH,
+    });
   } catch (error) {
+    dispatch({
+      type: UNSET_FETCH,
+    });
     console.log(error);
   }
 };

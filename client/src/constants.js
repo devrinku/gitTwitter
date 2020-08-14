@@ -33,3 +33,13 @@ export const GET_FOLLOWERS = "GET_FOLLOWERS";
 export const GET_FOLLOWINGS = "GET_FOLLOWINGS";
 export const DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
 export const DELETE_EDUCATION = "DELETE_EDUCATION";
+export const SET_PROGRESS = "SET_PROGRESS";
+export const UNSET_PROGRESS = "UNSET_PROGRESS";
+export const GITHUB_REPOS = "GITHUB_REPOS";
+// Posts
+export const GET_ALL_POSTS = "GET_ALL_POSTS";
+export const GET_SINGLE_POST = "GET_SINGLE_POST";
+export const ADD_POST = "ADD_POST";
+export const UPDATE_POST = "UPDATE_POST";
+export const POST_ERROR = "POST_ERROR";
+export const DELETE_POST = "DELETE_POST";

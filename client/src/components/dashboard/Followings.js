@@ -1,7 +1,7 @@
 import React from "react";
 import FriendList from "./FriendList";
 
-const Followings = () => {
+const Followings = ({ myprofile }) => {
   return (
     <div className="mid-container padding-top">
       <div className="my teal">
@@ -9,7 +9,7 @@ const Followings = () => {
           <i className="fas fa-users mx"></i>Followings
         </span>
       </div>
-      <FriendList followings={"followings"} />
+      <FriendList myprofileFollowings={myprofile} followings={"followings"} />
     </div>
   );
 };

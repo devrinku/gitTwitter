@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { addEducation } from "./../../actions/profile";
 
 const EducationForm = ({
-  profile: { loggedProfile },
+  profile: { loggedProfile, progress },
   addEducation,
   showComponent,
+
   history,
 }) => {
   const location = useLocation();
@@ -20,6 +21,7 @@ const EducationForm = ({
   });
   const { school, description, degree, from, to, fieldofstudy } = formData;
   const [current, currenthandler] = useState(false);
+
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -121,16 +123,23 @@ const EducationForm = ({
           }>
           <p>
             <input
-              style={{ color: "white" }}
+              disabled={progress === true ? true : false}
+              style={
+                progress === true
+                  ? { color: "white", background: "red" }
+                  : { color: "white" }
+              }
               type="submit"
-              value="Submit"
+              value={
+                progress === true ? "Addding Education..." : "Add Education"
+              }
               className="btn block "
             />
           </p>
           {location.pathname === "/dashboard/education" ? null : (
             <p>
               <Link
-                to="/create/experienceform"
+                to={progress === true ? "#!" : "/create/experienceform"}
                 style={{ backgroundColor: "grey" }}
                 className="btn mx-2">
                 Skip

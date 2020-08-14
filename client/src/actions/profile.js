@@ -7,6 +7,9 @@ import {
   GET_FOLLOWERS,
   GET_FOLLOWINGS,
   CLEAR_CURRENT_PROFILE,
+  SET_PROGRESS,
+  UNSET_PROGRESS,
+  GITHUB_REPOS,
 } from "./../constants";
 
 import { toast } from "react-toastify";
@@ -42,6 +45,9 @@ export const getMyProfile = () => async (dispatch) => {
   }
 };
 export const createProfile = (formData, history) => async (dispatch) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
   try {
     const config = {
       headers: {
@@ -61,7 +67,13 @@ export const createProfile = (formData, history) => async (dispatch) => {
       progressClassName: "Toastify__progress-bar--dark",
     });
     history.push("/create/educationform");
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
   } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
     if (error.response && error.response.data && error.response.data.error) {
       const errors = error.response.data.error.split(",");
       if (errors) {
@@ -87,9 +99,12 @@ export const createProfile = (formData, history) => async (dispatch) => {
   }
 };
 
-export const addEducation = (formData, id, param, history) => async (
+export const addEducation = (formData, id, param, history, mount) => async (
   dispatch
 ) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -114,7 +129,13 @@ export const addEducation = (formData, id, param, history) => async (
         progressClassName: "Toastify__progress-bar--dark",
       });
     }
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
   } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
     if (error.response && error.response.data && error.response.data.error) {
       const errors = error.response.data.error.split(",");
       if (errors) {
@@ -143,6 +164,9 @@ export const addEducation = (formData, id, param, history) => async (
 export const addExperience = (formData, id, param, history) => async (
   dispatch
 ) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -167,7 +191,13 @@ export const addExperience = (formData, id, param, history) => async (
         progressClassName: "Toastify__progress-bar--dark",
       });
     }
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
   } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
     if (error.response && error.response.data && error.response.data.error) {
       const errors = error.response.data.error.split(",");
       if (errors) {
@@ -201,9 +231,10 @@ export const setCurrentProfile = (formData) => {
 };
 
 export const updateProfile = (formData, history) => async (dispatch) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
   try {
-    dispatch(setLoading());
-
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -229,7 +260,13 @@ export const updateProfile = (formData, history) => async (dispatch) => {
     dispatch({
       type: CLEAR_CURRENT_PROFILE,
     });
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
   } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
     if (error.response && error.response.data && error.response.data.error) {
       const errors = error.response.data.error.split(",");
       if (errors) {
@@ -287,6 +324,9 @@ export const getFriends = (id, type) => async (dispatch) => {
 };
 
 export const deleteExperience = (id) => async (dispatch) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
   try {
     await axios.delete(`/api/v1/experience/${id}`);
     dispatch(getMyProfile());
@@ -295,7 +335,13 @@ export const deleteExperience = (id) => async (dispatch) => {
       bodyClassName: "grow-font-size",
       progressClassName: "Toastify__progress-bar--dark",
     });
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
   } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
     if (error && error.response && error.response.statusText) {
       dispatch({
         type: PROFILE_ERROR,
@@ -311,6 +357,9 @@ export const deleteExperience = (id) => async (dispatch) => {
 };
 
 export const deleteEducation = (id) => async (dispatch) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
   try {
     await axios.delete(`/api/v1/education/${id}`);
     dispatch(getMyProfile());
@@ -318,6 +367,34 @@ export const deleteEducation = (id) => async (dispatch) => {
       className: "black-background",
       bodyClassName: "grow-font-size",
       progressClassName: "Toastify__progress-bar--dark",
+    });
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const getGithubRepos = (name) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/profile/github/${name}/repos`);
+    dispatch({
+      type: GITHUB_REPOS,
+      payload: res.data.data,
     });
   } catch (error) {
     if (error && error.response && error.response.statusText) {

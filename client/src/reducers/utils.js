@@ -26,11 +26,13 @@ export default (state = initialState, action) => {
         ...state,
         menubar: true,
       };
+
     case HIDE_MENU_BAR:
       return {
         ...state,
         menubar: false,
       };
+
     case SHOW_SIDE_DRAWER:
       return {
         ...state,
