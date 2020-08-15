@@ -46,6 +46,7 @@ const SideDrawer = ({
         hideModal();
       }
     });
+
     //eslint-disable-next-line
   }, []);
   const onClick = () => {
@@ -121,7 +122,7 @@ const SideDrawer = ({
           </ul>
         </div>
         {utils.backdrop && utils.modal && utils.backdropType === "logout" && (
-          <Modal index={90} action="logout">
+          <Modal warn={true} index={90} action="logout">
             <a
               onClick={() => {
                 logout();

@@ -15,24 +15,31 @@ const Modal = ({ hideSideDrawer, hideModal, hideBackDrop, ...props }) => {
   return (
     <Fragment>
       <Backdrop index={props.index} />
-      <div className="modal">
-        <div className="modal-heading fw-500 small">Confirm Your Action</div>
+      <div style={props.top ? { top: "10vh" } : {}} className="modal">
+        {props.warn && (
+          <div className="modal-heading fw-500 small">Confirm Your Action</div>
+        )}
         <div className="modal-content">
-          <p className="small"> Are you sure you want to {props.action}</p>
-          <div className="modal-links ">
-            <p>
-              <a
-                onClick={close}
-                style={{ color: "white" }}
-                href="#!"
-                className="btn teal ">
-                Close
-              </a>
-            </p>
-            <p onClick={close} className="mx">
-              {props.children}
-            </p>
-          </div>
+          {props.content && props.content}
+          {props.warn && (
+            <p className="small"> Are you sure you want to {props.action}</p>
+          )}
+          {props.warn && (
+            <div className="modal-links ">
+              <p>
+                <a
+                  onClick={close}
+                  style={{ color: "white" }}
+                  href="#!"
+                  className="btn teal ">
+                  Close
+                </a>
+              </p>
+              <p onClick={close} className="mx">
+                {props.children}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </Fragment>

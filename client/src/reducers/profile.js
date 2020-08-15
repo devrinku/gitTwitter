@@ -63,6 +63,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loadingProfile: false,
+        repos: null,
         error: payload,
       };
     case GET_FOLLOWERS:

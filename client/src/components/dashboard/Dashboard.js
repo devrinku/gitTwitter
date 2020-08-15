@@ -22,7 +22,7 @@ const Dashboard = ({
   showMenuBar,
   utils,
   hideMenuBar,
-  auth: { user },
+
   getMyProfile,
   profile: { loggedProfile, loadingProfile, progress },
 }) => {
@@ -90,7 +90,7 @@ const Dashboard = ({
           component={Experience}
         />
         <PrivateRoute
-          user={user}
+          myprofile={loggedProfile}
           exact
           path="/dashboard/github"
           component={Github}
@@ -104,7 +104,6 @@ const Dashboard = ({
 const mapStatetoProps = (state) => ({
   utils: state.utils,
   profile: state.profile,
-  auth: state.auth,
 });
 export default connect(mapStatetoProps, {
   showMenuBar,

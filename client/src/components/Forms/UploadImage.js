@@ -108,7 +108,7 @@ const UploadImage = ({
         </div>
       </form>
       {utils.backdrop && utils.modal && utils.backdropType === `image` && (
-        <Modal index={90} action="delete your  profile image">
+        <Modal warn={true} index={90} action="delete your  profile image">
           <a
             onClick={() => {
               deleteDP(history);

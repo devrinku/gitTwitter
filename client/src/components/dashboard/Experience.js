@@ -61,39 +61,43 @@ const Experience = ({
         </div>
       )}
       {myprofile.experience.map((exp) => (
-        <div
-          key={exp._id}
-          style={{ background: "rgb(243, 243, 243)" }}
-          className="border-div head edu">
-          <p style={{ width: "30%" }}>{exp.title}</p>
-          <p style={{ width: "30%" }}>{exp.company}</p>
-          <p style={{ width: "30%" }}>
-            <Moment format="YYYY/MM/DD">{exp.from}</Moment>-
-            {exp.to === null ? (
-              " Now"
-            ) : (
-              <Fragment>
-                <Moment format="YYYY/MM/DD">{exp.to}</Moment>
-              </Fragment>
-            )}
-          </p>
+        <Fragment key={exp._id}>
+          {" "}
+          <div
+            style={{ background: "rgb(243, 243, 243)" }}
+            className="border-div head edu">
+            <p style={{ width: "30%" }}>{exp.title}</p>
+            <p style={{ width: "30%" }}>{exp.company}</p>
+            <p style={{ width: "30%" }}>
+              <Moment format="YYYY/MM/DD">{exp.from}</Moment>-
+              {exp.to === null ? (
+                " Now"
+              ) : (
+                <Fragment>
+                  <Moment format="YYYY/MM/DD">{exp.to}</Moment>
+                </Fragment>
+              )}
+            </p>
 
-          <p className="text-center" style={{ width: "10%" }}>
-            <a
-              onClick={() => {
-                setBackdropType(`experience-${exp._id}`);
-                showBackDrop();
-                showModal();
-              }}
-              href="#!">
-              <i style={{ color: "red" }} className="small  fas fa-trash"></i>
-            </a>
-          </p>
-
+            <p className="text-center" style={{ width: "10%" }}>
+              <a
+                onClick={() => {
+                  setBackdropType(`experience-${exp._id}`);
+                  showBackDrop();
+                  showModal();
+                }}
+                href="#!">
+                <i style={{ color: "red" }} className="small  fas fa-trash"></i>
+              </a>
+            </p>
+          </div>
           {utils.backdrop &&
             utils.modal &&
             utils.backdropType === `experience-${exp._id}` && (
-              <Modal index={90} action="delete this experience credential">
+              <Modal
+                warn={true}
+                index={90}
+                action="delete this experience credential">
                 <a
                   onClick={() => deleteExperience(exp._id)}
                   style={{ color: "white" }}
@@ -103,9 +107,8 @@ const Experience = ({
                 </a>
               </Modal>
             )}
-        </div>
+        </Fragment>
       ))}
-
       <div className="mx py">
         <a
           style={progress === true ? { background: "red" } : {}}
@@ -121,7 +124,7 @@ const Experience = ({
       </div>
       {utils.componentType === "experience" && utils.component && (
         <div className="px">
-          <ExperienceForm showComponent={showComponent} />
+          <ExperienceForm />
         </div>
       )}
     </div>

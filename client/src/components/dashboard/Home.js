@@ -2,7 +2,19 @@ import React, { useEffect } from "react";
 import { getAllPosts } from "./../../actions/post";
 import Moment from "react-moment";
 import { connect } from "react-redux";
-const Home = ({ getAllPosts, post: { posts } }) => {
+import Modal from "./../Modal";
+import { showBackDrop } from "./../../actions/utils";
+import { showModal } from "./../../actions/utils";
+import { setBackdropType } from "./../../actions/utils";
+import FriendList from "./FriendList";
+const Home = ({
+  getAllPosts,
+  post: { posts },
+  showBackDrop,
+  showModal,
+  setBackdropType,
+  utils,
+}) => {
   useEffect(() => {
     getAllPosts();
     //eslint-disable-next-line
@@ -31,6 +43,16 @@ const Home = ({ getAllPosts, post: { posts } }) => {
                 <a href="#!">
                   <i className="fas fa-thumbs-up mx"></i>
                   {text.likes.length}
+                </a>{" "}
+                <a
+                  onClick={() => {
+                    setBackdropType(`likes-${text._id}`);
+                    showBackDrop();
+                    showModal();
+                  }}
+                  href="#!"
+                  className="x-small btn ">
+                  <i className="fas fa-binoculars"></i>
                 </a>
               </p>
               <p>
@@ -40,6 +62,15 @@ const Home = ({ getAllPosts, post: { posts } }) => {
                 </a>
               </p>
             </div>
+            {utils.backdrop &&
+              utils.modal &&
+              utils.backdropType === `likes-${text._id}` && (
+                <Modal
+                  content={<FriendList />}
+                  top={true}
+                  style={{ color: "black" }}
+                  index={90}></Modal>
+              )}
           </div>
         ))}
       </div>
@@ -49,5 +80,11 @@ const Home = ({ getAllPosts, post: { posts } }) => {
 
 const mapStateToProps = (state) => ({
   post: state.post,
+  utils: state.utils,
 });
-export default connect(mapStateToProps, { getAllPosts })(Home);
+export default connect(mapStateToProps, {
+  getAllPosts,
+  showModal,
+  showBackDrop,
+  setBackdropType,
+})(Home);

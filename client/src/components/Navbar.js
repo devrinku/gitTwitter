@@ -164,7 +164,11 @@ const Navbar = ({
         </div>
       </nav>
       {utils.backdrop && utils.modal && utils.backdropType === "nav-logout" && (
-        <Modal style={{ color: "black" }} index={90} action="logout">
+        <Modal
+          warn={true}
+          style={{ color: "black" }}
+          index={90}
+          action="logout">
           <a
             onClick={() => {
               logout();

@@ -76,7 +76,10 @@ const Settings = ({
         </ul>
       </div>
       {utils.backdrop && utils.modal && utils.backdropType === "deleteAccount" && (
-        <Modal index={90} action="delete your account ,this can't be undone !!">
+        <Modal
+          warn={true}
+          index={90}
+          action="delete your account ,this can't be undone !!">
           <a
             onClick={() => deleteAccount()}
             style={{ color: "white" }}

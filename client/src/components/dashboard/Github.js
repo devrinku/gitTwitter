@@ -2,9 +2,9 @@ import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { getGithubRepos } from "./../../actions/profile";
 
-const Github = ({ user, profile: { repos }, getGithubRepos }) => {
+const Github = ({ myprofile, profile: { repos }, getGithubRepos }) => {
   useEffect(() => {
-    getGithubRepos(user.name);
+    getGithubRepos(myprofile.githubusername);
     //eslint-disable-next-line
   }, []);
   return (

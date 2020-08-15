@@ -61,41 +61,45 @@ const Education = ({
         </div>
       )}
       {myprofile.education.map((edu) => (
-        <div
-          key={edu._id}
-          style={{ background: "rgb(243, 243, 243)" }}
-          className="border-div head edu">
-          <p className="px" style={{ width: "30%" }}>
-            {edu.school}
-          </p>
-          <p className="px" style={{ width: "30%" }}>
-            {edu.degree}
-          </p>
-          <p className="px" style={{ width: "30%" }}>
-            <Moment format="YYYY/MM/DD">{edu.from}</Moment>-
-            {edu.to === null ? (
-              " Now"
-            ) : (
-              <Fragment>
-                <Moment format="YYYY/MM/DD">{edu.to}</Moment>
-              </Fragment>
-            )}
-          </p>
-          <p className="text-center" style={{ width: "10%" }}>
-            <a
-              onClick={() => {
-                setBackdropType(`education-${edu._id}`);
-                showBackDrop();
-                showModal();
-              }}
-              href="#!">
-              <i style={{ color: "red" }} className="small  fas fa-trash"></i>
-            </a>
-          </p>
+        <Fragment key={edu._id}>
+          <div
+            style={{ background: "rgb(243, 243, 243)" }}
+            className="border-div head edu">
+            <p className="px" style={{ width: "30%" }}>
+              {edu.school}
+            </p>
+            <p className="px" style={{ width: "30%" }}>
+              {edu.degree}
+            </p>
+            <p className="px" style={{ width: "30%" }}>
+              <Moment format="YYYY/MM/DD">{edu.from}</Moment>-
+              {edu.to === null ? (
+                " Now"
+              ) : (
+                <Fragment>
+                  <Moment format="YYYY/MM/DD">{edu.to}</Moment>
+                </Fragment>
+              )}
+            </p>
+            <p className="text-center" style={{ width: "10%" }}>
+              <a
+                onClick={() => {
+                  setBackdropType(`education-${edu._id}`);
+                  showBackDrop();
+                  showModal();
+                }}
+                href="#!">
+                <i style={{ color: "red" }} className="small  fas fa-trash"></i>
+              </a>
+            </p>
+          </div>
           {utils.backdrop &&
             utils.modal &&
             utils.backdropType === `education-${edu._id}` && (
-              <Modal index={90} action="delete this education credential">
+              <Modal
+                warn={true}
+                index={90}
+                action="delete this education credential">
                 <a
                   type="submit"
                   href="#!"
@@ -106,7 +110,7 @@ const Education = ({
                 </a>
               </Modal>
             )}
-        </div>
+        </Fragment>
       ))}
       <div className="mx py">
         <a
