@@ -8,6 +8,8 @@ export const SHOW_SIDE_DRAWER = "SHOW_SIDE_DRAWER";
 export const HIDE_SIDE_DRAWER = "HIDE_SIDE_DRAWER";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
+export const CLOSE_COMPONENT = "CLOSE_COMPONENT";
+export const SHOW_COMPONENT = "SHOW_COMPONENT";
 
 // Auth
 export const SET_LOADING_AUTH = "SET_LOADING_AUTH";

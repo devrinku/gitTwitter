@@ -2,14 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Link, withRouter, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { addEducation } from "./../../actions/profile";
+import { unsetProgress } from "./../../actions/profile";
 
 const EducationForm = ({
   profile: { loggedProfile, progress },
   addEducation,
   showComponent,
+  unsetProgress,
 
   history,
 }) => {
+  useEffect(() => {
+    return () => {
+      unsetProgress();
+    };
+    //eslint-disable-next-line
+  }, []);
   const location = useLocation();
   const [formData, setFormData] = useState({
     school: "",
@@ -154,6 +162,6 @@ const EducationForm = ({
 const mapStatetoprops = (state) => ({
   profile: state.profile,
 });
-export default connect(mapStatetoprops, { addEducation })(
+export default connect(mapStatetoprops, { addEducation, unsetProgress })(
   withRouter(EducationForm)
 );

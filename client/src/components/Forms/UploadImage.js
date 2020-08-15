@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import { uploadDP } from "./../../actions/auth";
@@ -9,18 +9,29 @@ import { showModal } from "./../../actions/utils";
 import Preloader from "./../Preloader";
 import spinner from "./../../images/25C.gif";
 import { setBackdropType } from "./../../actions/utils";
+import { unsetProgress } from "./../../actions/profile";
+import { unsetFetch } from "./../../actions/auth";
 
 const UploadImage = ({
   uploadDP,
   history,
   auth: { user, fetch },
+  profile: { progress },
   utils,
   setBackdropType,
   showModal,
   showBackDrop,
+  unsetFetch,
   deleteDP,
 }) => {
   const History = useHistory();
+  useEffect(() => {
+    return () => {
+      unsetProgress();
+      unsetFetch();
+    };
+    //eslint-disable-next-line
+  }, []);
   const [file, setFile] = useState("");
   const onChange = (e) => {
     setFile(e.target.files[0]);
@@ -46,21 +57,30 @@ const UploadImage = ({
         <div className="input-field">
           <input onChange={(e) => onChange(e)} type="file" />
           <input
-            disabled={fetch === true ? true : false}
+            style={progress === true ? { background: "red" } : {}}
+            disabled={progress === true ? true : false}
             className="btn block"
             type="submit"
             value={
               user && user.image !== "no-image.png"
-                ? "Change Profile Image"
-                : "Upload"
+                ? progress === true
+                  ? "Changing Profile Image..."
+                  : "Change Profile Image"
+                : progress === true
+                ? "Uploading Profile Image..."
+                : "Upload Profile Image"
             }
           />
           {user && user.image !== "no-image.png" && (
             <a
               href="#!"
               disabled={fetch === true ? true : false}
-              className="btn block orange my-1"
-              style={{ textAlign: "center" }}
+              className="btn block  my-1"
+              style={
+                fetch === true
+                  ? { textAlign: "center", background: "red" }
+                  : { textAlign: "center" }
+              }
               onClick={() => {
                 setBackdropType(`image`);
                 showBackDrop();
@@ -69,24 +89,21 @@ const UploadImage = ({
               {fetch ? "Deleting Image..." : "Delete Current Profile Image"}
             </a>
           )}
+
           <Link
             onClick={() => {
-              if (user && user.image !== "no-image.png") {
+              if (History.location.state) {
                 History.goBack();
               }
             }}
-            to={
-              user && user.image !== "no-image.png"
-                ? "#!"
-                : "/dashboard/profile"
-            }
+            to={History.location.state ? "#!" : "/dashboard/profile"}
             style={{
               backgroundColor: "grey",
               display: "block",
               textAlign: "center",
             }}
             className="btn block ">
-            {user && user.image !== "no-image.png" ? "Close" : "Skip"}
+            Skip
           </Link>
         </div>
       </form>
@@ -94,9 +111,7 @@ const UploadImage = ({
         <Modal index={90} action="delete your  profile image">
           <a
             onClick={() => {
-              if (fetch === false) {
-                deleteDP(history);
-              }
+              deleteDP(history);
             }}
             style={{ color: "white" }}
             href="#!"
@@ -111,6 +126,7 @@ const UploadImage = ({
 const mapStateToProps = (state) => ({
   auth: state.auth,
   utils: state.utils,
+  profile: state.profile,
 });
 export default connect(mapStateToProps, {
   uploadDP,
@@ -118,4 +134,6 @@ export default connect(mapStateToProps, {
   setBackdropType,
   showModal,
   showBackDrop,
+  unsetFetch,
+  unsetProgress,
 })(withRouter(UploadImage));

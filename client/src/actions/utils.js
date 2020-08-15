@@ -7,6 +7,8 @@ import {
   HIDE_BACKDROP,
   SHOW_MODAL,
   SET_BACKDROP_TYPE,
+  SHOW_COMPONENT,
+  CLOSE_COMPONENT,
   HIDE_MODAL,
 } from "./../constants";
 
@@ -62,5 +64,19 @@ export const setBackdropType = (backdropType) => {
   return {
     type: SET_BACKDROP_TYPE,
     payload: backdropType,
+  };
+};
+
+export const showComponent = (param, type) => {
+  return {
+    type: SHOW_COMPONENT,
+    payload: { param, type },
+  };
+};
+
+export const closeComponent = (param, type) => {
+  return {
+    type: CLOSE_COMPONENT,
+    payload: { param, type },
   };
 };

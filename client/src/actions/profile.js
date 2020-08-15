@@ -11,7 +11,7 @@ import {
   UNSET_PROGRESS,
   GITHUB_REPOS,
 } from "./../constants";
-
+import { closeComponent } from "./utils";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -99,7 +99,7 @@ export const createProfile = (formData, history) => async (dispatch) => {
   }
 };
 
-export const addEducation = (formData, id, param, history, mount) => async (
+export const addEducation = (formData, id, param, history) => async (
   dispatch
 ) => {
   dispatch({
@@ -114,7 +114,7 @@ export const addEducation = (formData, id, param, history, mount) => async (
     await axios.post(`/api/v1/profile/${id}/education`, formData, config);
 
     if (param === true) {
-      history(false);
+      dispatch(closeComponent(false, null));
       dispatch(getMyProfile());
       toast(`Education Added`, {
         className: "black-background",
@@ -176,7 +176,7 @@ export const addExperience = (formData, id, param, history) => async (
     await axios.post(`/api/v1/profile/${id}/experience`, formData, config);
 
     if (param === true) {
-      history(false);
+      dispatch(closeComponent(false, null));
       dispatch(getMyProfile());
       toast(`Experience Added`, {
         className: "black-background",
@@ -409,4 +409,7 @@ export const getGithubRepos = (name) => async (dispatch) => {
       console.log(error);
     }
   }
+};
+export const unsetProgress = () => {
+  return { type: UNSET_PROGRESS };
 };

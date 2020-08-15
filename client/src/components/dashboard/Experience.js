@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Modal from "./../Modal";
 import { connect } from "react-redux";
 import { showBackDrop } from "./../../actions/utils";
@@ -6,7 +6,9 @@ import { showModal } from "./../../actions/utils";
 import { setBackdropType } from "./../../actions/utils";
 import ExperienceForm from "./../Forms/ExperienceForm";
 import { deleteExperience } from "./../../actions/profile";
+import { unsetProgress } from "./../../actions/profile";
 import Moment from "react-moment";
+import { showComponent } from "./../../actions/utils";
 import { Fragment } from "react";
 
 const Experience = ({
@@ -16,9 +18,23 @@ const Experience = ({
   setBackdropType,
   deleteExperience,
   showModal,
+  unsetProgress,
+  showComponent,
   profile: { progress },
 }) => {
-  const [component, showComponent] = useState(false);
+  useEffect(() => {
+    return () => {
+      unsetProgress();
+    };
+    //eslint-disable-next-line
+  }, []);
+  useEffect(() => {
+    return () => {
+      showComponent(false, null);
+    };
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <div className="padding-top mid-container">
       <div className="my teal">
@@ -91,11 +107,19 @@ const Experience = ({
       ))}
 
       <div className="mx py">
-        <a onClick={() => showComponent(!component)} href="#!" className="btn">
-          {component ? "Close" : "Add Experience"}
+        <a
+          style={progress === true ? { background: "red" } : {}}
+          onClick={() => showComponent(!utils.component, "experience")}
+          href="#!"
+          className="btn">
+          {utils.component
+            ? "Close"
+            : progress === true
+            ? "Deleting Experience..."
+            : "Add Experience"}
         </a>
       </div>
-      {component && (
+      {utils.componentType === "experience" && utils.component && (
         <div className="px">
           <ExperienceForm showComponent={showComponent} />
         </div>
@@ -113,4 +137,6 @@ export default connect(mapStateToProps, {
   deleteExperience,
   showModal,
   setBackdropType,
+  showComponent,
+  unsetProgress,
 })(Experience);

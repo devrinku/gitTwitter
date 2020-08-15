@@ -1,13 +1,15 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import Modal from "./../Modal";
 import { connect } from "react-redux";
 import { showBackDrop } from "./../../actions/utils";
 import { showModal } from "./../../actions/utils";
 
 import { setBackdropType } from "./../../actions/utils";
+import { showComponent } from "./../../actions/utils";
 import EducationForm from "./../Forms/EducationForm";
 import { deleteEducation } from "./../../actions/profile";
 import Moment from "react-moment";
+import { unsetProgress } from "./../../actions/profile";
 
 const Education = ({
   utils,
@@ -15,10 +17,23 @@ const Education = ({
   myprofile,
   showModal,
   deleteEducation,
+  unsetProgress,
   profile: { progress },
   setBackdropType,
+  showComponent,
 }) => {
-  const [component, showComponent] = useState(false);
+  useEffect(() => {
+    return () => {
+      unsetProgress();
+    };
+    //eslint-disable-next-line
+  }, []);
+  useEffect(() => {
+    return () => {
+      showComponent(false, null);
+    };
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <div className="padding-top mid-container">
@@ -82,6 +97,7 @@ const Education = ({
             utils.backdropType === `education-${edu._id}` && (
               <Modal index={90} action="delete this education credential">
                 <a
+                  type="submit"
                   href="#!"
                   onClick={() => deleteEducation(edu._id)}
                   style={{ color: "white" }}
@@ -93,13 +109,23 @@ const Education = ({
         </div>
       ))}
       <div className="mx py">
-        <a onClick={() => showComponent(!component)} href="#!" className="btn">
-          {component ? "Close" : "Add Education"}
+        <a
+          style={progress === true ? { background: "red" } : {}}
+          onClick={() => {
+            showComponent(!utils.component, "education");
+          }}
+          href="#!"
+          className="btn">
+          {utils.component
+            ? "Close"
+            : progress === true
+            ? "Deleting Education..."
+            : "Add Education"}
         </a>
       </div>
-      {component && (
+      {utils.componentType === "education" && utils.component && (
         <div className="px">
-          <EducationForm showComponent={showComponent} />
+          <EducationForm />
         </div>
       )}
     </div>
@@ -113,5 +139,7 @@ export default connect(mapStateToProps, {
   showBackDrop,
   showModal,
   deleteEducation,
+  unsetProgress,
+  showComponent,
   setBackdropType,
 })(Education);

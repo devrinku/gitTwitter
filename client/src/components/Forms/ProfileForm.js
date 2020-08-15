@@ -3,15 +3,22 @@ import { useHistory, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createProfile } from "./../../actions/profile";
 import { updateProfile } from "./../../actions/profile";
+import { unsetProgress } from "./../../actions/profile";
 
 const ProfileForm = ({
   createProfile,
   history,
-  profile: { currentProfile, progress },
+  profile: { currentProfile, progress, loggedProfile },
   updateProfile,
+  unsetProgress,
 }) => {
   const History = useHistory();
-
+  useEffect(() => {
+    return () => {
+      unsetProgress();
+    };
+    //eslint-disable-next-line
+  }, []);
   const [profileData, setProfileData] = useState({
     company: "",
     website: "",
@@ -251,17 +258,19 @@ const ProfileForm = ({
           </p>
 
           <p>
-            <a
-              onClick={() => {
-                if (progress === false) {
-                  History.goBack();
-                }
-              }}
-              href="#!"
-              style={{ background: "grey" }}
-              className="btn mx-2">
-              Go Back
-            </a>
+            {loggedProfile !== null && (
+              <a
+                onClick={() => {
+                  if (progress === false) {
+                    History.goBack();
+                  }
+                }}
+                href="#!"
+                style={{ background: "grey" }}
+                className="btn mx-2">
+                Go Back
+              </a>
+            )}
           </p>
         </div>
       </form>
@@ -272,6 +281,8 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { createProfile, updateProfile })(
-  withRouter(ProfileForm)
-);
+export default connect(mapStateToProps, {
+  createProfile,
+  updateProfile,
+  unsetProgress,
+})(withRouter(ProfileForm));

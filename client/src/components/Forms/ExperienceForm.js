@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { addExperience } from "./../../actions/profile";
+import { unsetProgress } from "./../../actions/profile";
 
 const ExperienceForm = ({
   profile: { loggedProfile, progress },
   showComponent,
   addExperience,
   history,
+  unsetProgress,
 }) => {
+  useEffect(() => {
+    return () => {
+      unsetProgress();
+    };
+    //eslint-disable-next-line
+  }, []);
   const Location = useLocation();
   const [formData, setFormData] = useState({
     title: "",
@@ -153,6 +161,6 @@ const ExperienceForm = ({
 const mapStatetoprops = (state) => ({
   profile: state.profile,
 });
-export default connect(mapStatetoprops, { addExperience })(
+export default connect(mapStatetoprops, { addExperience, unsetProgress })(
   withRouter(ExperienceForm)
 );

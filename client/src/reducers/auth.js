@@ -65,10 +65,12 @@ export default (state = initialState, action) => {
     case AUTH_ERROR:
       localStorage.removeItem("token");
       return {
+        ...state,
         token: null,
         loadingAuth: false,
         user: null,
         isLoggedIn: false,
+        fetch: false,
       };
     default:
       return state;

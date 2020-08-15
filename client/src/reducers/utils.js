@@ -8,6 +8,8 @@ import {
   SHOW_MODAL,
   SET_BACKDROP_TYPE,
   HIDE_MODAL,
+  SHOW_COMPONENT,
+  CLOSE_COMPONENT,
 } from "./../constants";
 
 const initialState = {
@@ -16,11 +18,25 @@ const initialState = {
   backdrop: false,
   modal: false,
   backdropType: null,
+  component: false,
+  componentType: null,
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case SHOW_COMPONENT:
+      return {
+        ...state,
+        component: payload.param,
+        componentType: payload.type,
+      };
+    case CLOSE_COMPONENT:
+      return {
+        ...state,
+        component: payload.param,
+        componentType: payload.type,
+      };
     case SHOW_MENU_BAR:
       return {
         ...state,

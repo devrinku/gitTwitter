@@ -10,6 +10,8 @@ import {
   CHANGE_PASSWORD,
   SET_FETCH,
   UNSET_FETCH,
+  SET_PROGRESS,
+  UNSET_PROGRESS,
   LOGOUT,
 } from "./../constants";
 import { toast } from "react-toastify";
@@ -125,7 +127,7 @@ export const logout = () => (dispatch) => {
 
 export const uploadDP = (data, history) => async (dispatch) => {
   dispatch({
-    type: SET_FETCH,
+    type: SET_PROGRESS,
   });
   const formData = new FormData();
   formData.append("file", data);
@@ -138,12 +140,13 @@ export const uploadDP = (data, history) => async (dispatch) => {
     await axios.put("/api/v1/auth/uploadprofileimage", formData, config);
     dispatch(loadUser());
     history.push("/dashboard/profile");
+
     dispatch({
-      type: UNSET_FETCH,
+      type: UNSET_PROGRESS,
     });
   } catch (error) {
     dispatch({
-      type: UNSET_FETCH,
+      type: UNSET_PROGRESS,
     });
     if (error.response && error.response.data && error.response.data.error) {
       toast(`${error.response.data.error}`, {
@@ -234,6 +237,9 @@ export const changePassword = (data, history) => async (dispatch) => {
 };
 
 export const deleteAccount = () => async (dispatch) => {
+  dispatch({
+    type: SET_FETCH,
+  });
   try {
     await axios.delete("/api/v1/auth");
     dispatch(logout());
@@ -242,7 +248,19 @@ export const deleteAccount = () => async (dispatch) => {
       bodyClassName: "grow-font-size",
       progressClassName: "Toastify__progress-bar--dark",
     });
+    dispatch({
+      type: UNSET_FETCH,
+    });
   } catch (error) {
+    dispatch({
+      type: UNSET_FETCH,
+    });
     console.log(error);
   }
+};
+
+export const unsetFetch = () => {
+  return {
+    type: UNSET_FETCH,
+  };
 };

@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { changePassword } from "./../../actions/auth";
+import { unsetFetch } from "./../../actions/auth";
 import { withRouter } from "react-router-dom";
 import Preloader from "./../Preloader";
 import spinner from "./../../images/25C.gif";
 
-const ChangePassword = ({ changePassword, history, auth: { fetch } }) => {
+const ChangePassword = ({
+  changePassword,
+  history,
+  unsetFetch,
+  auth: { fetch },
+}) => {
+  useEffect(() => {
+    return () => {
+      unsetFetch();
+    };
+    //eslint-disable-next-line
+  }, []);
   const [formData, setFormData] = useState({
     newPassword: "",
     oldPassword: "",
@@ -54,16 +66,14 @@ const ChangePassword = ({ changePassword, history, auth: { fetch } }) => {
               placeholder="* School"
             />
           </div>
-          {fetch === true ? (
-            <input
-              className="btn "
-              style={{ background: "red" }}
-              type="submit"
-              value="Checking Password..."
-            />
-          ) : (
-            <input className="btn " type="submit" value="Change Password" />
-          )}
+
+          <input
+            disabled={fetch === true ? true : false}
+            className="btn "
+            style={fetch === true ? { background: "red" } : {}}
+            type="submit"
+            value={fetch === true ? "Checking Password..." : "Change Password"}
+          />
         </form>
       </div>
     </div>
@@ -73,6 +83,6 @@ const ChangePassword = ({ changePassword, history, auth: { fetch } }) => {
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, { changePassword })(
+export default connect(mapStateToProps, { changePassword, unsetFetch })(
   withRouter(ChangePassword)
 );

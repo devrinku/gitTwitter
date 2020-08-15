@@ -28,15 +28,15 @@ connectDB();
 app.use(mongoSanitize());
 app.use(helmet());
 app.use(xss());
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  max: 100,
-  message: {
-    success: false,
-    data: "Too many requests,Please try again later",
-  },
-});
-app.use(limiter);
+// const limiter = rateLimit({
+//   windowMs: 10 * 60 * 1000,
+//   max: 100,
+//   message: {
+//     success: false,
+//     data: "Too many requests,Please try again later",
+//   },
+// });
+// app.use(limiter);
 app.use(hpp());
 
 //Using bodyParser

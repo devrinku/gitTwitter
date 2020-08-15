@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 const Home = ({ getAllPosts, post: { posts } }) => {
   useEffect(() => {
     getAllPosts();
+    //eslint-disable-next-line
   }, []);
   return (
     posts !== null &&

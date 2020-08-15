@@ -5,7 +5,8 @@ import { getGithubRepos } from "./../../actions/profile";
 const Github = ({ user, profile: { repos }, getGithubRepos }) => {
   useEffect(() => {
     getGithubRepos(user.name);
-  }, [getGithubRepos]);
+    //eslint-disable-next-line
+  }, []);
   return (
     <div className="mid-container padding-top  ">
       <div className="my teal">
