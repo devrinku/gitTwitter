@@ -5,14 +5,14 @@ import Followers from "./Followers";
 import Followings from "./Followings";
 import Github from "./Github";
 import Backdrop from "./../Backdrop";
-import Posts from "./Posts";
+import MyPosts from "./MyPosts";
 import Home from "./Home";
 import Education from "./Education";
 import Experience from "./Experience";
 import Settings from "./Settings";
 import SideDrawer from "./../SideDrawer";
 import Aside from "./../Aside";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { getMyProfile } from "./../../actions/profile";
 import { connect } from "react-redux";
 import { showMenuBar } from "./../../actions/utils";
@@ -63,7 +63,7 @@ const Dashboard = ({
           myprofile={loggedProfile}
           exact
           path="/dashboard/posts"
-          component={Posts}
+          component={MyPosts}
         />
         <PrivateRoute
           myprofile={loggedProfile}
@@ -95,7 +95,7 @@ const Dashboard = ({
           path="/dashboard/github"
           component={Github}
         />
-        <Route exact path="/dashboard/home" component={Home} />
+        <PrivateRoute exact path="/dashboard/home" component={Home} />
         <PrivateRoute exact path="/dashboard/settings" component={Settings} />
       </Switch>
     </Fragment>

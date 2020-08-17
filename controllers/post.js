@@ -22,6 +22,12 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
   next();
 });
 
+exports.getProfileAllPosts = asyncHandler(async (req, res, next) => {
+  const posts = await Post.find({ profile: req.params.id });
+  res.response = new Response(200, posts);
+  next();
+});
+
 exports.getPost = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id)
     .populate({
@@ -58,6 +64,12 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
 });
 
 exports.likeDislikePost = asyncHandler(async (req, res, next) => {
+  const reqUser = await Profile.findOne({ user: req.user.id });
+  if (!reqUser) {
+    return next(
+      new ErrorResponse("No profile found ,make sure to create one first", 404)
+    );
+  }
   const like = res.result.likes.filter(
     (like) => like.user.toString() === req.user.id
   );
@@ -76,7 +88,11 @@ exports.likeDislikePost = asyncHandler(async (req, res, next) => {
     createNotification(req, res, "liked");
   }
   await res.result.save();
-  res.response = new Response(200, res.result.likes);
+  const post = await Post.findById(req.params.id).populate("user", [
+    "name",
+    "image",
+  ]);
+  res.response = new Response(200, post);
   next();
 });
 

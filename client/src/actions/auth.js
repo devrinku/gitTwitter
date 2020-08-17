@@ -11,6 +11,7 @@ import {
   SET_FETCH,
   UNSET_FETCH,
   SET_PROGRESS,
+  CLEAR_POSTS,
   UNSET_PROGRESS,
   LOGOUT,
 } from "./../constants";
@@ -69,6 +70,7 @@ export const register = (formData) => async (dispatch) => {
         );
       }
     } else {
+      console.log(error);
       toast(`Network Error ,Please try after some time`, {
         className: "black-background",
         bodyClassName: "grow-font-size",
@@ -108,6 +110,7 @@ export const login = (formData) => async (dispatch) => {
         );
       }
     } else {
+      console.log(error);
       toast(`Network Error ,Please try after some time`, {
         className: "black-background",
         bodyClassName: "grow-font-size",
@@ -123,6 +126,7 @@ export const login = (formData) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
   dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: CLEAR_POSTS });
 };
 
 export const uploadDP = (data, history) => async (dispatch) => {
@@ -186,6 +190,11 @@ export const deleteDP = (history) => async (dispatch) => {
       type: UNSET_FETCH,
     });
     console.log(error);
+    toast(`Image not deleted,try after sometime`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
   }
 };
 
@@ -254,6 +263,9 @@ export const deleteAccount = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UNSET_FETCH,
+    });
+    dispatch({
+      type: AUTH_ERROR,
     });
     console.log(error);
   }

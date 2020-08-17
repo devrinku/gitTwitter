@@ -10,6 +10,7 @@ import {
   SET_PROGRESS,
   UNSET_PROGRESS,
   GITHUB_REPOS,
+  GITHUB_ERROR,
 } from "./../constants";
 import { closeComponent } from "./utils";
 import { toast } from "react-toastify";
@@ -85,14 +86,6 @@ export const createProfile = (formData, history) => async (dispatch) => {
           })
         );
       }
-    } else if (error && error.response && error.response.statusText) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
     } else {
       console.log(error);
     }
@@ -147,14 +140,6 @@ export const addEducation = (formData, id, param, history) => async (
           })
         );
       }
-    } else if (error && error.response && error.response.statusText) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
     } else {
       console.log(error);
     }
@@ -209,14 +194,6 @@ export const addExperience = (formData, id, param, history) => async (
           })
         );
       }
-    } else if (error && error.response && error.response.statusText) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
     } else {
       console.log(error);
     }
@@ -278,14 +255,6 @@ export const updateProfile = (formData, history) => async (dispatch) => {
           })
         );
       }
-    } else if (error && error.response && error.response.statusText) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
     } else {
       console.log(error);
     }
@@ -399,7 +368,7 @@ export const getGithubRepos = (name) => async (dispatch) => {
   } catch (error) {
     if (error && error.response && error.response.statusText) {
       dispatch({
-        type: PROFILE_ERROR,
+        type: GITHUB_ERROR,
         payload: {
           msg: error.response.statusText,
           status: error.response.status,

@@ -13,6 +13,7 @@ const {
   likeDislikePost,
   likeCredentials,
   addcomment,
+  getProfileAllPosts,
   deleteComment,
 } = require("./../controllers/post");
 const response = require("../middlewares/response");
@@ -32,6 +33,12 @@ router.get(
   response
 );
 router.get("/:id", idChecker(Post, "post"), getPost, response);
+router.get(
+  "/profile/:id",
+  idChecker(Profile, "profile"),
+  getProfileAllPosts,
+  response
+);
 router
   .route("/:id/likes")
   .get(idChecker(Post, "post"), likeCredentials, response);

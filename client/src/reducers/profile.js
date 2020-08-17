@@ -10,6 +10,7 @@ import {
   SET_PROGRESS,
   UNSET_PROGRESS,
   GITHUB_REPOS,
+  GITHUB_ERROR,
 } from "./../constants";
 
 const initialState = {
@@ -66,6 +67,7 @@ export default (state = initialState, action) => {
         repos: null,
         error: payload,
       };
+
     case GET_FOLLOWERS:
       return {
         ...state,
@@ -81,6 +83,12 @@ export default (state = initialState, action) => {
         ...state,
         repos: payload,
       };
+    case GITHUB_ERROR:
+      return {
+        ...state,
+        repos: [],
+      };
+
     case CLEAR_PROFILE:
       return {
         ...state,
@@ -92,6 +100,7 @@ export default (state = initialState, action) => {
         followings: [],
         loadingProfile: false,
         error: {},
+        progress: false,
       };
     default:
       return state;

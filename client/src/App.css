@@ -450,11 +450,10 @@ input[type="submit"] {
 }
 
 /* -------------------Posts------------------------------ */
-.post img {
+.post-img img {
   width: 80px;
   height: 80px;
 
-  border: 2px solid rgb(189, 189, 189);
   border-radius: 50%;
 }
 .post {
@@ -488,6 +487,31 @@ input[type="submit"] {
   padding: 0.7rem;
   color: teal;
   border-top: 1px solid gray;
+}
+.likes {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px dotted gray;
+  margin-bottom: 0.5rem;
+}
+.likes-container {
+  padding: 0.5rem;
+}
+
+.like-image img {
+  width: 80px;
+  height: 80px;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+.like-info {
+  align-self: flex-start;
+}
+.like-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 /* ---------------Github content---------------- */
 .github-content {
@@ -547,6 +571,8 @@ input[type="submit"] {
 .modal {
   position: fixed;
   top: 30vh;
+  overflow: auto;
+  max-height: 80vh;
   z-index: 100;
   width: 50%;
   left: 25%;
@@ -642,6 +668,36 @@ input[type="checkbox"] {
   font-weight: 500 !important;
   font-size: 1rem !important;
 }
+/* ---------------------Change Password--------------------- */
+.change-password {
+  margin-top: 2rem;
+}
+.feild {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.feild input[type="password"],
+.create-post input[type="text"] {
+  border: 1px solid gray;
+  color: gray;
+  margin: 0;
+  padding: 0 0.5rem;
+}
+.create-post input::placeholder {
+  color: gray;
+}
+.create-post textarea {
+  color: black;
+  min-height: 5rem;
+  font-size: 1rem;
+}
+label {
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
 @media (max-width: 992px) {
   .auth {
     width: 80%;
@@ -723,27 +779,7 @@ input[type="checkbox"] {
     left: 10%;
   }
 }
-/* ---------------------Change Password--------------------- */
-.change-password {
-  margin-top: 2rem;
-}
-.feild {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-.feild input[type="password"] {
-  border: 1px solid gray;
-  color: gray;
-  margin: 0;
-  padding: 0 0.5rem;
-}
-label {
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-}
+
 @media (min-width: 768px) {
   .hide {
     display: none;

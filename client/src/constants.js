@@ -38,6 +38,8 @@ export const DELETE_EDUCATION = "DELETE_EDUCATION";
 export const SET_PROGRESS = "SET_PROGRESS";
 export const UNSET_PROGRESS = "UNSET_PROGRESS";
 export const GITHUB_REPOS = "GITHUB_REPOS";
+export const GITHUB_ERROR = "GITHUB_ERROR";
+
 // Posts
 export const GET_ALL_POSTS = "GET_ALL_POSTS";
 export const GET_SINGLE_POST = "GET_SINGLE_POST";
@@ -45,3 +47,8 @@ export const ADD_POST = "ADD_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const POST_ERROR = "POST_ERROR";
 export const DELETE_POST = "DELETE_POST";
+export const GET_LIKE_CREDENTIAL = "GET_LIKE_CREDENTIAL";
+export const GET_MY_POSTS = "GET_MY_POSTS";
+export const CLEAR_LIKES = "CLEAR_LIKES";
+export const CLEAR_POSTS = "CLEAR_POSTS";
+export const LIKE_A_POST = "LIKE_A_POST";

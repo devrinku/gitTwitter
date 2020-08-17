@@ -19,7 +19,9 @@ const Modal = ({ hideSideDrawer, hideModal, hideBackDrop, ...props }) => {
         {props.warn && (
           <div className="modal-heading fw-500 small">Confirm Your Action</div>
         )}
-        <div className="modal-content">
+        <div
+          style={props.top ? { padding: "0" } : {}}
+          className="modal-content">
           {props.content && props.content}
           {props.warn && (
             <p className="small"> Are you sure you want to {props.action}</p>
