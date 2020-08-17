@@ -95,7 +95,12 @@ const Dashboard = ({
           path="/dashboard/github"
           component={Github}
         />
-        <PrivateRoute exact path="/dashboard/home" component={Home} />
+        <PrivateRoute
+          exact
+          myprofile={loggedProfile}
+          path="/dashboard/home"
+          component={Home}
+        />
         <PrivateRoute exact path="/dashboard/settings" component={Settings} />
       </Switch>
     </Fragment>

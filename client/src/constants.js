@@ -52,3 +52,5 @@ export const GET_MY_POSTS = "GET_MY_POSTS";
 export const CLEAR_LIKES = "CLEAR_LIKES";
 export const CLEAR_POSTS = "CLEAR_POSTS";
 export const LIKE_A_POST = "LIKE_A_POST";
+export const SET_CURRENT_POST = "SET_CURRENT_POST";
+export const CLEAR_CURRENT_POST = "CLEAR_CURRENT_POST";

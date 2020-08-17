@@ -18,10 +18,10 @@ const MyPosts = ({
       <div className="mid-container padding-top">
         <div className="my teal">
           <span className="pencil fw-500 ">
-            <i className="fas fa-blog mx"></i>Posts
+            <i className="fas fa-blog mx"></i>My Posts
           </span>
         </div>
-        <CreatePost myprofile={myprofile} myPosts={myPosts} />
+        <CreatePost myprofile={myprofile} />
         {myPosts.length > 0 &&
           myPosts.map((text) => (
             <Post key={text._id} text={text} postOwner={user} />

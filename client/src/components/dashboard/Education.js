@@ -3,7 +3,6 @@ import Modal from "./../Modal";
 import { connect } from "react-redux";
 import { showBackDrop } from "./../../actions/utils";
 import { showModal } from "./../../actions/utils";
-
 import { setBackdropType } from "./../../actions/utils";
 import { showComponent } from "./../../actions/utils";
 import EducationForm from "./../Forms/EducationForm";
@@ -101,7 +100,6 @@ const Education = ({
                 index={90}
                 action="delete this education credential">
                 <a
-                  type="submit"
                   href="#!"
                   onClick={() => deleteEducation(edu._id)}
                   style={{ color: "white" }}

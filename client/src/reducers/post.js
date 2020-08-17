@@ -10,6 +10,8 @@ import {
   CLEAR_LIKES,
   CLEAR_POSTS,
   LIKE_A_POST,
+  CLEAR_CURRENT_POST,
+  SET_CURRENT_POST,
 } from "./../constants";
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   singlePost: null,
   myPosts: [],
   error: null,
+  currentPost: null,
   likesInfo: null,
 };
 
@@ -32,6 +35,23 @@ export default (state = initialState, action) => {
       return {
         ...state,
         myPosts: [...state.myPosts, payload],
+        posts: [...state.posts, payload],
+      };
+    case SET_CURRENT_POST:
+      return {
+        ...state,
+        currentPost: payload,
+      };
+    case CLEAR_CURRENT_POST:
+      return {
+        ...state,
+        currentPost: null,
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((elem) => elem._id !== payload),
+        myPosts: state.myPosts.filter((elem) => elem._id !== payload),
       };
     case CLEAR_LIKES:
       return {
@@ -49,6 +69,7 @@ export default (state = initialState, action) => {
         error: payload,
       };
     case LIKE_A_POST:
+    case UPDATE_POST:
       return {
         ...state,
         myPosts: state.myPosts.map((elem) =>

@@ -1,22 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { getAllPosts } from "./../../actions/post";
-
+import CreatePost from "./CreatePost";
 import { connect } from "react-redux";
 import Post from "./Post";
 
-const Home = ({ getAllPosts, post: { posts } }) => {
+const Home = ({ getAllPosts, myprofile, post: { posts } }) => {
   useEffect(() => {
     getAllPosts();
     //eslint-disable-next-line
   }, []);
   return (
-    posts.length > 0 && (
+    <Fragment>
       <div className="mid-container padding-top">
-        {posts.map((text) => (
-          <Post key={text._id} text={text} postOwner={text.user} />
-        ))}
+        <div className="my teal">
+          <span className="pencil fw-500 ">
+            <i className="fas fa-blog mx"></i>Home
+          </span>
+        </div>
+        <CreatePost myprofile={myprofile} />
+        {posts.length > 0 &&
+          posts.map((text) => (
+            <Post key={text._id} text={text} postOwner={text.user} />
+          ))}
       </div>
-    )
+    </Fragment>
   );
 };
 

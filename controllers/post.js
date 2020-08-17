@@ -23,7 +23,10 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
 });
 
 exports.getProfileAllPosts = asyncHandler(async (req, res, next) => {
-  const posts = await Post.find({ profile: req.params.id });
+  const posts = await Post.find({ profile: req.params.id }).populate("user", [
+    "name",
+    "image",
+  ]);
   res.response = new Response(200, posts);
   next();
 });

@@ -466,9 +466,17 @@ input[type="submit"] {
 .line {
   border-bottom: 1px solid gray;
 }
+.post-links {
+  position: absolute;
+  right: 0rem;
+  top: 1.3rem;
+}
+.post-links a i {
+  color: red;
+}
 .post-info {
   display: flex;
-
+  position: relative;
   align-items: center;
   padding: 1rem 0rem 0 1rem;
 }
@@ -805,5 +813,8 @@ label {
     border-right: 1px solid grey;
     height: 100%;
     padding: 1rem 0;
+  }
+  .post-links {
+    top: 1.7rem;
   }
 }
