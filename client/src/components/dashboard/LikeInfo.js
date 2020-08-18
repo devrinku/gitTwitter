@@ -55,7 +55,7 @@ const LikeInfo = ({
                   <div key={person._id} className="likes">
                     <div className="like-image">
                       <img
-                        src={`./../../uploads/${person.user.image}`}
+                        src={`/./../../uploads/${person.user.image}`}
                         alt=""
                       />
                     </div>

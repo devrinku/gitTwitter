@@ -7,10 +7,15 @@ import {
   UPDATE_POST,
   POST_ERROR,
   GET_LIKE_CREDENTIAL,
+  ADD_COMMENT,
+  DELETE_COMMENT,
+  SET_FETCH,
+  UNSET_FETCH,
   SET_PROGRESS,
   UNSET_PROGRESS,
   CLEAR_LIKES,
   LIKE_A_POST,
+  CLEAR_SINGLE_POST,
   GET_MY_POSTS,
   CLEAR_CURRENT_POST,
 } from "./../constants";
@@ -232,6 +237,119 @@ export const deleteAPost = (id) => async (dispatch) => {
       progressClassName: "Toastify__progress-bar--dark",
     });
   } catch (error) {
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: POST_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const getAPost = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/post/${id}`);
+    dispatch({
+      type: GET_SINGLE_POST,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: POST_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const clearAPost = (id) => async (dispatch) => {
+  dispatch({
+    type: CLEAR_SINGLE_POST,
+  });
+};
+
+export const addComment = (formData, id) => async (dispatch) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const res = await axios.post(
+      `/api/v1/post/${id}/comments`,
+      formData,
+      config
+    );
+    dispatch({
+      type: ADD_COMMENT,
+      payload: { res, id },
+    });
+    toast(`Comment Added`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+    if (error.response && error.response.data && error.response.data.error) {
+      const errors = error.response.data.error.split(",");
+      if (errors) {
+        errors.forEach((error) =>
+          toast(`${error}`, {
+            className: "black-background",
+            bodyClassName: "grow-font-size",
+            progressClassName: "Toastify__progress-bar--dark",
+          })
+        );
+      }
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const deleteComment = (id, commentId) => async (dispatch) => {
+  dispatch({
+    type: SET_FETCH,
+  });
+
+  try {
+    const res = await axios.delete(`/api/v1/post/${id}/comments/${commentId}`);
+    dispatch({
+      type: DELETE_COMMENT,
+      payload: { res, id },
+    });
+    toast(`Comment Deleted`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
+    dispatch({
+      type: UNSET_FETCH,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_FETCH,
+    });
     if (error && error.response && error.response.statusText) {
       dispatch({
         type: POST_ERROR,

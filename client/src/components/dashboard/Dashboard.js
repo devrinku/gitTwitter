@@ -7,12 +7,13 @@ import Github from "./Github";
 import Backdrop from "./../Backdrop";
 import MyPosts from "./MyPosts";
 import Home from "./Home";
+import Comments from "./Comments";
 import Education from "./Education";
 import Experience from "./Experience";
 import Settings from "./Settings";
 import SideDrawer from "./../SideDrawer";
 import Aside from "./../Aside";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { getMyProfile } from "./../../actions/profile";
 import { connect } from "react-redux";
 import { showMenuBar } from "./../../actions/utils";
@@ -65,6 +66,13 @@ const Dashboard = ({
           path="/dashboard/posts"
           component={MyPosts}
         />
+        <PrivateRoute
+          myprofile={loggedProfile}
+          exact
+          path="/dashboard/posts/:id/comments"
+          component={Comments}
+        />
+
         <PrivateRoute
           myprofile={loggedProfile}
           exact

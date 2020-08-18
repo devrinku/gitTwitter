@@ -55,7 +55,15 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
   post = await Post.findByIdAndUpdate(req.params.id, post, {
     runValidators: true,
     new: true,
-  }).populate("user", ["name", "image"]);
+  })
+    .populate("user", ["name", "image"])
+    .populate({
+      path: "comments",
+      populate: {
+        path: "user",
+        select: "name image",
+      },
+    });
   res.response = new Response(200, post);
   next();
 });
@@ -91,10 +99,15 @@ exports.likeDislikePost = asyncHandler(async (req, res, next) => {
     createNotification(req, res, "liked");
   }
   await res.result.save();
-  const post = await Post.findById(req.params.id).populate("user", [
-    "name",
-    "image",
-  ]);
+  const post = await Post.findById(req.params.id)
+    .populate("user", ["name", "image"])
+    .populate({
+      path: "comments",
+      populate: {
+        path: "user",
+        select: "name image",
+      },
+    });
   res.response = new Response(200, post);
   next();
 });
@@ -107,6 +120,7 @@ exports.likeCredentials = asyncHandler(async (req, res, next) => {
       select: "name image",
     });
   });
+
   users = await Promise.all(users);
   res.response = new Response(200, users);
   next();
@@ -133,7 +147,8 @@ exports.addcomment = asyncHandler(async (req, res, next) => {
       path: "user",
       select: "name image",
     });
-  res.response = new Response(201, post.comments);
+
+  res.response = new Response(201, post);
   next();
 });
 
@@ -153,13 +168,25 @@ exports.deleteComment = asyncHandler(async (req, res, next) => {
   }
   res.result.comments.forEach((comment) => {
     if (comment._id.toString() === req.params.commentId) {
-      console.log(comment);
       const removeIndex = res.result.comments.indexOf(comment);
       res.result.comments.splice(removeIndex, 1);
     }
   });
   await res.result.save();
-  res.response = new Response(200, res.result.comments);
+  const post = await Post.findById(req.params.id)
+    .populate({
+      path: "comments",
+      populate: {
+        path: "user",
+        select: "name image",
+      },
+    })
+    .populate({
+      path: "user",
+      select: "name image",
+    });
+
+  res.response = new Response(200, post);
   next();
 });
 

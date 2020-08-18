@@ -43,6 +43,7 @@ export const GITHUB_ERROR = "GITHUB_ERROR";
 // Posts
 export const GET_ALL_POSTS = "GET_ALL_POSTS";
 export const GET_SINGLE_POST = "GET_SINGLE_POST";
+export const CLEAR_SINGLE_POST = "CLEAR_SINGLE_POST";
 export const ADD_POST = "ADD_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const POST_ERROR = "POST_ERROR";
@@ -54,3 +55,5 @@ export const CLEAR_POSTS = "CLEAR_POSTS";
 export const LIKE_A_POST = "LIKE_A_POST";
 export const SET_CURRENT_POST = "SET_CURRENT_POST";
 export const CLEAR_CURRENT_POST = "CLEAR_CURRENT_POST";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";

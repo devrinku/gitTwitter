@@ -5,6 +5,7 @@ import {
   DELETE_POST,
   GET_MY_POSTS,
   UPDATE_POST,
+  DELETE_COMMENT,
   POST_ERROR,
   GET_LIKE_CREDENTIAL,
   CLEAR_LIKES,
@@ -12,6 +13,8 @@ import {
   LIKE_A_POST,
   CLEAR_CURRENT_POST,
   SET_CURRENT_POST,
+  CLEAR_SINGLE_POST,
+  ADD_COMMENT,
 } from "./../constants";
 
 const initialState = {
@@ -58,10 +61,20 @@ export default (state = initialState, action) => {
         ...state,
         likesInfo: null,
       };
+    case CLEAR_SINGLE_POST:
+      return {
+        ...state,
+        singlePost: null,
+      };
     case GET_MY_POSTS:
       return {
         ...state,
         myPosts: payload,
+      };
+    case GET_SINGLE_POST:
+      return {
+        ...state,
+        singlePost: payload,
       };
     case POST_ERROR:
       return {
@@ -70,6 +83,8 @@ export default (state = initialState, action) => {
       };
     case LIKE_A_POST:
     case UPDATE_POST:
+    case ADD_COMMENT:
+    case DELETE_COMMENT:
       return {
         ...state,
         myPosts: state.myPosts.map((elem) =>
@@ -82,6 +97,7 @@ export default (state = initialState, action) => {
             ? payload.res.data.data
             : elem
         ),
+        singlePost: payload.res.data.data,
       };
     case GET_LIKE_CREDENTIAL:
       return {

@@ -10,6 +10,7 @@ import { showModal } from "./../../actions/utils";
 import { connect } from "react-redux";
 import { setBackdropType } from "./../../actions/utils";
 import LikeInfo from "./LikeInfo";
+import { Link, useLocation } from "react-router-dom";
 
 const Post = ({
   text,
@@ -24,6 +25,7 @@ const Post = ({
   showModal,
   setBackdropType,
 }) => {
+  const location = useLocation();
   const showBinacular = (text, user) => {
     const icon = text.likes.filter((like) => like.user === user._id);
     if (icon.length > 0) {
@@ -54,11 +56,12 @@ const Post = ({
       );
     }
   };
+
   return (
     <div className="post  ">
       <div className="post-info ">
         <div className="post-img">
-          <img src={`./../../uploads/${postOwner.image}`} alt="" />
+          <img src={`/./../../uploads/${postOwner.image}`} alt="" />
         </div>
         <div className="post-name">
           <p className="my fw-500">{postOwner.name}</p>
@@ -67,7 +70,9 @@ const Post = ({
             <Moment format="DD/MM/YYYY">{text.text.date}</Moment>
           </p>
         </div>
-        {postLinks(text, user)}
+        {(location.pathname === "/dashboard/posts" ||
+          location.pathname === "/dashboard/home") &&
+          postLinks(text, user)}
       </div>
       <div className="post-content">{text.text}</div>
       <div className="reaxn">
@@ -89,10 +94,10 @@ const Post = ({
           )}
         </p>
         <p>
-          <a href="#!">
+          <Link to={`/dashboard/posts/${text._id}/comments`}>
             <i className="fas fa-comment-alt mx"></i>
             {text.comments.length}
-          </a>
+          </Link>
         </p>
       </div>
       {utils.backdrop &&
