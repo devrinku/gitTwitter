@@ -200,7 +200,7 @@ const createNotification = async (req, res, task) => {
     );
     const mesg = `${
       logger.name.charAt(0).toUpperCase() + logger.name.slice(1)
-    } ${task} your post with id ${owner._id.toString()} `;
+    } ${task} your post of id ${req.params.id.toString()} with id ${owner._id.toString()} `;
     const removeIndex = ownerProfile.notifications.indexOf(mesg);
     if (removeIndex !== -1) {
       ownerProfile.notifications.splice(removeIndex, 1);

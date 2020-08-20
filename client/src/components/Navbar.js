@@ -22,6 +22,7 @@ const Navbar = ({
   hideModal,
   setBackdropType,
   logout,
+  profile: { loggedProfile },
 }) => {
   const onClick = () => {
     if (utils.sideDrawer === false) {
@@ -40,6 +41,9 @@ const Navbar = ({
       <li>
         <a href="#!">
           <i className="fas fa-bell"></i>
+          {loggedProfile &&
+            loggedProfile.notifications.length > 0 &&
+            ` : ${loggedProfile.notifications.length}`}
         </a>
       </li>
       <li>
@@ -62,14 +66,7 @@ const Navbar = ({
       <li>
         <span className="divider small">|</span>
       </li>
-      <li>
-        <Link to="#!">
-          <i className="fas fa-plus-circle"></i>
-        </Link>
-      </li>
-      <li>
-        <span className="divider small">|</span>
-      </li>
+
       <li>
         <a
           onClick={() => {
@@ -188,6 +185,7 @@ const Navbar = ({
 const mapStateToProps = (state) => ({
   utils: state.utils,
   auth: state.auth,
+  profile: state.profile,
 });
 export default connect(mapStateToProps, {
   showSideDrawer,

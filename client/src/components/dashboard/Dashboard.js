@@ -13,7 +13,7 @@ import Experience from "./Experience";
 import Settings from "./Settings";
 import SideDrawer from "./../SideDrawer";
 import Aside from "./../Aside";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { getMyProfile } from "./../../actions/profile";
 import { connect } from "react-redux";
 import { showMenuBar } from "./../../actions/utils";
@@ -25,7 +25,7 @@ const Dashboard = ({
   hideMenuBar,
 
   getMyProfile,
-  profile: { loggedProfile, loadingProfile, progress },
+  profile: { loggedProfile, loadingProfile },
 }) => {
   const [aside, asideHandler] = useState(false);
 

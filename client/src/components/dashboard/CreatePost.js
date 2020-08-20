@@ -18,7 +18,7 @@ const CreatePost = ({
       setPost(currentPost);
     } else {
       setPost({ ...post, text: "" });
-    }
+    } //eslint-disable-next-line
   }, [currentPost]);
   useEffect(() => {
     return () => {

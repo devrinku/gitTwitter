@@ -29,6 +29,7 @@ const Comments = ({
   profile: { progress },
   auth: { user, fetch },
 }) => {
+  const [deleteType, setDeleteType] = useState("");
   const [comment, setComment] = useState({
     text: "",
   });
@@ -41,6 +42,7 @@ const Comments = ({
       unsetFetch();
       unsetProgress();
     };
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -99,15 +101,22 @@ const Comments = ({
                   <div className="py">
                     <a
                       onClick={() => {
+                        setDeleteType(comment._id);
                         setBackdropType(`comment-${comment._id}`);
                         showBackDrop();
                         showModal();
                       }}
                       href="#!"
-                      style={{ margin: "0px 1rem", background: "red" }}
+                      style={
+                        fetch === true && comment._id === deleteType
+                          ? { margin: "0px 1rem", background: "red" }
+                          : { margin: "0px 1rem" }
+                      }
                       type="submit"
-                      className="btn ">
-                      Delete
+                      className={`btn`}>
+                      {fetch === true && comment._id === deleteType
+                        ? "Deleting..."
+                        : "Delete"}
                     </a>
                   </div>
                 )}
@@ -117,9 +126,9 @@ const Comments = ({
                     <Modal warn={true} index={90} action="delete this comment">
                       <a
                         href="#!"
-                        onClick={() =>
-                          deleteComment(singlePost._id, comment._id)
-                        }
+                        onClick={() => {
+                          deleteComment(singlePost._id, comment._id);
+                        }}
                         style={{ color: "white" }}
                         className="btn orange">
                         Confirm
