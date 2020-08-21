@@ -15,6 +15,7 @@ import {
   SET_CURRENT_POST,
   CLEAR_SINGLE_POST,
   ADD_COMMENT,
+  COMMENT_ERROR,
 } from "./../constants";
 
 const initialState = {
@@ -33,6 +34,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         posts: payload,
+      };
+    case GET_MY_POSTS:
+      return {
+        ...state,
+        myPosts: payload,
       };
     case ADD_POST:
       return {
@@ -66,15 +72,16 @@ export default (state = initialState, action) => {
         ...state,
         singlePost: null,
       };
-    case GET_MY_POSTS:
-      return {
-        ...state,
-        myPosts: payload,
-      };
+
     case GET_SINGLE_POST:
       return {
         ...state,
         singlePost: payload,
+      };
+    case COMMENT_ERROR:
+      return {
+        ...state,
+        singlePost: undefined,
       };
     case POST_ERROR:
       return {

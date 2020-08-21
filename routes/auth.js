@@ -11,6 +11,7 @@ const {
   uploadDi,
   updateDetails,
   changePassword,
+  getNotifiedUser,
   forgotPassword,
   resetPassword,
   deleteAccount,
@@ -30,6 +31,7 @@ router.put("/resetpassword/:salt", resetPassword, response);
 //Private Routes
 router.use(authenticate);
 router.post("/changepassword", changePassword, response);
+router.post("/notifications", getNotifiedUser, response);
 router.put("/uploadprofileimage", uploadDi, response);
 router.delete("/deleteprofileimage", deleteDi, response);
 router

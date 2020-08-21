@@ -8,6 +8,7 @@ import Backdrop from "./../Backdrop";
 import MyPosts from "./MyPosts";
 import Home from "./Home";
 import Comments from "./Comments";
+import Notifications from "./Notifications";
 import Education from "./Education";
 import Experience from "./Experience";
 import Settings from "./Settings";
@@ -72,7 +73,6 @@ const Dashboard = ({
           path="/dashboard/posts/:id/comments"
           component={Comments}
         />
-
         <PrivateRoute
           myprofile={loggedProfile}
           exact
@@ -108,6 +108,11 @@ const Dashboard = ({
           myprofile={loggedProfile}
           path="/dashboard/home"
           component={Home}
+        />
+        <PrivateRoute
+          exact
+          path="/dashboard/notifications"
+          component={Notifications}
         />
         <PrivateRoute exact path="/dashboard/settings" component={Settings} />
       </Switch>

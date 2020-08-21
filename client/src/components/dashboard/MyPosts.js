@@ -2,6 +2,10 @@ import React, { Fragment, useEffect } from "react";
 import { getMyPosts } from "./../../actions/post";
 import CreatePost from "./CreatePost";
 import { connect } from "react-redux";
+
+import Preloader from "./../Preloader";
+import spinner from "./../../images/25C.gif";
+
 import Post from "./Post";
 const MyPosts = ({
   post: { myPosts },

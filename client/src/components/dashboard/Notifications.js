@@ -1,86 +1,97 @@
 import React, { Fragment, useEffect } from "react";
-import Modal from "./../Modal";
-
+import { unsetProgress } from "./../../actions/profile";
+import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { hideSideDrawer } from "./../../actions/utils";
-import { hideBackDrop } from "./../../actions/utils";
-import { hideModal } from "./../../actions/utils";
+
+import { clearNotifications } from "./../../actions/profile";
+
 import Preloader from "./../Preloader";
 import spinner from "./../../images/25C.gif";
 
 const Notifications = ({
-  hideBackDrop,
-  notifications,
-  hideModal,
-  hideSideDrawer,
+  clearNotifications,
+  profile: { notifyUsers, loggedProfile, progress },
+  unsetProgress,
 }) => {
   useEffect(() => {
-    //eslint-disable-next-line
+    return () => {
+      unsetProgress();
+    };
   }, []);
-  const close = () => {
-    hideBackDrop();
-    hideModal();
-    if (window.innerWidth < 768) {
-      hideSideDrawer();
-    }
-  };
   return (
-    <Modal
-      content={
-        notifications.length > 0 ? (
+    <Fragment>
+      <div className="mid-container padding-top">
+        <div className="my teal">
+          <span className="pencil fw-500 ">
+            <i className="fas fa-bell mx"></i>Notifications
+          </span>
+        </div>{" "}
+        {notifyUsers === null ? (
+          <div style={{ padding: "1rem" }} className="text-center">
+            <Preloader spinner={spinner} />
+          </div>
+        ) : loggedProfile.notifications.length > 0 ? (
           <Fragment>
             {" "}
-            <div className="modal-heading fw-500 small">
-              <div className="like-heading">
-                Notifications
-                <a onClick={close} href="#!">
-                  <i className="fas fa-times-circle"></i>
-                </a>
-              </div>
-            </div>
-            <div className="likes-container">
-              {notifications.length > 0 &&
-                notifications.map((person) => (
-                  <div key={person._id} className="likes">
-                    <div className="like-image">
+            <p className="my-1">
+              {" "}
+              <a
+                style={progress === true ? { background: "red" } : {}}
+                onClick={() => clearNotifications(loggedProfile._id)}
+                className="btn mx py">
+                {progress === true
+                  ? "Clearing Notifications..."
+                  : "Clear Notifications"}
+              </a>
+            </p>
+            {notifyUsers.map((person) => (
+              <Link
+                style={{ display: "block" }}
+                key={uuidv4()}
+                to={`/dashboard/posts/${person.post}/comments`}>
+                {" "}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+
+                    padding: "0",
+                  }}
+                  className="post  ">
+                  <div style={{ padding: "0.6rem" }} className="post-info ">
+                    <div className="post-img">
                       <img
                         src={`/./../../uploads/${person.user.image}`}
                         alt=""
                       />
                     </div>
-                    <div className="like-info my">
-                      <p className=" fw-500"> {person.user.name}</p>
-                      <p>{person.status}</p>
-                      <p> {person.hometown}</p>
-                    </div>
                   </div>
-                ))}
-            </div>
+                  <div className="post-content">
+                    <span className="fw-500">
+                      {person.user.name.charAt(0).toUpperCase() +
+                        person.user.name.slice(1)}{" "}
+                    </span>
+                    {person.type} your post
+                  </div>
+                </div>
+              </Link>
+            ))}
           </Fragment>
         ) : (
-          <Fragment>
-            <div className="modal-heading fw-500 small">
-              <div className="like-heading">Notifications</div>
-            </div>
-            <div className="likes-container">
-              <p className="small fw-500">There are no notifications</p>
-            </div>
-          </Fragment>
-        )
-      }
-      top={true}
-      style={{ color: "black" }}
-      index={90}></Modal>
+          <p className="small fw-500 px">There is no new notification</p>
+        )}
+      </div>
+    </Fragment>
   );
 };
 
 const mapStateToProps = (state) => ({
   post: state.post,
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, {
-  hideSideDrawer,
-  hideBackDrop,
-
-  hideModal,
+  clearNotifications,
+  unsetProgress,
 })(Notifications);

@@ -67,7 +67,7 @@ const Post = ({
           <p className="my fw-500">{postOwner.name}</p>
 
           <p>
-            <Moment format="DD/MM/YYYY">{text.text.date}</Moment>
+            Posted on <Moment format="DD/MM/YYYY">{text.text.date}</Moment>
           </p>
         </div>
         {(location.pathname === "/dashboard/posts" ||

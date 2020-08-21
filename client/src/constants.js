@@ -23,6 +23,8 @@ export const LOGOUT = "LOGOUT";
 export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
 export const SET_FETCH = "SET_FETCH";
 export const UNSET_FETCH = "UNSET_FETCH";
+export const GET_NOTIFY_USERS = "GET_NOTIFY_USER";
+export const CLEAR_NOTIFY_USERS = "CLEAR_NOTIFY_USER";
 
 // Profile
 export const GET_PROFILE = "GET_PROFILE";
@@ -56,4 +58,5 @@ export const LIKE_A_POST = "LIKE_A_POST";
 export const SET_CURRENT_POST = "SET_CURRENT_POST";
 export const CLEAR_CURRENT_POST = "CLEAR_CURRENT_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const COMMENT_ERROR = "COMMENT_ERROR";
 export const DELETE_COMMENT = "DELETE_COMMENT";

@@ -13,6 +13,26 @@ exports.register = asyncHandler(async (req, res, next) => {
   getToken(user, res, next, 201);
 });
 
+exports.getNotifiedUser = asyncHandler(async (req, res, next) => {
+  let users = await User.find();
+  let { data } = req.body;
+
+  users = data.map(async (elem) => {
+    let user = await User.findById(elem.user.toString()).select("name image");
+    user = {
+      user,
+      type: elem.type,
+      post: elem.post,
+    };
+
+    return user;
+  });
+  users = await Promise.all(users);
+
+  res.response = new Response(200, users);
+  next();
+});
+
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {

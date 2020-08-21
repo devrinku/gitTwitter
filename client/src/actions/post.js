@@ -18,6 +18,7 @@ import {
   CLEAR_SINGLE_POST,
   GET_MY_POSTS,
   CLEAR_CURRENT_POST,
+  COMMENT_ERROR,
 } from "./../constants";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -261,7 +262,7 @@ export const getAPost = (id) => async (dispatch) => {
   } catch (error) {
     if (error && error.response && error.response.statusText) {
       dispatch({
-        type: POST_ERROR,
+        type: COMMENT_ERROR,
         payload: {
           msg: error.response.statusText,
           status: error.response.status,

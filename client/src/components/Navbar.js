@@ -8,6 +8,7 @@ import { hideSideDrawer } from "./../actions/utils";
 import { setBackdropType } from "./../actions/utils";
 import { showModal } from "./../actions/utils";
 import { hideModal } from "./../actions/utils";
+import { notifyUsers } from "./../actions/profile";
 import { logout } from "./../actions/auth";
 import Modal from "./Modal";
 import Notifications from "./dashboard/Notifications";
@@ -22,6 +23,7 @@ const Navbar = ({
   hideSideDrawer,
   hideModal,
   setBackdropType,
+  notifyUsers,
   logout,
   profile: { loggedProfile },
 }) => {
@@ -40,20 +42,21 @@ const Navbar = ({
   const guestLinks = (
     <Fragment>
       <li>
-        <a
+        <Link
+          to="/dashboard/notifications"
           onClick={() => {
-            setBackdropType(`notifications`);
-            showBackDrop();
-            showModal();
+            notifyUsers(loggedProfile.notifications);
           }}
           style={
-            loggedProfile && loggedProfile.notifications.length > 0
-              ? { color: "red", fontSize: "1.5rem " }
+            loggedProfile &&
+            loggedProfile.notifications &&
+            loggedProfile.notifications.length > 0
+              ? { color: "red", fontSize: "1.5rem" }
               : {}
           }
           href="#!">
-          <i className="fas fa-bell"></i>
-        </a>
+          <i className="fas fa-bell notifyme"></i>
+        </Link>
       </li>
       <li>
         <span className="divider small">|</span>
@@ -182,11 +185,6 @@ const Navbar = ({
           </a>
         </Modal>
       )}
-      {utils.backdrop &&
-        utils.modal &&
-        utils.backdropType === `notifications` && (
-          <Notifications notifications={loggedProfile.notifications} />
-        )}
     </Fragment>
   );
 };
@@ -204,4 +202,5 @@ export default connect(mapStateToProps, {
   logout,
   hideModal,
   showModal,
+  notifyUsers,
 })(Navbar);

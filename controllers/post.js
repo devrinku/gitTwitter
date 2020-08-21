@@ -134,7 +134,7 @@ exports.addcomment = asyncHandler(async (req, res, next) => {
   };
   post.comments.push(comment);
   await post.save();
-  createNotification(req, res, "commented ");
+  createNotification(req, res, "commented on ");
   post = await Post.findById(req.params.id)
     .populate({
       path: "comments",
@@ -193,15 +193,12 @@ exports.deleteComment = asyncHandler(async (req, res, next) => {
 //Static Method
 const createNotification = async (req, res, task) => {
   if (res.result.user.toString() !== req.user.id.toString()) {
-    const logger = await User.findById(req.user.id).select("-createdAt");
     let owner = await Post.findById(req.params.id).populate("profile");
     let ownerProfile = await Profile.findById(owner.profile._id).select(
       "+notifications"
     );
     let mesg = {
-      image: logger.image,
-      id: logger._id,
-      name: logger.name,
+      user: req.user.id,
       type: task,
       post: owner._id,
     };

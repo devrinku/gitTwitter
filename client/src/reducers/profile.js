@@ -9,20 +9,24 @@ import {
   CLEAR_CURRENT_PROFILE,
   SET_PROGRESS,
   UNSET_PROGRESS,
+  GET_NOTIFY_USERS,
+  CLEAR_NOTIFY_USERS,
   GITHUB_REPOS,
+  COMMENT_ERROR,
   GITHUB_ERROR,
 } from "./../constants";
 
 const initialState = {
   loggedProfile: null,
   currentProfile: null,
-  profiles: [],
+  profiles: null,
   repos: null,
   followers: [],
   followings: [],
   loadingProfile: false,
   error: {},
   progress: false,
+  notifyUsers: null,
 };
 
 export default (state = initialState, action) => {
@@ -43,6 +47,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loadingProfile: true,
+      };
+    case GET_NOTIFY_USERS:
+      return {
+        ...state,
+        notifyUsers: payload,
+      };
+    case CLEAR_NOTIFY_USERS:
+      return {
+        ...state,
+        notifyUsers: [],
       };
     case GET_PROFILE:
       return {
@@ -94,12 +108,13 @@ export default (state = initialState, action) => {
         ...state,
         loggedProfile: null,
         currentProfile: null,
-        profiles: [],
+        profiles: null,
         repos: null,
         followers: [],
         followings: [],
         loadingProfile: false,
         error: {},
+        notifyUsers: null,
         progress: false,
       };
     default:

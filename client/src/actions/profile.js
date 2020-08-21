@@ -8,9 +8,11 @@ import {
   GET_FOLLOWINGS,
   CLEAR_CURRENT_PROFILE,
   SET_PROGRESS,
+  GET_NOTIFY_USERS,
   UNSET_PROGRESS,
   GITHUB_REPOS,
   GITHUB_ERROR,
+  CLEAR_NOTIFY_USERS,
 } from "./../constants";
 import { closeComponent } from "./utils";
 import { toast } from "react-toastify";
@@ -381,4 +383,76 @@ export const getGithubRepos = (name) => async (dispatch) => {
 };
 export const unsetProgress = () => {
   return { type: UNSET_PROGRESS };
+};
+
+export const notifyUsers = (notifications) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const formData = {
+      data: notifications,
+    };
+    let res = await axios.post("/api/v1/auth/notifications", formData, config);
+
+    dispatch({
+      type: GET_NOTIFY_USERS,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const clearNotifications = (id) => async (dispatch) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
+  try {
+    await axios.delete(`/api/v1/profile/notifications/${id}`);
+    let res = await axios.get("/api/v1/profile/user/me");
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data.data,
+    });
+    dispatch({
+      type: CLEAR_NOTIFY_USERS,
+    });
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+    toast(`Notification Cleared`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
 };

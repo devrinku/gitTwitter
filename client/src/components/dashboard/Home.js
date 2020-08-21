@@ -3,6 +3,8 @@ import { getAllPosts } from "./../../actions/post";
 import CreatePost from "./CreatePost";
 import { connect } from "react-redux";
 import Post from "./Post";
+import Preloader from "./../Preloader";
+import spinner from "./../../images/25C.gif";
 
 const Home = ({ getAllPosts, myprofile, post: { posts } }) => {
   useEffect(() => {
