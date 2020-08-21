@@ -51,7 +51,7 @@ const ProfileSchema = new mongoose.Schema(
     },
 
     notifications: {
-      type: [String],
+      type: [],
       select: false,
     },
     followers: [

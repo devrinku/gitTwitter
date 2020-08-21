@@ -134,7 +134,7 @@ exports.addcomment = asyncHandler(async (req, res, next) => {
   };
   post.comments.push(comment);
   await post.save();
-  createNotification(req, res, "commented on");
+  createNotification(req, res, "commented ");
   post = await Post.findById(req.params.id)
     .populate({
       path: "comments",
@@ -193,19 +193,32 @@ exports.deleteComment = asyncHandler(async (req, res, next) => {
 //Static Method
 const createNotification = async (req, res, task) => {
   if (res.result.user.toString() !== req.user.id.toString()) {
-    const logger = await User.findById(req.user.id);
+    const logger = await User.findById(req.user.id).select("-createdAt");
     let owner = await Post.findById(req.params.id).populate("profile");
     let ownerProfile = await Profile.findById(owner.profile._id).select(
       "+notifications"
     );
-    const mesg = `${
-      logger.name.charAt(0).toUpperCase() + logger.name.slice(1)
-    } ${task} your post of id ${req.params.id.toString()} with id ${owner._id.toString()} `;
-    const removeIndex = ownerProfile.notifications.indexOf(mesg);
+    let mesg = {
+      image: logger.image,
+      id: logger._id,
+      name: logger.name,
+      type: task,
+      post: owner._id,
+    };
+    ownerProfile.notifications = ownerProfile.notifications.map((elem) =>
+      JSON.stringify(elem)
+    );
+
+    let removeIndex = ownerProfile.notifications.indexOf(JSON.stringify(mesg));
+
     if (removeIndex !== -1) {
       ownerProfile.notifications.splice(removeIndex, 1);
     }
+    ownerProfile.notifications = ownerProfile.notifications.map((elem) =>
+      JSON.parse(elem)
+    );
     ownerProfile.notifications.push(mesg);
+
     await ownerProfile.save();
   }
 };

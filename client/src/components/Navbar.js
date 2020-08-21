@@ -10,6 +10,7 @@ import { showModal } from "./../actions/utils";
 import { hideModal } from "./../actions/utils";
 import { logout } from "./../actions/auth";
 import Modal from "./Modal";
+import Notifications from "./dashboard/Notifications";
 
 const Navbar = ({
   utils,
@@ -39,11 +40,19 @@ const Navbar = ({
   const guestLinks = (
     <Fragment>
       <li>
-        <a href="#!">
+        <a
+          onClick={() => {
+            setBackdropType(`notifications`);
+            showBackDrop();
+            showModal();
+          }}
+          style={
+            loggedProfile && loggedProfile.notifications.length > 0
+              ? { color: "red", fontSize: "1.5rem " }
+              : {}
+          }
+          href="#!">
           <i className="fas fa-bell"></i>
-          {loggedProfile &&
-            loggedProfile.notifications.length > 0 &&
-            ` : ${loggedProfile.notifications.length}`}
         </a>
       </li>
       <li>
@@ -112,13 +121,7 @@ const Navbar = ({
             {isLoggedIn === true && loadingAuth === false ? (
               <Fragment>
                 <p>
-                  <input
-                    type="text"
-                    placeholder="ser"
-                    className="search-bar"
-                    name=""
-                    id=""
-                  />
+                  <input type="text" placeholder="ser" className="search-bar" />
                 </p>
                 <p>
                   <a
@@ -179,6 +182,11 @@ const Navbar = ({
           </a>
         </Modal>
       )}
+      {utils.backdrop &&
+        utils.modal &&
+        utils.backdropType === `notifications` && (
+          <Notifications notifications={loggedProfile.notifications} />
+        )}
     </Fragment>
   );
 };

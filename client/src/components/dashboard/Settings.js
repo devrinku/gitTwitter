@@ -70,7 +70,7 @@ const Settings = ({
               style={fetch === true ? { background: "red" } : {}}
               className="btn  block "
               href="#!">
-              {fetch === true ? "Deleting your Account..." : "Deleting Account"}
+              {fetch === true ? "Deleting your Account..." : "Delete Account"}
             </a>
           </li>
         </ul>
