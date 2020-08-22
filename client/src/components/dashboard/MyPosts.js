@@ -3,13 +3,11 @@ import { getMyPosts } from "./../../actions/post";
 import CreatePost from "./CreatePost";
 import { connect } from "react-redux";
 
-import Preloader from "./../Preloader";
-import spinner from "./../../images/25C.gif";
-
 import Post from "./Post";
 const MyPosts = ({
   post: { myPosts },
   getMyPosts,
+  loggedUser,
   myprofile,
   auth: { user },
 }) => {
@@ -19,13 +17,19 @@ const MyPosts = ({
   }, []);
   return (
     <Fragment>
-      <div className="mid-container padding-top">
+      <div
+        className={
+          "mid-container " + (loggedUser === true ? "padding-top" : " ")
+        }>
         <div className="my teal">
           <span className="pencil fw-500 ">
-            <i className="fas fa-blog mx"></i>My Posts
+            <i className="fas fa-blog mx"></i>Posts
           </span>
         </div>
-        <CreatePost myprofile={myprofile} />
+        {loggedUser && <CreatePost myprofile={myprofile} />}
+        {myPosts.length === 0 && loggedUser === false && (
+          <p className="fw-500 px">No Posts.</p>
+        )}
         {myPosts.length > 0 &&
           myPosts.map((text) => (
             <Post key={text._id} text={text} postOwner={user} />

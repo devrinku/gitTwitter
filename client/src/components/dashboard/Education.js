@@ -16,6 +16,7 @@ const Education = ({
   myprofile,
   showModal,
   deleteEducation,
+  loggedUser,
   unsetProgress,
   profile: { progress },
   setBackdropType,
@@ -35,7 +36,10 @@ const Education = ({
   }, []);
 
   return (
-    <div className="padding-top mid-container">
+    <div
+      className={
+        "mid-container " + (loggedUser === true ? "padding-top" : " ")
+      }>
       <div className="my teal">
         <span className="pencil fw-500 ">
           <i className="fas fa-users-cog mx"></i>Education Credentials
@@ -59,6 +63,9 @@ const Education = ({
           </div>
         </div>
       )}
+      {myprofile.education.length === 0 && loggedUser === false && (
+        <p className="fw-500 px">The user has not added education yet.</p>
+      )}
       {myprofile.education.map((edu) => (
         <Fragment key={edu._id}>
           <div
@@ -80,17 +87,21 @@ const Education = ({
                 </Fragment>
               )}
             </p>
-            <p className="text-center" style={{ width: "10%" }}>
-              <a
-                onClick={() => {
-                  setBackdropType(`education-${edu._id}`);
-                  showBackDrop();
-                  showModal();
-                }}
-                href="#!">
-                <i style={{ color: "red" }} className="small  fas fa-trash"></i>
-              </a>
-            </p>
+            {loggedUser && (
+              <p className="text-center" style={{ width: "10%" }}>
+                <a
+                  onClick={() => {
+                    setBackdropType(`education-${edu._id}`);
+                    showBackDrop();
+                    showModal();
+                  }}
+                  href="#!">
+                  <i
+                    style={{ color: "red" }}
+                    className="small  fas fa-trash"></i>
+                </a>
+              </p>
+            )}
           </div>
           {utils.backdrop &&
             utils.modal &&
@@ -110,21 +121,23 @@ const Education = ({
             )}
         </Fragment>
       ))}
-      <div className="mx py">
-        <a
-          style={progress === true ? { background: "red" } : {}}
-          onClick={() => {
-            showComponent(!utils.component, "education");
-          }}
-          href="#!"
-          className="btn">
-          {utils.component
-            ? "Close"
-            : progress === true
-            ? "Deleting Education..."
-            : "Add Education"}
-        </a>
-      </div>
+      {loggedUser && (
+        <div className="mx py">
+          <a
+            style={progress === true ? { background: "red" } : {}}
+            onClick={() => {
+              showComponent(!utils.component, "education");
+            }}
+            href="#!"
+            className="btn">
+            {utils.component
+              ? "Close"
+              : progress === true
+              ? "Deleting Education..."
+              : "Add Education"}
+          </a>
+        </div>
+      )}
       {utils.componentType === "education" && utils.component && (
         <div className="px">
           <EducationForm />

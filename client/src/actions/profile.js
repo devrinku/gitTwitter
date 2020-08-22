@@ -13,6 +13,9 @@ import {
   GITHUB_REPOS,
   GITHUB_ERROR,
   CLEAR_NOTIFY_USERS,
+  GET_SUGGESTIONS,
+  GET_A_SINGLE_PROFILE,
+  CLEAR_SINGLE_PROFILE,
 } from "./../constants";
 import { closeComponent } from "./utils";
 import { toast } from "react-toastify";
@@ -455,4 +458,54 @@ export const clearNotifications = (id) => async (dispatch) => {
       console.log(error);
     }
   }
+};
+
+export const getUserSuggestion = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/profile`);
+    dispatch({
+      type: GET_SUGGESTIONS,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const getAProfile = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/profile/${id}`);
+    dispatch({
+      type: GET_A_SINGLE_PROFILE,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const clearSingleProfile = () => {
+  return {
+    type: CLEAR_SINGLE_PROFILE,
+  };
 };

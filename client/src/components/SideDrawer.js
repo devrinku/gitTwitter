@@ -66,7 +66,7 @@ const SideDrawer = ({
             <li className="background-img padding-top">
               <img
                 className="user-img"
-                src={`./../uploads/${user.image}`}
+                src={`/./../uploads/${user.image}`}
                 alt=""
               />
               <p className="my">{user.name}</p>

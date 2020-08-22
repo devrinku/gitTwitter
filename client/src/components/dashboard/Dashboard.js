@@ -14,6 +14,7 @@ import Experience from "./Experience";
 import Settings from "./Settings";
 import SideDrawer from "./../SideDrawer";
 import Aside from "./../Aside";
+import OtherProfile from "./../OtherProfile";
 import { Switch } from "react-router-dom";
 import { getMyProfile } from "./../../actions/profile";
 import { connect } from "react-redux";
@@ -55,14 +56,21 @@ const Dashboard = ({
 
       <Switch>
         <PrivateRoute
+          exact
+          path="/dashboard/profile/:id"
+          component={OtherProfile}
+        />
+        <PrivateRoute
           myprofile={loggedProfile}
           myLoadingprofile={loadingProfile}
+          loggedUser={true}
           exact
           path="/dashboard/profile"
           component={Profile}
         />
         <PrivateRoute
           myprofile={loggedProfile}
+          loggedUser={true}
           exact
           path="/dashboard/posts"
           component={MyPosts}
@@ -75,30 +83,35 @@ const Dashboard = ({
         />
         <PrivateRoute
           myprofile={loggedProfile}
+          loggedUser={true}
           exact
           path="/dashboard/followers"
           component={Followers}
         />
         <PrivateRoute
           myprofile={loggedProfile}
+          loggedUser={true}
           exact
           path="/dashboard/followings"
           component={Followings}
         />
         <PrivateRoute
           myprofile={loggedProfile}
+          loggedUser={true}
           exact
           path="/dashboard/education"
           component={Education}
         />
         <PrivateRoute
           myprofile={loggedProfile}
+          loggedUser={true}
           exact
           path="/dashboard/experience"
           component={Experience}
         />
         <PrivateRoute
           myprofile={loggedProfile}
+          loggedUser={true}
           exact
           path="/dashboard/github"
           component={Github}

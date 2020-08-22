@@ -405,13 +405,15 @@ input[type="submit"] {
 
 .list {
   display: flex;
-  -webkit-scrollbar: none;
-  cursor: pointer;
-  justify-content: space-around;
+
   border: 1px solid rgb(196, 194, 194);
   border-right: none;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.5rem;
+
   color: rgb(90, 86, 86);
+}
+.aside::-webkit-scrollbar {
+  display: none;
 }
 .list img {
   width: 80px;

@@ -25,7 +25,7 @@ const advancedQuery = (model, populate) =>
       query = query.sort("-createdAt");
     }
     const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 10;
+    const limit = parseInt(req.query.limit, 10) || 30;
     const startIndex = (page - 1) * limit;
     const lastIndex = page * limit;
     query = query.skip(startIndex).limit(limit);

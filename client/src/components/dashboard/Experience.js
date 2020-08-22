@@ -20,6 +20,7 @@ const Experience = ({
   showModal,
   unsetProgress,
   showComponent,
+  loggedUser,
   profile: { progress },
 }) => {
   useEffect(() => {
@@ -36,7 +37,10 @@ const Experience = ({
   }, []);
 
   return (
-    <div className="padding-top mid-container">
+    <div
+      className={
+        "mid-container " + (loggedUser === true ? "padding-top" : " ")
+      }>
       <div className="my teal">
         <span className="pencil fw-500 ">
           <i className="fas fa-users-cog mx"></i>Experience Credentials
@@ -60,6 +64,9 @@ const Experience = ({
           </div>
         </div>
       )}
+      {myprofile.experience.length === 0 && loggedUser === false && (
+        <p className="fw-500 px">The user has not added experience yet.</p>
+      )}
       {myprofile.experience.map((exp) => (
         <Fragment key={exp._id}>
           {" "}
@@ -79,17 +86,21 @@ const Experience = ({
               )}
             </p>
 
-            <p className="text-center" style={{ width: "10%" }}>
-              <a
-                onClick={() => {
-                  setBackdropType(`experience-${exp._id}`);
-                  showBackDrop();
-                  showModal();
-                }}
-                href="#!">
-                <i style={{ color: "red" }} className="small  fas fa-trash"></i>
-              </a>
-            </p>
+            {loggedUser && (
+              <p className="text-center" style={{ width: "10%" }}>
+                <a
+                  onClick={() => {
+                    setBackdropType(`experience-${exp._id}`);
+                    showBackDrop();
+                    showModal();
+                  }}
+                  href="#!">
+                  <i
+                    style={{ color: "red" }}
+                    className="small  fas fa-trash"></i>
+                </a>
+              </p>
+            )}
           </div>
           {utils.backdrop &&
             utils.modal &&
@@ -109,19 +120,21 @@ const Experience = ({
             )}
         </Fragment>
       ))}
-      <div className="mx py">
-        <a
-          style={progress === true ? { background: "red" } : {}}
-          onClick={() => showComponent(!utils.component, "experience")}
-          href="#!"
-          className="btn">
-          {utils.component
-            ? "Close"
-            : progress === true
-            ? "Deleting Experience..."
-            : "Add Experience"}
-        </a>
-      </div>
+      {loggedUser && (
+        <div className="mx py">
+          <a
+            style={progress === true ? { background: "red" } : {}}
+            onClick={() => showComponent(!utils.component, "experience")}
+            href="#!"
+            className="btn">
+            {utils.component
+              ? "Close"
+              : progress === true
+              ? "Deleting Experience..."
+              : "Add Experience"}
+          </a>
+        </div>
+      )}
       {utils.componentType === "experience" && utils.component && (
         <div className="px">
           <ExperienceForm />

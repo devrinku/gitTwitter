@@ -5,7 +5,12 @@ import { connect } from "react-redux";
 import Preloader from "./../Preloader";
 import spinner from "./../../images/25C.gif";
 
-const Profile = ({ auth: { user }, myprofile, myLoadingprofile }) => {
+const Profile = ({
+  auth: { user },
+  myprofile,
+  loggedUser,
+  myLoadingprofile,
+}) => {
   return myLoadingprofile === true ? (
     <Fragment>
       <div className="container padding-top text-center">
@@ -30,14 +35,22 @@ const Profile = ({ auth: { user }, myprofile, myLoadingprofile }) => {
       </div>
     </div>
   ) : (
-    <div className=" mid-container bg-teal padding-top">
+    <div className="bg-teal padding-top  mid-container">
       <div className="profile">
         <div className="image my-2">
-          <img src={`./../../uploads/${user.image}`} alt="" />
+          <img
+            src={
+              loggedUser === true
+                ? `./../../uploads/${user.image}`
+                : `./../../uploads/${myprofile.user.image}`
+            }
+            alt=""
+          />
         </div>
         <div className="pro-content">
           <p>
-            <i className="fas fa-user-tie"></i> {user.name && user.name}
+            <i className="fas fa-user-tie"></i>
+            {loggedUser === true ? user.name : myprofile.user.name}
           </p>
           {myprofile.status && (
             <Fragment>

@@ -12,14 +12,17 @@ import {
   GET_NOTIFY_USERS,
   CLEAR_NOTIFY_USERS,
   GITHUB_REPOS,
-  COMMENT_ERROR,
+  GET_SUGGESTIONS,
   GITHUB_ERROR,
+  GET_A_SINGLE_PROFILE,
+  CLEAR_SINGLE_PROFILE,
 } from "./../constants";
 
 const initialState = {
   loggedProfile: null,
   currentProfile: null,
   profiles: null,
+  otherProfile: null,
   repos: null,
   followers: [],
   followings: [],
@@ -47,6 +50,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loadingProfile: true,
+      };
+    case GET_A_SINGLE_PROFILE:
+      return {
+        ...state,
+        otherProfile: payload,
+      };
+    case CLEAR_SINGLE_PROFILE:
+      return {
+        ...state,
+        otherProfile: null,
+      };
+    case GET_SUGGESTIONS:
+      return {
+        ...state,
+        profiles: payload,
       };
     case GET_NOTIFY_USERS:
       return {
@@ -111,6 +129,7 @@ export default (state = initialState, action) => {
         profiles: null,
         repos: null,
         followers: [],
+        otherProfile: null,
         followings: [],
         loadingProfile: false,
         error: {},

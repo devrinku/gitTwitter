@@ -5,7 +5,7 @@ import { getGithubRepos } from "./../../actions/profile";
 const Github = ({
   myprofile,
   profile: { repos },
-
+  loggedUser,
   getGithubRepos,
 }) => {
   useEffect(() => {
@@ -14,7 +14,10 @@ const Github = ({
   }, []);
 
   return (
-    <div className="mid-container padding-top  ">
+    <div
+      className={
+        "mid-container " + (loggedUser === true ? "padding-top" : " ")
+      }>
       <div className="my teal">
         <span className="pencil fw-500 ">
           <i className="fab fa-github mx"></i>Github Repos
