@@ -1,7 +1,10 @@
 import React from "react";
 import FriendList from "./FriendList";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+const Followers = ({ myprofile, profile: { otherProfile } }) => {
+  const history = useHistory();
 
-const Followers = ({ myprofile }) => {
   return (
     <div className="mid-container padding-top">
       <div className="my teal">
@@ -9,9 +12,22 @@ const Followers = ({ myprofile }) => {
           <i className="fas fa-users mx"></i>Followers
         </span>
       </div>
-      <FriendList myprofileFollowers={myprofile} followers={"followers"} />
+      {history.location.state &&
+        history.location.state.from === "otherProfile" && (
+          <FriendList
+            myprofileFollowers={otherProfile}
+            followers={"followers"}
+          />
+        )}
+      {history.location.state &&
+        history.location.state.from === "dashboard" && (
+          <FriendList myprofileFollowers={myprofile} followers={"followers"} />
+        )}
     </div>
   );
 };
 
-export default Followers;
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+export default connect(mapStateToProps)(Followers);

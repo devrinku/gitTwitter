@@ -82,6 +82,16 @@ const Dashboard = ({
           component={Comments}
         />
         <PrivateRoute
+          exact
+          path="/dashboard/profile/:profileId/followers"
+          component={Followers}
+        />
+        <PrivateRoute
+          exact
+          path="/dashboard/profile/:profileId/followings"
+          component={Followings}
+        />
+        <PrivateRoute
           myprofile={loggedProfile}
           exact
           path="/dashboard/followers"

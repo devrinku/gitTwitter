@@ -9,6 +9,8 @@ import {
   CLEAR_CURRENT_PROFILE,
   SET_PROGRESS,
   GET_NOTIFY_USERS,
+  CLEAR_FOLLOWERS,
+  CLEAR_FOLLOWINGS,
   UNSET_PROGRESS,
   GITHUB_REPOS,
   GITHUB_ERROR,
@@ -16,7 +18,6 @@ import {
   GET_SUGGESTIONS,
   GET_A_SINGLE_PROFILE,
   CLEAR_SINGLE_PROFILE,
-  FOLLOW_A_USER,
 } from "./../constants";
 import { closeComponent } from "./utils";
 import { toast } from "react-toastify";
@@ -533,5 +534,16 @@ export const followAUser = (id) => async (dispatch) => {
 export const clearSingleProfile = () => {
   return {
     type: CLEAR_SINGLE_PROFILE,
+  };
+};
+
+export const clearFollowers = () => {
+  return {
+    type: CLEAR_FOLLOWERS,
+  };
+};
+export const clearFollowings = () => {
+  return {
+    type: CLEAR_FOLLOWINGS,
   };
 };

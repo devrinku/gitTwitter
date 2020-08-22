@@ -73,12 +73,26 @@ const SideDrawer = ({
               <p>{user.email}</p>
             </li>
             <li>
-              <Link onClick={onClick} to="/dashboard/followers">
+              <Link
+                onClick={onClick}
+                to={{
+                  pathname: "/dashboard/followers",
+                  state: {
+                    from: "dashboard",
+                  },
+                }}>
                 Followers
               </Link>
             </li>
             <li>
-              <Link onClick={onClick} to="/dashboard/followings">
+              <Link
+                onClick={onClick}
+                to={{
+                  pathname: "/dashboard/followings",
+                  state: {
+                    from: "dashboard",
+                  },
+                }}>
                 Followings
               </Link>
             </li>

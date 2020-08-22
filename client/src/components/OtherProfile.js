@@ -24,6 +24,7 @@ const OtherProfile = ({
       clearSingleProfile();
     };
   }, [id]);
+
   return otherProfile === null ? (
     <div className="padding-top">
       <div className="container text-center">

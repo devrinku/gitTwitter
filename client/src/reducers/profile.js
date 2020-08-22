@@ -14,6 +14,8 @@ import {
   GITHUB_REPOS,
   GET_SUGGESTIONS,
   GITHUB_ERROR,
+  CLEAR_FOLLOWINGS,
+  CLEAR_FOLLOWERS,
   GET_A_SINGLE_PROFILE,
   CLEAR_SINGLE_PROFILE,
 } from "./../constants";
@@ -65,6 +67,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         profiles: payload,
+      };
+    case CLEAR_FOLLOWERS:
+      return {
+        ...state,
+        followers: [],
+      };
+    case CLEAR_FOLLOWINGS:
+      return {
+        ...state,
+        followings: [],
       };
     case GET_NOTIFY_USERS:
       return {

@@ -34,8 +34,8 @@ const Profile = ({
 
   return myLoadingprofile === true ? (
     <Fragment>
-      <div className="container padding-top text-center">
-        <div className="my-3">
+      <div className="mid-container padding-top ">
+        <div className="my-1 text-center">
           <Preloader spinner={spinner} />
         </div>
       </div>
@@ -198,12 +198,26 @@ const Profile = ({
                       type="submit"
                     />
                   )}
-                  <a className="btn text-center my block " href="#!">
+                  <Link
+                    className="btn text-center my block "
+                    to={{
+                      pathname: `/dashboard/profile/${myprofile._id}/followers`,
+                      state: {
+                        from: "otherProfile",
+                      },
+                    }}>
                     Followers : {myprofile.followers.length}
-                  </a>
-                  <a className="btn text-center my block" href="#!">
+                  </Link>
+                  <Link
+                    className="btn text-center my block"
+                    to={{
+                      pathname: `/dashboard/profile/${myprofile._id}/followings`,
+                      state: {
+                        from: "otherProfile",
+                      },
+                    }}>
                     Followings : {myprofile.followings.length}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </Fragment>
