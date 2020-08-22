@@ -18,7 +18,9 @@ const Notifications = ({
     return () => {
       unsetProgress();
     };
+    //eslint-disable-next-line
   }, []);
+
   return (
     <Fragment>
       <div className="mid-container padding-top">
@@ -37,6 +39,7 @@ const Notifications = ({
             <p className="my-1">
               {" "}
               <a
+                href="#!"
                 style={progress === true ? { background: "red" } : {}}
                 onClick={() => clearNotifications(loggedProfile._id)}
                 className="btn mx py">

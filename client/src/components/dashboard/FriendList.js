@@ -10,6 +10,7 @@ const FriendList = ({
   myprofileFollowings,
   myprofileFollowers,
   getFriends,
+
   clearFollowers,
   clearFollowings,
   profile,

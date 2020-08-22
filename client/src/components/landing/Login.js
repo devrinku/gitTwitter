@@ -66,7 +66,7 @@ const Login = ({ login, auth: { isLoggedIn, loadingAuth } }) => {
           <Link to="/register">I am not registered yet! </Link>
         </p>
         <p>
-          <Link to="#!">Forgot Password?</Link>
+          <Link to="/forgotpassword">Forgot Password?</Link>
         </p>
       </div>
     </div>

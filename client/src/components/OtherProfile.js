@@ -23,6 +23,7 @@ const OtherProfile = ({
     return () => {
       clearSingleProfile();
     };
+    //eslint-disable-next-line
   }, [id]);
 
   return otherProfile === null ? (

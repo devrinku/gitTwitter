@@ -462,12 +462,12 @@ export const clearNotifications = (id) => async (dispatch) => {
   }
 };
 
-export const getUserSuggestion = () => async (dispatch) => {
+export const getUserSuggestion = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/v1/profile`);
     dispatch({
       type: GET_SUGGESTIONS,
-      payload: res.data.data,
+      payload: { res: res.data.data, id },
     });
   } catch (error) {
     if (error && error.response && error.response.statusText) {

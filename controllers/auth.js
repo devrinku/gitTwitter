@@ -98,6 +98,11 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   if (!email) {
     return next(new ErrorResponse("Please enter your  email", 400));
   }
+  const regx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (!email.match(regx)) {
+    return next(new ErrorResponse("Enter a valid  email", 400));
+  }
+
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
     return next(new ErrorResponse("Invalid Credentials", 400));

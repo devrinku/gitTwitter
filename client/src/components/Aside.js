@@ -7,8 +7,11 @@ import { getUserSuggestion } from "./../actions/profile";
 
 const Aside = ({ profile: { loggedProfile, profiles }, getUserSuggestion }) => {
   useEffect(() => {
-    getUserSuggestion();
-  }, []);
+    if (loggedProfile) {
+      getUserSuggestion(loggedProfile._id);
+    }
+    //eslint-disable-next-line
+  }, [loggedProfile]);
   return (
     loggedProfile !== null &&
     (profiles === null ? (

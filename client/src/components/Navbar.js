@@ -11,7 +11,6 @@ import { hideModal } from "./../actions/utils";
 import { notifyUsers } from "./../actions/profile";
 import { logout } from "./../actions/auth";
 import Modal from "./Modal";
-import Notifications from "./dashboard/Notifications";
 
 const Navbar = ({
   utils,
@@ -41,44 +40,46 @@ const Navbar = ({
 
   const guestLinks = (
     <Fragment>
-      <li>
-        <Link
-          to="/dashboard/notifications"
-          onClick={() => {
-            notifyUsers(loggedProfile.notifications);
-          }}
-          style={
-            loggedProfile &&
-            loggedProfile.notifications &&
-            loggedProfile.notifications.length > 0
-              ? { color: "red", fontSize: "1.5rem" }
-              : {}
-          }
-          href="#!">
-          <i className="fas fa-bell notifyme"></i>
-        </Link>
-      </li>
-      <li>
-        <span className="divider small">|</span>
-      </li>
-      <li>
-        <Link to="/dashboard/home">
-          <i className="fas fa-home"></i>
-        </Link>
-      </li>
-
-      <li>
-        <span className="divider small">|</span>
-      </li>
-      <li>
-        <Link to="/dashboard/profile">
-          <i className="fas fa-user"></i>
-        </Link>
-      </li>
-      <li>
-        <span className="divider small">|</span>
-      </li>
-
+      {loggedProfile !== null && (
+        <Fragment>
+          <li>
+            <Link
+              to="/dashboard/notifications"
+              onClick={() => {
+                notifyUsers(loggedProfile.notifications);
+              }}
+              style={
+                loggedProfile &&
+                loggedProfile.notifications &&
+                loggedProfile.notifications.length > 0
+                  ? { color: "red", fontSize: "1.5rem" }
+                  : {}
+              }
+              href="#!">
+              <i className="fas fa-bell notifyme"></i>
+            </Link>
+          </li>
+          <li>
+            <span className="divider small">|</span>
+          </li>
+          <li>
+            <Link to="/dashboard/home">
+              <i className="fas fa-home"></i>
+            </Link>
+          </li>
+          <li>
+            <span className="divider small">|</span>
+          </li>{" "}
+          <li>
+            <Link to="/dashboard/profile">
+              <i className="fas fa-user"></i>
+            </Link>
+          </li>
+          <li>
+            <span className="divider small">|</span>
+          </li>
+        </Fragment>
+      )}
       <li>
         <a
           onClick={() => {
@@ -87,7 +88,11 @@ const Navbar = ({
             showModal();
           }}
           href="#!">
-          <i className="fas fa-sign-out-alt"></i>
+          {loggedProfile === null ? (
+            "Logout"
+          ) : (
+            <i className="fas fa-sign-out-alt"></i>
+          )}
         </a>
       </li>
     </Fragment>
@@ -121,10 +126,16 @@ const Navbar = ({
                 style={{ color: "teal" }}
                 className="fab fa-github-alt mx "></i>
             </Link>
-            {isLoggedIn === true && loadingAuth === false ? (
+            {isLoggedIn === true &&
+            loggedProfile !== null &&
+            loadingAuth === false ? (
               <Fragment>
                 <p>
-                  <input type="text" placeholder="ser" className="search-bar" />
+                  <input
+                    type="text"
+                    placeholder="Search a developer"
+                    className="search-bar"
+                  />
                 </p>
                 <p>
                   <a
@@ -148,7 +159,7 @@ const Navbar = ({
             )}
           </div>
           <ul className="right-nav">
-            {utils.menubar && (
+            {utils.menubar && loggedProfile !== null && (
               <Fragment>
                 <li className="hide ">
                   <a onClick={onClick} href="#!">

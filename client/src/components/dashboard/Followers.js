@@ -9,7 +9,11 @@ const Followers = ({ myprofile, profile: { otherProfile } }) => {
     <div className="mid-container padding-top">
       <div className="my teal">
         <span className="pencil fw-500 ">
-          <i className="fas fa-users mx"></i>Followers
+          <i className="fas fa-users mx"></i>
+          {history.location.state &&
+            history.location.state.from === "dashboard" &&
+            "My "}
+          Followers{" "}
         </span>
       </div>
       {history.location.state &&

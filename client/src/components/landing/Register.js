@@ -99,13 +99,13 @@ const Register = ({ register, auth: { isLoggedIn, loadingAuth } }) => {
           <input type="submit" value="Register" className="btn block" />
         )}
       </form>
-      <div className="auth-links ">
-        <p>
-          <Link to="/login">I am already registered! </Link>
+      <div>
+        <p className="text-center ">
+          <Link className="login-link" to="/login">
+            I am already registered!{" "}
+          </Link>
         </p>
-        <p>
-          <Link to="#!">Forgot Password?</Link>
-        </p>
+        <p></p>
       </div>
     </div>
   );

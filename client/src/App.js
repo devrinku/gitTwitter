@@ -5,13 +5,13 @@ import Navbar from "./components/Navbar";
 import Landing from "./components/landing/Landing";
 import Dashboard from "./components/dashboard/Dashboard";
 import Forms from "./components/Forms/Forms";
-import OtherProfile from "./components/OtherProfile";
+import ForgotPassword from "./components/ForgotPassword";
 import store from "./store";
 import { Provider } from "react-redux";
 import { toast } from "react-toastify";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./actions/auth";
-import PrivateRoute from "./components/PrivateRoute";
+
 import "react-toastify/dist/ReactToastify.css";
 
 if (localStorage.getItem("token")) {
@@ -30,7 +30,7 @@ const App = () => {
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/create" component={Forms} />
-
+          <Route exact path="/forgotpassword" component={ForgotPassword} />
           <Route path="/" component={Landing} />
         </Switch>
       </Router>

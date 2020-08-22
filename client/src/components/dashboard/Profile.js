@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { unsetProgress } from "./../../actions/profile";
 import { followAUser } from "./../../actions/profile";
 import Preloader from "./../Preloader";
+import Skills from "./../Skills";
 import spinner from "./../../images/25C.gif";
 
 const Profile = ({
@@ -20,6 +21,7 @@ const Profile = ({
     return () => {
       unsetProgress();
     };
+    //eslint-disable-next-line
   }, []);
   const showFollowBtn = (resource) => {
     const user = resource.find(
@@ -34,7 +36,7 @@ const Profile = ({
 
   return myLoadingprofile === true ? (
     <Fragment>
-      <div className="mid-container padding-top ">
+      <div className="container padding-top ">
         <div className="my-1 text-center">
           <Preloader spinner={spinner} />
         </div>
@@ -224,9 +226,36 @@ const Profile = ({
           )}
         </div>
       </div>
+      {myprofile && myprofile.bio && (
+        <div style={{ background: "#dddddd" }} className="mid-container py-1">
+          <p
+            style={{ textTransform: "capitalize" }}
+            className="small fw-500 teal text-center ">
+            {loggedUser === true ? user.name : myprofile.user.name}'s Bio{" "}
+          </p>
+          <div className=" px-1">
+            <p
+              className="py-1"
+              style={{ borderBottom: "1px solid #888888", fontSize: "1.3rem" }}>
+              {" "}
+              {myprofile.bio}
+            </p>
+          </div>
+        </div>
+      )}
+      {myprofile && myprofile.skills && (
+        <div
+          style={{ background: "#dddddd", paddingBottom: "2rem" }}
+          className="mid-container ">
+          <div className="px-1">
+            <Skills skills={myprofile.skills} />
+          </div>
+        </div>
+      )}
     </Fragment>
   );
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,

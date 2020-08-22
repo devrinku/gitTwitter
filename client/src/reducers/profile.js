@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
     case GET_SUGGESTIONS:
       return {
         ...state,
-        profiles: payload,
+        profiles: payload.res.filter((profile) => profile._id !== payload.id),
       };
     case CLEAR_FOLLOWERS:
       return {
