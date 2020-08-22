@@ -83,14 +83,12 @@ const Dashboard = ({
         />
         <PrivateRoute
           myprofile={loggedProfile}
-          loggedUser={true}
           exact
           path="/dashboard/followers"
           component={Followers}
         />
         <PrivateRoute
           myprofile={loggedProfile}
-          loggedUser={true}
           exact
           path="/dashboard/followings"
           component={Followings}

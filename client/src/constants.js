@@ -44,6 +44,7 @@ export const GITHUB_REPOS = "GITHUB_REPOS";
 export const GITHUB_ERROR = "GITHUB_ERROR";
 export const GET_SUGGESTIONS = "GET_SUGGESTIONS";
 export const CLEAR_SINGLE_PROFILE = "CLEAR_SINGLE_PROFILE";
+export const FOLLOW_A_USER = "FOLLOW_A_USER";
 
 // Posts
 export const GET_ALL_POSTS = "GET_ALL_POSTS";

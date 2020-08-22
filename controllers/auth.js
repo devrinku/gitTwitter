@@ -19,11 +19,19 @@ exports.getNotifiedUser = asyncHandler(async (req, res, next) => {
 
   users = data.map(async (elem) => {
     let user = await User.findById(elem.user.toString()).select("name image");
-    user = {
-      user,
-      type: elem.type,
-      post: elem.post,
-    };
+    if (elem.post) {
+      user = {
+        user,
+        type: elem.type,
+        post: elem.post,
+      };
+    } else {
+      user = {
+        user,
+        type: elem.type,
+        profile: elem.profile,
+      };
+    }
 
     return user;
   });

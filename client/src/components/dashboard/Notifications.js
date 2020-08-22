@@ -49,8 +49,11 @@ const Notifications = ({
               <Link
                 style={{ display: "block" }}
                 key={uuidv4()}
-                to={`/dashboard/posts/${person.post}/comments`}>
-                {" "}
+                to={
+                  person.type === "liked" || person.type === "commented on "
+                    ? `/dashboard/posts/${person.post}/comments`
+                    : `/dashboard/profile/${person.profile}`
+                }>
                 <div
                   style={{
                     display: "flex",
@@ -72,7 +75,12 @@ const Notifications = ({
                       {person.user.name.charAt(0).toUpperCase() +
                         person.user.name.slice(1)}{" "}
                     </span>
-                    {person.type} your post
+                    {person.type === "liked" ||
+                    person.type === "commented on " ? (
+                      <Fragment>{person.type} your post</Fragment>
+                    ) : (
+                      <Fragment>started {person.type} you</Fragment>
+                    )}
                   </div>
                 </div>
               </Link>

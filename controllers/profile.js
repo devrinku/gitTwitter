@@ -147,13 +147,21 @@ exports.follow = asyncHandler(async (req, res, next) => {
   reqUser.setFollowing(req.params.id);
   await reqUser.save();
   resUser.setFollower(reqUser.id);
-  const mesg = `${
-    req.user.name.charAt(0).toUpperCase() + req.user.name.slice(1)
-  } started following you with an id ${reqUser.id}`;
-  const index = resUser.notifications.indexOf(mesg);
-  if (index !== -1) {
-    resUser.notifications.splice(index, 1);
+  //
+  const mesg = {
+    user: req.user.id,
+    type: "following",
+    profile: reqUser._id,
+  };
+  resUser.notifications = resUser.notifications.map((elem) =>
+    JSON.stringify(elem)
+  );
+  let removeIndex = resUser.notifications.indexOf(JSON.stringify(mesg));
+  if (removeIndex !== -1) {
+    resUser.notifications.splice(removeIndex, 1);
   }
+  resUser.notifications = resUser.notifications.map((elem) => JSON.parse(elem));
+
   resUser.notifications.push(mesg);
   await resUser.save();
 
