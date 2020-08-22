@@ -28,7 +28,9 @@ const MyPosts = ({
         </div>
         {loggedUser && <CreatePost myprofile={myprofile} />}
         {myPosts.length === 0 && loggedUser === false && (
-          <p className="fw-500 px">No Posts.</p>
+          <p style={{ padding: "0.5rem" }} className="fw-500 ">
+            No Posts.
+          </p>
         )}
         {myPosts.length > 0 &&
           myPosts.map((text) => (

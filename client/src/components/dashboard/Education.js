@@ -50,13 +50,17 @@ const Education = ({
           <div
             style={{ background: "rgb(243, 243, 243)" }}
             className="border-div head edu ">
-            <p className="px" style={{ width: "30%" }}>
+            <p className="px special small" style={{ width: "30%" }}>
               School
             </p>
-            <p className="px" style={{ width: "30%" }}>
+            <p
+              className="px special small "
+              style={{ width: "30%", justifyContent: "center" }}>
               Degree
             </p>
-            <p className="px" style={{ width: "30%" }}>
+            <p
+              className="px special small "
+              style={{ width: "30%", justifyContent: "center" }}>
               Years
             </p>
             <p className="px" style={{ width: "10%" }}></p>
@@ -74,10 +78,10 @@ const Education = ({
             <p className="px" style={{ width: "30%" }}>
               {edu.school}
             </p>
-            <p className="px" style={{ width: "30%" }}>
+            <p className="px text-center" style={{ width: "30%" }}>
               {edu.degree}
             </p>
-            <p className="px" style={{ width: "30%" }}>
+            <p className="px text-center " style={{ width: "30%" }}>
               <Moment format="YYYY/MM/DD">{edu.from}</Moment>-
               {edu.to === null ? (
                 " Now"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { getAProfile } from "./../actions/profile";
 import { clearSingleProfile } from "./../actions/profile";
 import { connect } from "react-redux";
@@ -31,17 +31,19 @@ const OtherProfile = ({
       </div>
     </div>
   ) : (
-    <div className="px">
+    <Fragment>
       <Profile loggedUser={false} myprofile={otherProfile} />
       <main className="my-3"></main>
-      <Experience loggedUser={false} myprofile={otherProfile} />
-      <main className="my-3"></main>
-      <Education loggedUser={false} myprofile={otherProfile} />
-      <main className="my-3"></main>
-      <Github loggedUser={false} myprofile={otherProfile} />
-      <main className="my-3"></main>
-      <Posts loggedUser={false} myprofile={otherProfile} />
-    </div>
+      <div className="px">
+        <Experience loggedUser={false} myprofile={otherProfile} />
+        <main className="my-3"></main>
+        <Education loggedUser={false} myprofile={otherProfile} />
+        <main className="my-3"></main>
+        <Github loggedUser={false} myprofile={otherProfile} />
+        <main className="my-3"></main>
+        <Posts loggedUser={false} myprofile={otherProfile} />
+      </div>
+    </Fragment>
   );
 };
 

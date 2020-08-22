@@ -559,7 +559,6 @@ input[type="submit"] {
 .head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   background-color: rgb(219, 219, 219);
 }
@@ -567,8 +566,13 @@ input[type="submit"] {
 .head p {
   padding: 1rem 0 1rem 0.5rem;
   word-wrap: break-word;
+  min-height: 5rem;
 }
-
+.special {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
 /* ------------Settings------------------- */
 .settings {
   width: 95%;
@@ -827,9 +831,10 @@ label {
     font-size: 85%;
     word-wrap: break-word;
     border-right: 1px solid grey;
-    height: 100%;
-    padding: 1rem 0;
+    height: 7rem;
+    padding: 1rem 0.1rem;
   }
+
   .post-links {
     top: 5.3rem;
     left: 7rem;
