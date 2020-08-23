@@ -5,7 +5,9 @@ import Navbar from "./components/Navbar";
 import Landing from "./components/landing/Landing";
 import Dashboard from "./components/dashboard/Dashboard";
 import Forms from "./components/Forms/Forms";
-import ForgotPassword from "./components/ForgotPassword";
+import About from "./components/About";
+import ResetPasswordform from "./components/Forms/ResetPasswordform";
+import PassworResetMesg from "./components/PassworResetMesg";
 import store from "./store";
 import { Provider } from "react-redux";
 import { toast } from "react-toastify";
@@ -30,7 +32,14 @@ const App = () => {
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/create" component={Forms} />
-          <Route exact path="/forgotpassword" component={ForgotPassword} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/resetpassword" component={PassworResetMesg} />
+          <Route
+            exact
+            path="/resetpassword/:salt"
+            component={ResetPasswordform}
+          />
+
           <Route path="/" component={Landing} />
         </Switch>
       </Router>

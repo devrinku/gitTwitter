@@ -2,9 +2,13 @@ import React from "react";
 import Login from "./Login";
 import Register from "./Register";
 import Heading from "./Heading";
-import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import { Route, Switch, Redirect } from "react-router-dom";
 
-const Landing = () => {
+const Landing = ({ auth: { isLoggedIn, loadingAuth } }) => {
+  if (isLoggedIn === true && loadingAuth === false) {
+    return <Redirect to="/dashboard/profile" />;
+  }
   return (
     <header>
       <div className="overlay"></div>
@@ -18,5 +22,7 @@ const Landing = () => {
     </header>
   );
 };
-
-export default Landing;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(Landing);

@@ -94,7 +94,8 @@ exports.changePassword = asyncHandler(async (req, res, next) => {
 });
 
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
-  const { email } = req.body;
+  const { email, host, protocol } = req.body;
+
   if (!email) {
     return next(new ErrorResponse("Please enter your  email", 400));
   }
@@ -111,9 +112,8 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
   await user.save();
 
-  const link = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/auth/resetpassword/${resetToken}`;
+  const link = `${protocol}//${host}/resetpassword/${resetToken}`;
+
   const message = `Click on the link to reset your password : ${link}`;
   try {
     await sendMail({
@@ -141,6 +141,10 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 });
 
 exports.resetPassword = asyncHandler(async (req, res, next) => {
+  const { newpassword } = req.body;
+  if (!newpassword) {
+    return next(new ErrorResponse("Enter your new Passsword", 400));
+  }
   const salt = crypto
     .createHash("sha256")
     .update(req.params.salt)
@@ -150,13 +154,11 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     resetTokenPassword: salt,
     resetTokenExpire: { $gt: Date.now() },
   });
+
   if (!user) {
-    return next(new ErrorResponse("Broken Link ,try again", 401));
+    return next(new ErrorResponse("Broken Link try again", 401));
   }
-  const { newpassword } = req.body;
-  if (!newpassword) {
-    return next(new ErrorResponse("Enter your new Passsword", 400));
-  }
+
   user.password = newpassword;
   user.resetTokenPassword = undefined;
   user.resetTokenExpire = undefined;

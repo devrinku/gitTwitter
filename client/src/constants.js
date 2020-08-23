@@ -24,6 +24,7 @@ export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
 export const SET_FETCH = "SET_FETCH";
 export const UNSET_FETCH = "UNSET_FETCH";
 export const GET_NOTIFY_USERS = "GET_NOTIFY_USER";
+
 export const CLEAR_NOTIFY_USERS = "CLEAR_NOTIFY_USER";
 
 // Profile

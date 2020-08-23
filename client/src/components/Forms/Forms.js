@@ -2,9 +2,10 @@ import React from "react";
 import EducationForm from "./EducationForm";
 import ExperienceForm from "./ExperienceForm";
 import UploadImage from "./UploadImage";
+import ForgotPassword from "./ForgotPassword";
 import ChangePassword from "./ChangePassword";
 import PrivateRoute from "./../PrivateRoute";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import ProfileForm from "./ProfileForm";
 const Forms = () => {
   return (
@@ -30,11 +31,8 @@ const Forms = () => {
           path="/create/uploadimage"
           component={UploadImage}
         />
-        <PrivateRoute
-          exact
-          path="/create/changepassword"
-          component={ChangePassword}
-        />
+
+        <Route exact path="/create/forgotpassword" component={ForgotPassword} />
       </Switch>
     </div>
   );

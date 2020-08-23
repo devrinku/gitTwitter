@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { register } from "./../../actions/auth";
@@ -101,7 +102,7 @@ const Register = ({ register, auth: { isLoggedIn, loadingAuth } }) => {
       </form>
       <div>
         <p className="text-center ">
-          <Link className="login-link" to="/login">
+          <Link className="login-link" to={loadingAuth ? "#!" : "/login"}>
             I am already registered!{" "}
           </Link>
         </p>

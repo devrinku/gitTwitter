@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { login } from "./../../actions/auth";
+
 import Preloader from "./../Preloader";
 import spinner from "./../../images/25B.gif";
 
@@ -58,15 +59,19 @@ const Login = ({ login, auth: { isLoggedIn, loadingAuth } }) => {
             className="btn block"
           />
         ) : (
-          <input type="submit" value="Register" className="btn block" />
+          <input type="submit" value="Login" className="btn block" />
         )}
       </form>
       <div className="auth-links ">
         <p>
-          <Link to="/register">I am not registered yet! </Link>
+          <Link to={loadingAuth ? "#!" : "/register"}>
+            I am not registered yet!{" "}
+          </Link>
         </p>
         <p>
-          <Link to="/forgotpassword">Forgot Password?</Link>
+          <Link to={loadingAuth ? "#!" : "/create/forgotpassword"}>
+            Forgot Password?
+          </Link>
         </p>
       </div>
     </div>

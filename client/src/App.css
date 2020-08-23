@@ -723,8 +723,26 @@ label {
   font-weight: 500;
   margin-bottom: 1rem;
 }
+/* ----------------------------Forgot Password----------------------- */
 
+.forgot-password {
+  width: 60%;
+  margin: auto;
+  background: #222831;
+  padding: 2rem;
+  color: white;
+}
+.forgot-password input[type="text"] {
+  border: 1px solid white;
+  color: white;
+  padding: 0.3rem 0.5rem;
+}
+
+/* --------------------------Media Queries---------------------------- */
 @media (max-width: 992px) {
+  .forgot-password {
+    width: 70%;
+  }
   .auth {
     width: 80%;
   }
@@ -755,6 +773,9 @@ label {
 }
 
 @media (max-width: 768px) {
+  .forgot-password {
+    width: 80%;
+  }
   .mid-container {
     padding-left: 0px;
     padding-right: 0px;
@@ -815,6 +836,11 @@ label {
   }
 }
 @media (max-width: 500px) {
+  .forgot-password {
+    width: 95%;
+    padding: 1rem;
+  }
+
   .large {
     font-size: 1.7rem;
   }

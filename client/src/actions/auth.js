@@ -85,6 +85,7 @@ export const register = (formData) => async (dispatch) => {
 
 export const login = (formData) => async (dispatch) => {
   dispatch(setLoading());
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -275,4 +276,97 @@ export const unsetFetch = () => {
   return {
     type: UNSET_FETCH,
   };
+};
+
+export const forgotpassword = (form, history) => async (dispatch) => {
+  dispatch({
+    type: SET_FETCH,
+  });
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    await axios.put("/api/v1/auth/forgotpassword", form, config);
+    history.push("/resetpassword");
+    dispatch({
+      type: UNSET_FETCH,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_FETCH,
+    });
+    if (error.response && error.response.data && error.response.data.error) {
+      const errors = error.response.data.error.split(",");
+      if (errors) {
+        errors.forEach((error) =>
+          toast(`${error}`, {
+            className: "black-background",
+            bodyClassName: "grow-font-size",
+            progressClassName: "Toastify__progress-bar--dark",
+          })
+        );
+      }
+    } else {
+      console.log(error);
+      toast(`Network Error ,Please try after some time`, {
+        className: "black-background",
+        bodyClassName: "grow-font-size",
+        progressClassName: "Toastify__progress-bar--dark",
+      });
+    }
+    dispatch({
+      type: REGISTER_FAIL,
+    });
+  }
+};
+
+export const resetpassword = (form, salt, history) => async (dispatch) => {
+  dispatch({
+    type: SET_FETCH,
+  });
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    await axios.put(`/api/v1/auth/resetpassword/${salt}`, form, config);
+    history.push("/login");
+    toast("Reset password successfull", {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
+    dispatch({
+      type: UNSET_FETCH,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_FETCH,
+    });
+    if (error.response && error.response.data && error.response.data.error) {
+      const errors = error.response.data.error.split(",");
+      if (errors) {
+        errors.forEach((error) =>
+          toast(`${error}`, {
+            className: "black-background",
+            bodyClassName: "grow-font-size",
+            progressClassName: "Toastify__progress-bar--dark",
+          })
+        );
+      }
+    } else {
+      console.log(error);
+      toast(`Network Error ,Please try after some time`, {
+        className: "black-background",
+        bodyClassName: "grow-font-size",
+        progressClassName: "Toastify__progress-bar--dark",
+      });
+    }
+    dispatch({
+      type: REGISTER_FAIL,
+    });
+  }
 };

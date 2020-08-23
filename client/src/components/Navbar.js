@@ -100,19 +100,19 @@ const Navbar = ({
   const authLinks = (
     <Fragment>
       <li>
-        <a href="#!">Login</a>
+        <Link to={loadingAuth ? "#!" : "/login"}>Login</Link>
       </li>
       <li>
         <span className="divider small">|</span>
       </li>
       <li>
-        <a href="#!">Register</a>
+        <Link to={loadingAuth ? "#!" : "/register"}>Register</Link>
       </li>
       <li>
         <span className="divider small">|</span>
       </li>
       <li>
-        <Link to="/dashboard/profile">Enter as guest</Link>
+        <Link to="/about">About</Link>
       </li>
     </Fragment>
   );
