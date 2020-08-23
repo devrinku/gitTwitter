@@ -171,35 +171,49 @@ exports.uploadDi = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse("Please select a file first", 400));
   }
   const file = req.files.file;
+
   if (!file.mimetype.startsWith("image")) {
     return next(new ErrorResponse("Please select a image file", 400));
   }
   if (file.size > process.env.FILE_SIZE) {
     return next(new ErrorResponse("File size must be less then 1mb", 400));
   }
-  file.name = `photo_${req.user.name}_${req.user.id}${
-    path.parse(file.name).ext
-  }`;
-
-  file.mv(`${process.env.FILE_PATH}/${file.name}`, async (err) => {
-    if (err) {
-      console.log(err);
-      return next(new ErrorResponse("Image not uploaded", 500));
-    }
-    await User.findByIdAndUpdate(
-      req.user.id,
-      {
-        image: file.name,
-      },
-      {
-        runValidators: true,
-        new: true,
+  const user = await User.findById(req.user.id).select("image");
+  const img = `${process.env.FILE_PATH}/${user.image}`;
+  fs.stat(img, (err, stat) => {
+    if (err === null) {
+      if (img !== "./client/src/public/uploads/no-image.png") {
+        fs.unlink(`${process.env.FILE_PATH}/${user.image}`, async (err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            user.image = undefined;
+            await user.save();
+          }
+        });
       }
-    );
-  });
+    }
+    file.name = `photo_${req.user.name}_${req.user.id}${file.name}`;
 
-  res.response = new Response(200, file.name);
-  next();
+    file.mv(`${process.env.FILE_PATH}/${file.name}`, async (err) => {
+      if (err) {
+        console.log(err);
+        return next(new ErrorResponse("Image not uploaded", 500));
+      }
+      await User.findByIdAndUpdate(
+        req.user.id,
+        {
+          image: file.name,
+        },
+        {
+          runValidators: true,
+          new: true,
+        }
+      );
+    });
+    res.response = new Response(200, file.name);
+    next();
+  });
 });
 ///
 exports.deleteDi = asyncHandler(async (req, res, next) => {
