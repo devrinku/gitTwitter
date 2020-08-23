@@ -9,6 +9,7 @@ import { setBackdropType } from "./../actions/utils";
 import { showModal } from "./../actions/utils";
 import { hideModal } from "./../actions/utils";
 import { notifyUsers } from "./../actions/profile";
+
 import { logout } from "./../actions/auth";
 import Modal from "./Modal";
 
@@ -17,6 +18,7 @@ const Navbar = ({
   auth: { loadingAuth, isLoggedIn },
   showSideDrawer,
   showBackDrop,
+
   showModal,
   hideBackDrop,
   hideSideDrawer,
@@ -131,20 +133,15 @@ const Navbar = ({
             loadingAuth === false ? (
               <Fragment>
                 <p>
-                  <input
+                  <Link
+                    to="/dashboard/search"
                     type="text"
                     placeholder="Search a developer"
-                    className="search-bar"
-                  />
+                    className="search-bar btn text-center ">
+                    Search a developer
+                  </Link>
                 </p>
-                <p>
-                  <a
-                    style={{ height: "2.5rem", fontSize: "initial" }}
-                    className="btn mx"
-                    href="#!">
-                    <i className="fas fa-search"></i>
-                  </a>
-                </p>
+                <p></p>
               </Fragment>
             ) : (
               <Fragment>
@@ -213,5 +210,6 @@ export default connect(mapStateToProps, {
   logout,
   hideModal,
   showModal,
+
   notifyUsers,
 })(Navbar);

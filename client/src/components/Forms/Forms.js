@@ -3,7 +3,7 @@ import EducationForm from "./EducationForm";
 import ExperienceForm from "./ExperienceForm";
 import UploadImage from "./UploadImage";
 import ForgotPassword from "./ForgotPassword";
-import ChangePassword from "./ChangePassword";
+
 import PrivateRoute from "./../PrivateRoute";
 import { Switch, Route } from "react-router-dom";
 import ProfileForm from "./ProfileForm";

@@ -15,6 +15,7 @@ const {
   getFollowers,
   getFollowings,
   useGithub,
+  searchProfiles,
   useGithubRepos,
 } = require("./../controllers/profile");
 const response = require("../middlewares/response");
@@ -29,6 +30,7 @@ const User = require("./../models/User");
 router.use("/:id/education", educationRoute);
 router.use("/:id/experience", experienceRoute);
 router.use("/:id/post", PostRoute);
+router.post("/search", searchProfiles, response);
 router.get(
   "/",
   advancedQuery(Profile, {

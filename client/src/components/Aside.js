@@ -42,6 +42,7 @@ const Aside = ({ profile: { loggedProfile, profiles }, getUserSuggestion }) => {
                       profile.user.name.slice(1)}
                   </p>
                   <p>{profile.status}</p>
+                  <p>{profile.hometown}</p>
                 </div>
               </li>
             </Link>

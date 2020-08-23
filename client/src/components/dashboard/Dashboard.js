@@ -6,6 +6,7 @@ import Followings from "./Followings";
 import Github from "./Github";
 import Backdrop from "./../Backdrop";
 import MyPosts from "./MyPosts";
+import SearchProfiles from "./SearchProfiles";
 import Home from "./Home";
 import Comments from "./Comments";
 import Notifications from "./Notifications";
@@ -102,6 +103,11 @@ const Dashboard = ({
           exact
           path="/dashboard/followings"
           component={Followings}
+        />
+        <PrivateRoute
+          exact
+          path="/dashboard/search"
+          component={SearchProfiles}
         />
         <PrivateRoute
           myprofile={loggedProfile}

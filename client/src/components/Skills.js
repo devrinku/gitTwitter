@@ -7,7 +7,7 @@ const Skills = ({ skills }) => {
 
   return (
     <Fragment>
-      <p className="small fw-500 teal text-center my">Skill Set</p>{" "}
+      <p className="small fw-500 teal text-center my-1">Skill Set</p>{" "}
       {skills.map((skill) => (
         <SkillItem key={uuidv4()} skill={skill} />
       ))}

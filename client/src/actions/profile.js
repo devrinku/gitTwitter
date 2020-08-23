@@ -18,6 +18,7 @@ import {
   GET_SUGGESTIONS,
   GET_A_SINGLE_PROFILE,
   CLEAR_SINGLE_PROFILE,
+  SEARCH_PROFILES,
 } from "./../constants";
 import { closeComponent } from "./utils";
 import { toast } from "react-toastify";
@@ -513,6 +514,45 @@ export const followAUser = (id) => async (dispatch) => {
   try {
     await axios.put(`/api/v1/profile/${id}/follow`);
     dispatch(getAProfile(id));
+  } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const searchProfiles = (text) => async (dispatch) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
+  const form = {
+    name: text,
+  };
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const res = await axios.post(`/api/v1/profile/search`, form, config);
+    dispatch({
+      type: SEARCH_PROFILES,
+      payload: res.data.data,
+    });
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
   } catch (error) {
     dispatch({
       type: UNSET_PROGRESS,

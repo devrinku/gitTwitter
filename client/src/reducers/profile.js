@@ -18,6 +18,7 @@ import {
   CLEAR_FOLLOWERS,
   GET_A_SINGLE_PROFILE,
   CLEAR_SINGLE_PROFILE,
+  SEARCH_PROFILES,
 } from "./../constants";
 
 const initialState = {
@@ -30,6 +31,7 @@ const initialState = {
   followings: [],
   loadingProfile: false,
   error: {},
+  search: [],
   progress: false,
   notifyUsers: null,
 };
@@ -42,6 +44,12 @@ export default (state = initialState, action) => {
         ...state,
         progress: true,
       };
+    case SEARCH_PROFILES:
+      return {
+        ...state,
+        search: payload,
+      };
+
     case UNSET_PROGRESS:
       return {
         ...state,
@@ -141,6 +149,7 @@ export default (state = initialState, action) => {
         profiles: null,
         repos: null,
         followers: [],
+        search: [],
         otherProfile: null,
         followings: [],
         loadingProfile: false,

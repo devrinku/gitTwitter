@@ -245,8 +245,8 @@ const Profile = ({
       )}
       {myprofile && myprofile.skills && (
         <div
-          style={{ background: "#dddddd", paddingBottom: "2rem" }}
-          className="mid-container ">
+          style={{ background: "#dddddd", paddingBottom: "3rem" }}
+          className="mid-container text-center ">
           <div className="px-1">
             <Skills skills={myprofile.skills} />
           </div>

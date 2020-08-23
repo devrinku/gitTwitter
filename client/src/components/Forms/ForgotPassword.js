@@ -21,6 +21,7 @@ const ForgotPassword = ({
     return () => {
       unsetFetch();
     };
+    //eslint-disable-next-line
   }, []);
   const onSubmit = (e) => {
     e.preventDefault();
