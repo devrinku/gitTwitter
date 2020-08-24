@@ -19,6 +19,8 @@ import {
   GET_MY_POSTS,
   CLEAR_CURRENT_POST,
   COMMENT_ERROR,
+  CLEAR_MY_POSTS,
+  SET_HELPER_TRUE,
 } from "./../constants";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -363,4 +365,15 @@ export const deleteComment = (id, commentId) => async (dispatch) => {
       console.log(error);
     }
   }
+};
+
+export const clearmyPost = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_MY_POSTS,
+  });
+};
+export const setHelperTrue = () => async (dispatch) => {
+  dispatch({
+    type: SET_HELPER_TRUE,
+  });
 };

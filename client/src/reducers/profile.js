@@ -20,6 +20,7 @@ import {
   CLEAR_A_NOTIFICATION,
   CLEAR_SINGLE_PROFILE,
   SEARCH_PROFILES,
+  GITHUB_CLEAR,
 } from "./../constants";
 
 const initialState = {
@@ -28,11 +29,12 @@ const initialState = {
   profiles: null,
   otherProfile: null,
   repos: null,
-  followers: [],
-  followings: [],
+  followers: null,
+  followings: null,
   loadingProfile: false,
   error: {},
   search: [],
+
   progress: false,
   notifyUsers: null,
 };
@@ -77,6 +79,11 @@ export default (state = initialState, action) => {
         ...state,
         otherProfile: null,
       };
+    case GITHUB_CLEAR:
+      return {
+        ...state,
+        repos: null,
+      };
     case GET_SUGGESTIONS:
       return {
         ...state,
@@ -85,12 +92,12 @@ export default (state = initialState, action) => {
     case CLEAR_FOLLOWERS:
       return {
         ...state,
-        followers: [],
+        followers: null,
       };
     case CLEAR_FOLLOWINGS:
       return {
         ...state,
-        followings: [],
+        followings: null,
       };
     case GET_NOTIFY_USERS:
       return {
@@ -154,10 +161,10 @@ export default (state = initialState, action) => {
         currentProfile: null,
         profiles: null,
         repos: null,
-        followers: [],
+        followers: null,
         search: [],
         otherProfile: null,
-        followings: [],
+        followings: null,
         loadingProfile: false,
         error: {},
         notifyUsers: null,

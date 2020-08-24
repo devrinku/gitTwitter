@@ -13,14 +13,17 @@ exports.getProfiles = asyncHandler(async (req, res, next) => {
 });
 
 exports.searchProfiles = asyncHandler(async (req, res, next) => {
-  const { name } = req.body;
-  const regx = new RegExp(name, "gi");
+  const { name, id } = req.body;
+  const regx = new RegExp(`${name}`, "gi");
   if (!name) {
     return next(
       new ErrorResponse("Please enter a name to search a profile", 404)
     );
   }
   let profiles = await Profile.find().populate("user", ["name", "image"]);
+  profiles = profiles.filter(
+    (profile) => profile._id.toString() !== id.toString()
+  );
 
   profiles = profiles.filter((profile) =>
     profile.user.name.split(" ")[0].match(regx)
@@ -28,7 +31,6 @@ exports.searchProfiles = asyncHandler(async (req, res, next) => {
   res.response = new Response(200, profiles);
   next();
 });
-
 exports.getMe = asyncHandler(async (req, res, next) => {
   let profile = await Profile.findOne({ user: req.user.id })
     .select("+notifications")

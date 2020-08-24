@@ -19,6 +19,7 @@ import {
   GET_SUGGESTIONS,
   GET_A_SINGLE_PROFILE,
   CLEAR_SINGLE_PROFILE,
+  GITHUB_CLEAR,
   SEARCH_PROFILES,
 } from "./../constants";
 import { closeComponent } from "./utils";
@@ -481,13 +482,13 @@ export const followAUser = (id) => async (dispatch) => {
     }
   }
 };
-
-export const searchProfiles = (text) => async (dispatch) => {
+export const searchProfiles = (text, id) => async (dispatch) => {
   dispatch({
     type: SET_PROGRESS,
   });
   const form = {
     name: text,
+    id,
   };
   const config = {
     headers: {
@@ -520,7 +521,6 @@ export const searchProfiles = (text) => async (dispatch) => {
     }
   }
 };
-
 export const clearANotification = (id, profileId) => async (dispatch) => {
   const form = {
     notificationId: id,
@@ -605,6 +605,11 @@ export const clearSingleProfile = () => {
 export const clearFollowers = () => {
   return {
     type: CLEAR_FOLLOWERS,
+  };
+};
+export const clearRepos = () => {
+  return {
+    type: GITHUB_CLEAR,
   };
 };
 export const clearFollowings = () => {

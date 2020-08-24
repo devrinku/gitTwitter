@@ -1,12 +1,24 @@
 import React, { useEffect, Fragment } from "react";
 import { getAllPosts } from "./../../actions/post";
 import CreatePost from "./CreatePost";
+import { setHelperTrue } from "./../../actions/post";
 import { connect } from "react-redux";
+import Preloader from "./../Preloader";
+
+import spinner from "./../../images/25C.gif";
 import Post from "./Post";
 
-const Home = ({ getAllPosts, myprofile, post: { posts } }) => {
+const Home = ({
+  getAllPosts,
+  myprofile,
+  setHelperTrue,
+  post: { posts, helper },
+}) => {
   useEffect(() => {
     getAllPosts();
+    return () => {
+      setHelperTrue();
+    };
     //eslint-disable-next-line
   }, []);
   return (
@@ -18,10 +30,18 @@ const Home = ({ getAllPosts, myprofile, post: { posts } }) => {
           </span>
         </div>
         <CreatePost myprofile={myprofile} />
-        {posts.length > 0 &&
+        {helper ? (
+          <div className="container">
+            <div className="my-1 text-center">
+              <Preloader spinner={spinner} />
+            </div>
+          </div>
+        ) : (
+          posts.length > 0 &&
           posts.map((text) => (
             <Post key={text._id} text={text} postOwner={text.user} />
-          ))}
+          ))
+        )}
       </div>
     </Fragment>
   );
@@ -33,4 +53,5 @@ const mapStateToProps = (state) => ({
 });
 export default connect(mapStateToProps, {
   getAllPosts,
+  setHelperTrue,
 })(Home);

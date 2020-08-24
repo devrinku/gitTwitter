@@ -1,18 +1,30 @@
 import React, { Fragment, useEffect } from "react";
 import { getMyPosts } from "./../../actions/post";
+import { clearmyPost } from "./../../actions/post";
+import { setHelperTrue } from "./../../actions/post";
 import CreatePost from "./CreatePost";
+import Preloader from "./../Preloader";
+
+import spinner from "./../../images/25C.gif";
 import { connect } from "react-redux";
 
 import Post from "./Post";
 const MyPosts = ({
-  post: { myPosts },
+  post: { myPosts, helper },
   getMyPosts,
   loggedUser,
+  setHelperTrue,
   myprofile,
+  clearmyPost,
   auth: { user },
 }) => {
   useEffect(() => {
     getMyPosts(myprofile._id);
+    return () => {
+      clearmyPost();
+      setHelperTrue();
+    };
+
     //eslint-disable-next-line
   }, []);
   return (
@@ -27,15 +39,32 @@ const MyPosts = ({
           </span>
         </div>
         {loggedUser && <CreatePost myprofile={myprofile} />}
-        {myPosts.length === 0 && loggedUser === false && (
+
+        {helper ? (
+          <div className="container">
+            <div className="my-1 text-center ">
+              <Preloader spinner={spinner} />
+            </div>
+          </div>
+        ) : loggedUser ? (
+          myPosts.length === 0 ? (
+            <p style={{ padding: "0.5rem" }} className="fw-500 ">
+              No Posts.
+            </p>
+          ) : (
+            myPosts.map((text) => (
+              <Post key={text._id} text={text} postOwner={user} />
+            ))
+          )
+        ) : myPosts.length === 0 ? (
           <p style={{ padding: "0.5rem" }} className="fw-500 ">
             No Posts.
           </p>
-        )}
-        {myPosts.length > 0 &&
+        ) : (
           myPosts.map((text) => (
-            <Post key={text._id} text={text} postOwner={user} />
-          ))}
+            <Post key={text._id} text={text} postOwner={myprofile.user} />
+          ))
+        )}
       </div>
     </Fragment>
   );
@@ -46,4 +75,8 @@ const mapStateToProps = (state) => ({
   post: state.post,
 });
 
-export default connect(mapStateToProps, { getMyPosts })(MyPosts);
+export default connect(mapStateToProps, {
+  getMyPosts,
+  clearmyPost,
+  setHelperTrue,
+})(MyPosts);

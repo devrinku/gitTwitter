@@ -14,8 +14,10 @@ import {
   CLEAR_CURRENT_POST,
   SET_CURRENT_POST,
   CLEAR_SINGLE_POST,
+  CLEAR_MY_POSTS,
   ADD_COMMENT,
   COMMENT_ERROR,
+  SET_HELPER_TRUE,
 } from "./../constants";
 
 const initialState = {
@@ -24,6 +26,7 @@ const initialState = {
   myPosts: [],
   error: null,
   currentPost: null,
+  helper: true,
   likesInfo: null,
 };
 
@@ -34,11 +37,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         posts: payload,
+        helper: false,
+      };
+    case SET_HELPER_TRUE:
+      return {
+        ...state,
+        helper: true,
       };
     case GET_MY_POSTS:
       return {
         ...state,
         myPosts: payload,
+        helper: false,
       };
     case ADD_POST:
       return {
@@ -71,6 +81,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         singlePost: null,
+      };
+    case CLEAR_MY_POSTS:
+      return {
+        ...state,
+        myPosts: [],
       };
 
     case GET_SINGLE_POST:

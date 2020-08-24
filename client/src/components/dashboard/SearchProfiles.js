@@ -7,7 +7,10 @@ import { connect } from "react-redux";
 import Preloader from "./../Preloader";
 import spinner from "./../../images/25C.gif";
 
-const SearchProfiles = ({ profile: { search, progress }, searchProfiles }) => {
+const SearchProfiles = ({
+  profile: { search, progress, loggedProfile },
+  searchProfiles,
+}) => {
   const [text, setText] = useState("");
   useEffect(() => {
     return () => {
@@ -19,7 +22,7 @@ const SearchProfiles = ({ profile: { search, progress }, searchProfiles }) => {
   const onChange = (e) => {
     setText(e.target.value);
     if (text !== "") {
-      searchProfiles(text);
+      searchProfiles(text, loggedProfile._id);
     }
   };
   return (
@@ -51,7 +54,7 @@ const SearchProfiles = ({ profile: { search, progress }, searchProfiles }) => {
           </div>
         )}
       </div>
-      {search.length > 0 && (
+      {search.length > 0 && text !== "" && (
         <ul>
           {search.map((elem) => (
             <Link
