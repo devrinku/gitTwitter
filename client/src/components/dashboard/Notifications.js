@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { unsetProgress } from "./../../actions/profile";
+import { clearANotification } from "./../../actions/profile";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -12,6 +13,7 @@ import spinner from "./../../images/25C.gif";
 const Notifications = ({
   clearNotifications,
   profile: { notifyUsers, loggedProfile, progress },
+  clearANotification,
   unsetProgress,
 }) => {
   useEffect(() => {
@@ -50,12 +52,15 @@ const Notifications = ({
             </p>
             {notifyUsers.map((person) => (
               <Link
+                onClick={() =>
+                  clearANotification(person.notificationId, loggedProfile._id)
+                }
                 style={{ display: "block" }}
                 key={uuidv4()}
                 to={
-                  person.type === "liked" || person.type === "commented on "
-                    ? `/dashboard/posts/${person.post}/comments`
-                    : `/dashboard/profile/${person.profile}`
+                  person.type === "liked" || person.type === "commented on"
+                    ? `/dashboard/posts/${person.resourceId}/comments`
+                    : `/dashboard/profile/${person.resourceId}`
                 }>
                 <div
                   style={{
@@ -79,7 +84,7 @@ const Notifications = ({
                         person.user.name.slice(1)}{" "}
                     </span>
                     {person.type === "liked" ||
-                    person.type === "commented on " ? (
+                    person.type === "commented on" ? (
                       <Fragment>{person.type} your post</Fragment>
                     ) : (
                       <Fragment>started {person.type} you</Fragment>
@@ -104,5 +109,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   clearNotifications,
+  clearANotification,
   unsetProgress,
 })(Notifications);

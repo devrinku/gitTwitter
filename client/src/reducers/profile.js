@@ -17,6 +17,7 @@ import {
   CLEAR_FOLLOWINGS,
   CLEAR_FOLLOWERS,
   GET_A_SINGLE_PROFILE,
+  CLEAR_A_NOTIFICATION,
   CLEAR_SINGLE_PROFILE,
   SEARCH_PROFILES,
 } from "./../constants";
@@ -43,6 +44,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         progress: true,
+      };
+    case CLEAR_A_NOTIFICATION:
+      return {
+        ...state,
+        loggedProfile: payload,
       };
     case SEARCH_PROFILES:
       return {

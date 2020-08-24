@@ -16,6 +16,7 @@ const {
   getFollowings,
   useGithub,
   searchProfiles,
+  deleteNotification,
   useGithubRepos,
 } = require("./../controllers/profile");
 const response = require("../middlewares/response");
@@ -46,6 +47,16 @@ router.use(authenticate);
 //Private Routes
 router.post("/", createProfile, response);
 router.get("/user/me", getMe, response);
+
+router
+  .route("/:id/notifications")
+  .put(
+    idChecker(Profile, "profile"),
+    checkOwnership(Profile, "profile", "clear notifications of "),
+    deleteNotification,
+    response
+  );
+
 router
   .route("/:id")
   .put(
@@ -54,6 +65,7 @@ router
     updateProfile,
     response
   );
+
 router.delete(
   "/notifications/:id",
   idChecker(Profile, "profile"),

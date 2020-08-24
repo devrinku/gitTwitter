@@ -135,7 +135,7 @@ exports.addcomment = asyncHandler(async (req, res, next) => {
   };
   post.comments.push(comment);
   await post.save();
-  createNotification(req, res, "commented on ");
+  createNotification(req, res, "commented on");
   post = await Post.findById(req.params.id)
     .populate({
       path: "comments",
@@ -201,21 +201,24 @@ const createNotification = async (req, res, task) => {
     let mesg = {
       user: req.user.id,
       type: task,
-      post: owner._id,
+      resourceId: owner._id,
       notificationId: uuidv4(),
     };
-    ownerProfile.notifications = ownerProfile.notifications.map((elem) =>
-      JSON.stringify(elem)
-    );
+    let removeIndex = null;
+    ownerProfile.notifications.forEach((notification) => {
+      if (
+        notification.user.toString() === mesg.user.toString() &&
+        notification.type === mesg.type &&
+        notification.resourceId.toString() === mesg.resourceId.toString()
+      ) {
+        removeIndex = ownerProfile.notifications.indexOf(notification);
+      }
+    });
 
-    let removeIndex = ownerProfile.notifications.indexOf(JSON.stringify(mesg));
-
-    if (removeIndex !== -1) {
+    if (removeIndex !== -1 && removeIndex !== null) {
       ownerProfile.notifications.splice(removeIndex, 1);
     }
-    ownerProfile.notifications = ownerProfile.notifications.map((elem) =>
-      JSON.parse(elem)
-    );
+
     ownerProfile.notifications.push(mesg);
 
     await ownerProfile.save();

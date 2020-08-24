@@ -14,6 +14,7 @@ import {
   UNSET_PROGRESS,
   GITHUB_REPOS,
   GITHUB_ERROR,
+  CLEAR_A_NOTIFICATION,
   CLEAR_NOTIFY_USERS,
   GET_SUGGESTIONS,
   GET_A_SINGLE_PROFILE,
@@ -412,47 +413,6 @@ export const notifyUsers = (notifications) => async (dispatch) => {
   }
 };
 
-export const clearNotifications = (id) => async (dispatch) => {
-  dispatch({
-    type: SET_PROGRESS,
-  });
-  try {
-    await axios.delete(`/api/v1/profile/notifications/${id}`);
-    let res = await axios.get("/api/v1/profile/user/me");
-
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data.data,
-    });
-    dispatch({
-      type: CLEAR_NOTIFY_USERS,
-    });
-    dispatch({
-      type: UNSET_PROGRESS,
-    });
-    toast(`Notification Cleared`, {
-      className: "black-background",
-      bodyClassName: "grow-font-size",
-      progressClassName: "Toastify__progress-bar--dark",
-    });
-  } catch (error) {
-    dispatch({
-      type: UNSET_PROGRESS,
-    });
-    if (error && error.response && error.response.statusText) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
-    } else {
-      console.log(error);
-    }
-  }
-};
-
 export const getUserSuggestion = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/v1/profile`);
@@ -542,6 +502,81 @@ export const searchProfiles = (text) => async (dispatch) => {
     });
     dispatch({
       type: UNSET_PROGRESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const clearANotification = (id, profileId) => async (dispatch) => {
+  const form = {
+    notificationId: id,
+  };
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const res = await axios.put(
+      `/api/v1/profile/${profileId}/notifications`,
+      form,
+      config
+    );
+    dispatch({
+      type: CLEAR_A_NOTIFICATION,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const clearNotifications = (id) => async (dispatch) => {
+  dispatch({
+    type: SET_PROGRESS,
+  });
+  try {
+    await axios.delete(`/api/v1/profile/notifications/${id}`);
+    let res = await axios.get("/api/v1/profile/user/me");
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data.data,
+    });
+    dispatch({
+      type: CLEAR_NOTIFY_USERS,
+    });
+    dispatch({
+      type: UNSET_PROGRESS,
+    });
+    toast(`Notification Cleared`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
     });
   } catch (error) {
     dispatch({

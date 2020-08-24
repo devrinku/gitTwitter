@@ -2,7 +2,9 @@ const asyncHandler = require("./../middlewares/asyncHandler");
 const ErrorResponse = require("./../utils/errorClass");
 const Response = require("./../utils/reponseClass");
 const Profile = require("../models/Profile");
+const { v4: uuidv4 } = require("uuid");
 const User = require("../models/User");
+
 const axios = require("axios");
 
 exports.getProfiles = asyncHandler(async (req, res, next) => {
@@ -168,16 +170,24 @@ exports.follow = asyncHandler(async (req, res, next) => {
   const mesg = {
     user: req.user.id,
     type: "following",
-    profile: reqUser._id,
+    resourceId: reqUser._id,
+    notificationId: uuidv4(),
   };
-  resUser.notifications = resUser.notifications.map((elem) =>
-    JSON.stringify(elem)
-  );
-  let removeIndex = resUser.notifications.indexOf(JSON.stringify(mesg));
-  if (removeIndex !== -1) {
+
+  let removeIndex = null;
+  resUser.notifications.forEach((notification) => {
+    if (
+      notification.user.toString() === mesg.user.toString() &&
+      notification.type === mesg.type &&
+      notification.resourceId.toString() === mesg.resourceId.toString()
+    ) {
+      removeIndex = resUser.notifications.indexOf(notification);
+    }
+  });
+
+  if (removeIndex !== -1 && removeIndex !== null) {
     resUser.notifications.splice(removeIndex, 1);
   }
-  resUser.notifications = resUser.notifications.map((elem) => JSON.parse(elem));
 
   resUser.notifications.push(mesg);
   await resUser.save();
@@ -247,3 +257,28 @@ const gitHub = async (url, res, next) => {
       return next(new ErrorResponse(`User not found`, 404));
   }
 };
+exports.deleteNotification = asyncHandler(async (req, res, next) => {
+  const { notificationId } = req.body;
+  if (!notificationId) {
+    return next(
+      new ErrorResponse(
+        "Send a unique notification id to remove notification",
+        404
+      )
+    );
+  }
+  const profile = await Profile.findById(req.params.id).select(
+    "+notifications"
+  );
+
+  let notifications = profile.notifications;
+
+  notifications = notifications.filter(
+    (elem) => elem.notificationId.toString() !== notificationId.toString()
+  );
+  profile.notifications = notifications;
+  await profile.save();
+
+  res.response = new Response(200, profile);
+  next();
+});
