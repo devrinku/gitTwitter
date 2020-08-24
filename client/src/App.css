@@ -157,6 +157,11 @@ a {
   display: block;
   width: 100%;
 }
+
+.active {
+  background: teal;
+}
+
 /* -------------Navbar---------------- */
 nav {
   height: 10vh;
@@ -193,7 +198,7 @@ nav {
   margin: 0;
   background: teal;
   padding: 0 0.5rem;
-  width: 30rem;
+  width: 32rem;
   height: 2.5rem;
   color: white;
   display: block;
@@ -784,12 +789,14 @@ label {
     max-width: 93%;
   }
   nav {
-    height: 18vh;
+    height: 21vh;
   }
+
   .nav-wrapper {
     grid-template-columns: 1fr;
     padding: 0.5rem 0rem;
     align-items: center;
+    grid-gap: 0.5rem;
   }
   .left-nav,
   .right-nav {
@@ -852,7 +859,7 @@ label {
     font-size: 1rem;
   }
   .search-bar {
-    width: 13rem;
+    width: 15rem;
   }
   .head p {
     font-size: 85%;
@@ -871,5 +878,8 @@ label {
   }
   .notifyme {
     font-size: 1.2rem;
+  }
+  .bell {
+    font-size: 0.8rem !important;
   }
 }

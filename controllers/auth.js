@@ -24,6 +24,7 @@ exports.getNotifiedUser = asyncHandler(async (req, res, next) => {
         user,
         type: elem.type,
         post: elem.post,
+        notificationId: elem.notificationId,
       };
     } else {
       user = {

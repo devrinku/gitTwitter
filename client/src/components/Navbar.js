@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { showSideDrawer } from "./../actions/utils";
 import { showBackDrop } from "./../actions/utils";
@@ -28,6 +28,8 @@ const Navbar = ({
   logout,
   profile: { loggedProfile },
 }) => {
+  const location = useLocation();
+
   const onClick = () => {
     if (utils.sideDrawer === false) {
       showSideDrawer();
@@ -44,8 +46,12 @@ const Navbar = ({
     <Fragment>
       {loggedProfile !== null && (
         <Fragment>
-          <li>
+          <li
+            className={
+              location.pathname === "/dashboard/notifications" ? "active" : ""
+            }>
             <Link
+              className="bell"
               to="/dashboard/notifications"
               onClick={() => {
                 notifyUsers(loggedProfile.notifications);
@@ -64,7 +70,8 @@ const Navbar = ({
           <li>
             <span className="divider small">|</span>
           </li>
-          <li>
+          <li
+            className={location.pathname === "/dashboard/home" ? "active" : ""}>
             <Link to="/dashboard/home">
               <i className="fas fa-home"></i>
             </Link>
@@ -72,7 +79,10 @@ const Navbar = ({
           <li>
             <span className="divider small">|</span>
           </li>{" "}
-          <li>
+          <li
+            className={
+              location.pathname === "/dashboard/profile" ? "active" : ""
+            }>
             <Link to="/dashboard/profile">
               <i className="fas fa-user"></i>
             </Link>
@@ -101,19 +111,19 @@ const Navbar = ({
   );
   const authLinks = (
     <Fragment>
-      <li>
+      <li className={location.pathname === "/login" ? "active" : ""}>
         <Link to={loadingAuth ? "#!" : "/login"}>Login</Link>
       </li>
       <li>
         <span className="divider small">|</span>
       </li>
-      <li>
+      <li className={location.pathname === "/register" ? "active" : ""}>
         <Link to={loadingAuth ? "#!" : "/register"}>Register</Link>
       </li>
       <li>
         <span className="divider small">|</span>
       </li>
-      <li>
+      <li className={location.pathname === "/about" ? "active" : ""}>
         <Link to="/about">About</Link>
       </li>
     </Fragment>

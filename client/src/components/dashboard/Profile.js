@@ -72,7 +72,7 @@ const Profile = ({
             />
           </div>
           <div className="pro-content">
-            <p>
+            <p style={{ textTransform: "capitalize" }}>
               <i className="fas fa-user-tie"></i>
               {loggedUser === true ? user.name : myprofile.user.name}
             </p>

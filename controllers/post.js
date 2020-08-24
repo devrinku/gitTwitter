@@ -4,6 +4,7 @@ const Response = require("./../utils/reponseClass");
 const Profile = require("../models/Profile");
 const Post = require("../models/Post");
 const User = require("../models/User");
+const { v4: uuidv4 } = require("uuid");
 
 exports.createPost = asyncHandler(async (req, res, next) => {
   let post = {
@@ -201,6 +202,7 @@ const createNotification = async (req, res, task) => {
       user: req.user.id,
       type: task,
       post: owner._id,
+      notificationId: uuidv4(),
     };
     ownerProfile.notifications = ownerProfile.notifications.map((elem) =>
       JSON.stringify(elem)

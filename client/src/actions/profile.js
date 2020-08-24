@@ -208,13 +208,6 @@ export const addExperience = (formData, id, param, history) => async (
   }
 };
 
-export const setCurrentProfile = (formData) => {
-  return {
-    type: SET_CURRENT_PROFILE,
-    payload: formData,
-  };
-};
-
 export const updateProfile = (formData, history) => async (dispatch) => {
   dispatch({
     type: SET_PROGRESS,
@@ -386,9 +379,6 @@ export const getGithubRepos = (name) => async (dispatch) => {
       console.log(error);
     }
   }
-};
-export const unsetProgress = () => {
-  return { type: UNSET_PROGRESS };
 };
 
 export const notifyUsers = (notifications) => async (dispatch) => {
@@ -585,5 +575,14 @@ export const clearFollowers = () => {
 export const clearFollowings = () => {
   return {
     type: CLEAR_FOLLOWINGS,
+  };
+};
+export const unsetProgress = () => {
+  return { type: UNSET_PROGRESS };
+};
+export const setCurrentProfile = (formData) => {
+  return {
+    type: SET_CURRENT_PROFILE,
+    payload: formData,
   };
 };

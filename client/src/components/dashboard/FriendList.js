@@ -10,17 +10,25 @@ const FriendList = ({
   myprofileFollowings,
   myprofileFollowers,
   getFriends,
-
+  id,
   clearFollowers,
   clearFollowings,
   profile,
 }) => {
   useEffect(() => {
     if (followers) {
-      getFriends(myprofileFollowers._id, followers);
+      if (id) {
+        getFriends(id, followers);
+      } else {
+        getFriends(myprofileFollowers._id, followers);
+      }
     }
     if (followings) {
-      getFriends(myprofileFollowings._id, followings);
+      if (id) {
+        getFriends(id, followings);
+      } else {
+        getFriends(myprofileFollowings._id, followings);
+      }
     }
     return () => {
       clearFollowings();
@@ -42,9 +50,15 @@ const FriendList = ({
                   <img src={`/./../../uploads/${follower.user.image}`} alt="" />
                 </div>
                 <div className="info">
-                  <p>{follower.user.name}</p>
-                  <p>{follower.status}</p>
-                  <p>{follower.hometown}</p>
+                  <p style={{ textTransform: "capitalize" }}>
+                    {follower.user.name}
+                  </p>
+                  <p style={{ textTransform: "capitalize" }}>
+                    {follower.status}
+                  </p>
+                  <p style={{ textTransform: "capitalize" }}>
+                    {follower.hometown}
+                  </p>
                 </div>
               </li>
             </Link>
@@ -63,9 +77,15 @@ const FriendList = ({
                   />
                 </div>
                 <div className="info">
-                  <p>{following.user.name}</p>
-                  <p>{following.status}</p>
-                  <p>{following.hometown}</p>
+                  <p style={{ textTransform: "capitalize" }}>
+                    {following.user.name}
+                  </p>
+                  <p style={{ textTransform: "capitalize" }}>
+                    {following.status}
+                  </p>
+                  <p style={{ textTransform: "capitalize" }}>
+                    {following.hometown}
+                  </p>
                 </div>
               </li>
             </Link>

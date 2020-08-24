@@ -1,10 +1,11 @@
 import React from "react";
 import FriendList from "./FriendList";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const Followings = ({ myprofile, profile: { otherProfile } }) => {
   const history = useHistory();
+  const { profileId } = useParams();
 
   return (
     <div className="mid-container padding-top">
@@ -21,6 +22,7 @@ const Followings = ({ myprofile, profile: { otherProfile } }) => {
         history.location.state.from === "otherProfile" && (
           <FriendList
             myprofileFollowings={otherProfile}
+            id={profileId}
             followings={"followings"}
           />
         )}

@@ -69,7 +69,9 @@ const SideDrawer = ({
                 src={`/./../uploads/${user.image}`}
                 alt=""
               />
-              <p className="my">{user.name}</p>
+              <p style={{ textTransform: "capitalize" }} className="my">
+                {user.name}
+              </p>
               <p>{user.email}</p>
             </li>
             <li>

@@ -41,8 +41,12 @@ const Aside = ({ profile: { loggedProfile, profiles }, getUserSuggestion }) => {
                     {profile.user.name.charAt(0).toUpperCase() +
                       profile.user.name.slice(1)}
                   </p>
-                  <p>{profile.status}</p>
-                  <p>{profile.hometown}</p>
+                  <p style={{ textTransform: "capitalize" }}>
+                    {profile.status}
+                  </p>
+                  <p style={{ textTransform: "capitalize" }}>
+                    {profile.hometown}
+                  </p>
                 </div>
               </li>
             </Link>

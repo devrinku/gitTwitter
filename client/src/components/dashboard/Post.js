@@ -64,7 +64,9 @@ const Post = ({
           <img src={`/./../../uploads/${postOwner.image}`} alt="" />
         </div>
         <div className="post-name">
-          <p className="my fw-500">{postOwner.name}</p>
+          <p style={{ textTransform: "capitalize" }} className="my fw-500">
+            {postOwner.name}
+          </p>
 
           <p>
             Posted on <Moment format="DD/MM/YYYY">{text.text.date}</Moment>
