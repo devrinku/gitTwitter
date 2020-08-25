@@ -54,7 +54,7 @@ const Navbar = ({
               className="bell"
               to="/dashboard/notifications"
               onClick={() => {
-                notifyUsers(loggedProfile.notifications);
+                notifyUsers(loggedProfile.notifications, loggedProfile._id);
               }}
               style={
                 loggedProfile &&
@@ -132,8 +132,8 @@ const Navbar = ({
     <Fragment>
       <nav>
         <div className="nav-wrapper">
-          <div className="left-nav">
-            <Link to="/" style={{ fontSize: "2.1rem" }} className=" fw-700 ">
+          <div className="left-nav medium">
+            <Link to="/" className=" fw-700 ">
               <i
                 style={{ color: "teal" }}
                 className="fab fa-github-alt mx "></i>
@@ -144,6 +144,7 @@ const Navbar = ({
               <Fragment>
                 <p>
                   <Link
+                    style={{ fontSize: "1rem" }}
                     to="/dashboard/search"
                     type="text"
                     placeholder="Search a developer"
@@ -155,10 +156,7 @@ const Navbar = ({
               </Fragment>
             ) : (
               <Fragment>
-                <Link
-                  to="/"
-                  style={{ fontSize: "2.1rem" }}
-                  className=" fw-700 ">
+                <Link to="/" className=" fw-700 medium">
                   <span> Git</span>
                   <span style={{ color: "teal" }}>Tweet</span>
                 </Link>

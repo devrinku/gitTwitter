@@ -72,7 +72,7 @@ const SideDrawer = ({
               <p style={{ textTransform: "capitalize" }} className="my">
                 {user.name}
               </p>
-              <p>{user.email}</p>
+              <p style={{ padding: "0 0.3rem " }}>{user.email}</p>
             </li>
             <li>
               <Link

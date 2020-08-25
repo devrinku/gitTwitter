@@ -106,7 +106,7 @@ const Profile = ({
                   {
                     myprofile.education[myprofile.education.length - 1].degree
                   }{" "}
-                  at{" "}
+                  from{" "}
                   {myprofile.education[myprofile.education.length - 1].school}
                 </p>
               </Fragment>
@@ -171,7 +171,7 @@ const Profile = ({
                   {myprofile.instagram && (
                     <a
                       className="mx follow-links"
-                      href={`${myprofile.instagarm}`}>
+                      href={`${myprofile.instagram}`}>
                       <i className="fab fa-instagram"></i>
                     </a>
                   )}
@@ -230,13 +230,13 @@ const Profile = ({
         <div style={{ background: "#dddddd" }} className="mid-container py-1">
           <p
             style={{ textTransform: "capitalize" }}
-            className="small fw-500 teal text-center ">
+            className="small fw-600 teal text-center ">
             {loggedUser === true ? user.name : myprofile.user.name}'s Bio{" "}
           </p>
           <div className=" px-1">
             <p
               className="py-1"
-              style={{ borderBottom: "1px solid #888888", fontSize: "1.3rem" }}>
+              style={{ borderBottom: "1px solid #888888", fontSize: "1rem" }}>
               {" "}
               {myprofile.bio}
             </p>
@@ -245,10 +245,10 @@ const Profile = ({
       )}
       {myprofile && myprofile.skills && (
         <div
-          style={{ background: "#dddddd", paddingBottom: "3rem" }}
-          className="mid-container text-center ">
+          style={{ background: "#dddddd", paddingBottom: "1rem" }}
+          className="mid-container text-left">
           <div className="px-1">
-            <Skills skills={myprofile.skills} />
+            <Skills bio={myprofile.bio} skills={myprofile.skills} />
           </div>
         </div>
       )}

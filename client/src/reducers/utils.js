@@ -10,6 +10,8 @@ import {
   HIDE_MODAL,
   SHOW_COMPONENT,
   CLOSE_COMPONENT,
+  SHOW_DASHBOARD,
+  HIDE_DASHBOARD,
 } from "./../constants";
 
 const initialState = {
@@ -20,6 +22,7 @@ const initialState = {
   backdropType: null,
   component: false,
   componentType: null,
+  dashboard: true,
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +33,16 @@ export default (state = initialState, action) => {
         ...state,
         component: payload.param,
         componentType: payload.type,
+      };
+    case SHOW_DASHBOARD:
+      return {
+        ...state,
+        dashboard: true,
+      };
+    case HIDE_DASHBOARD:
+      return {
+        ...state,
+        dashboard: false,
       };
     case CLOSE_COMPONENT:
       return {

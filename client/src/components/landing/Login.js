@@ -25,7 +25,11 @@ const Login = ({ login, auth: { isLoggedIn, loadingAuth } }) => {
     return <Redirect to="/dashboard/profile" />;
   }
   return (
-    <div className="auth card">
+    <div
+      style={
+        window.innerWidth < 768 ? { marginTop: "7rem" } : { marginTop: "2rem" }
+      }
+      className="auth card">
       {loadingAuth && <Preloader spinner={spinner} />}
       <p className="medium fw-600">Welcome Back! </p>
       <form onSubmit={(e) => onSubmit(e)} className="my-1">
@@ -65,7 +69,7 @@ const Login = ({ login, auth: { isLoggedIn, loadingAuth } }) => {
       <div className="auth-links ">
         <p>
           <Link to={loadingAuth ? "#!" : "/register"}>
-            I am not registered yet!{" "}
+            I am not registered!{" "}
           </Link>
         </p>
         <p>

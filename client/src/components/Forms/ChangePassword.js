@@ -31,50 +31,54 @@ const ChangePassword = ({
     changePassword(formData, history);
   };
   return (
-    <div className="container ">
-      {fetch && (
-        <div className="container text-center">
-          <Preloader spinner={spinner} />
+    <div className="padding-top">
+      <div className="container ">
+        {fetch && (
+          <div className="container text-center">
+            <Preloader spinner={spinner} />
+          </div>
+        )}
+
+        <div className="my ">
+          <span className="teal pencil fw-500 ">
+            <i className="fas fa-user-secret mx"></i>Change Password
+          </span>
+          <br />
         </div>
-      )}
+        <div className="change-password">
+          <form onSubmit={(e) => onSubmit(e)}>
+            <div className="feild">
+              <label className="small">Old Password</label>
+              <input
+                onChange={(e) => onChange(e)}
+                value={oldPassword}
+                type="password"
+                name="oldPassword"
+                placeholder="* School"
+              />
+            </div>
+            <div className="feild">
+              <label className="small">New Password</label>
+              <input
+                onChange={(e) => onChange(e)}
+                value={newPassword}
+                type="password"
+                name="newPassword"
+                placeholder="* School"
+              />
+            </div>
 
-      <div className="my ">
-        <span className="teal pencil fw-500 ">
-          <i className="fas fa-user-secret mx"></i>Change Password
-        </span>
-        <br />
-      </div>
-      <div className="change-password">
-        <form onSubmit={(e) => onSubmit(e)}>
-          <div className="feild">
-            <label className="small">Old Password</label>
             <input
-              onChange={(e) => onChange(e)}
-              value={oldPassword}
-              type="password"
-              name="oldPassword"
-              placeholder="* School"
+              disabled={fetch === true ? true : false}
+              className="btn "
+              style={fetch === true ? { background: "red" } : {}}
+              type="submit"
+              value={
+                fetch === true ? "Checking Password..." : "Change Password"
+              }
             />
-          </div>
-          <div className="feild">
-            <label className="small">New Password</label>
-            <input
-              onChange={(e) => onChange(e)}
-              value={newPassword}
-              type="password"
-              name="newPassword"
-              placeholder="* School"
-            />
-          </div>
-
-          <input
-            disabled={fetch === true ? true : false}
-            className="btn "
-            style={fetch === true ? { background: "red" } : {}}
-            type="submit"
-            value={fetch === true ? "Checking Password..." : "Change Password"}
-          />
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

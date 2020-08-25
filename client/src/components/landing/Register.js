@@ -37,7 +37,7 @@ const Register = ({ register, auth: { isLoggedIn, loadingAuth } }) => {
     return <Redirect to="/dashboard/profile" />;
   }
   return (
-    <div className="auth card">
+    <div className="auth card register">
       {loadingAuth && <Preloader spinner={spinner} />}
       <p className="medium fw-600">Create an account </p>
       <form onSubmit={(e) => onSubmit(e)}>
@@ -103,7 +103,7 @@ const Register = ({ register, auth: { isLoggedIn, loadingAuth } }) => {
       <div>
         <p className="text-center ">
           <Link className="login-link" to={loadingAuth ? "#!" : "/login"}>
-            I am already registered!{" "}
+            I am registered!{" "}
           </Link>
         </p>
         <p></p>

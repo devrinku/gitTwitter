@@ -7,9 +7,9 @@ const SkillItem = ({ skill }) => {
         style={{
           wordWrap: "break-word",
           lineHeight: "2rem",
-          fontSize: "1.3rem",
+          fontSize: "1rem",
         }}>
-        <i style={{ fontSize: "1.3rem" }} className="fas fa-angle-right"></i>
+        <i style={{ fontSize: "1rem" }} className="fas fa-angle-right"></i>
         {skill}
       </span>
     </span>

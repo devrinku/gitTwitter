@@ -246,32 +246,6 @@ export const changePassword = (data, history) => async (dispatch) => {
   }
 };
 
-export const deleteAccount = () => async (dispatch) => {
-  dispatch({
-    type: SET_FETCH,
-  });
-  try {
-    await axios.delete("/api/v1/auth");
-    dispatch(logout());
-    toast(`Account Deleted`, {
-      className: "black-background",
-      bodyClassName: "grow-font-size",
-      progressClassName: "Toastify__progress-bar--dark",
-    });
-    dispatch({
-      type: UNSET_FETCH,
-    });
-  } catch (error) {
-    dispatch({
-      type: UNSET_FETCH,
-    });
-    dispatch({
-      type: AUTH_ERROR,
-    });
-    console.log(error);
-  }
-};
-
 export const unsetFetch = () => {
   return {
     type: UNSET_FETCH,

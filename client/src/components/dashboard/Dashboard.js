@@ -13,12 +13,14 @@ import Notifications from "./Notifications";
 import Education from "./Education";
 import Experience from "./Experience";
 import Settings from "./Settings";
+import NotFound from "./../NotFound";
 import SideDrawer from "./../SideDrawer";
 import Aside from "./../Aside";
 import OtherProfile from "./../OtherProfile";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { getMyProfile } from "./../../actions/profile";
 import { connect } from "react-redux";
+
 import { showMenuBar } from "./../../actions/utils";
 import { hideMenuBar } from "./../../actions/utils";
 
@@ -26,7 +28,6 @@ const Dashboard = ({
   showMenuBar,
   utils,
   hideMenuBar,
-
   getMyProfile,
   profile: { loggedProfile, loadingProfile },
 }) => {
@@ -42,6 +43,7 @@ const Dashboard = ({
     };
     //eslint-disable-next-line
   }, []);
+
   useEffect(() => {
     getMyProfile();
 
@@ -49,10 +51,14 @@ const Dashboard = ({
   }, []);
   return (
     <Fragment>
-      <SideDrawer />
-      {aside && <Aside />}
-      {utils.backdrop && utils.backdropType === "sideNav" && (
-        <Backdrop index={10} />
+      {utils.dashboard && (
+        <Fragment>
+          <SideDrawer />
+          {aside && <Aside />}
+          {utils.backdrop && utils.backdropType === "sideNav" && (
+            <Backdrop index={10} />
+          )}{" "}
+        </Fragment>
       )}
 
       <Switch>
@@ -142,6 +148,9 @@ const Dashboard = ({
           component={Notifications}
         />
         <PrivateRoute exact path="/dashboard/settings" component={Settings} />
+        <Route
+          render={(props) => <NotFound fromDashboard={true} {...props} />}
+        />
       </Switch>
     </Fragment>
   );

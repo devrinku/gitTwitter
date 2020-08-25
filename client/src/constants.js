@@ -10,6 +10,8 @@ export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 export const CLOSE_COMPONENT = "CLOSE_COMPONENT";
 export const SHOW_COMPONENT = "SHOW_COMPONENT";
+export const SHOW_DASHBOARD = "SHOW_DASHBOARD";
+export const HIDE_DASHBOARD = "HIDE_DASHBOARD";
 
 // Auth
 export const SET_LOADING_AUTH = "SET_LOADING_AUTH";

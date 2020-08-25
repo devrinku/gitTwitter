@@ -1,31 +1,16 @@
-import React, { Fragment, useEffect } from "react";
-import Modal from "./../Modal";
+import React, { Fragment } from "react";
+
 import { connect } from "react-redux";
-import { showBackDrop } from "./../../actions/utils";
-import { showModal } from "./../../actions/utils";
-import { setBackdropType } from "./../../actions/utils";
+
 import { setCurrentProfile } from "./../../actions/profile";
-import { deleteAccount } from "./../../actions/auth";
-import { unsetFetch } from "./../../actions/auth";
+
 import { Link } from "react-router-dom";
 
 const Settings = ({
-  utils,
   profile: { loggedProfile },
-  auth: { fetch },
-  showBackDrop,
-  showModal,
+
   setCurrentProfile,
-  setBackdropType,
-  deleteAccount,
-  unsetFetch,
 }) => {
-  useEffect(() => {
-    return () => {
-      unsetFetch();
-    };
-    //eslint-disable-next-line
-  }, []);
   return (
     <Fragment>
       <div className="mid-container padding-top">
@@ -60,49 +45,15 @@ const Settings = ({
               Change Password
             </Link>
           </li>
-          <li>
-            <a
-              onClick={() => {
-                setBackdropType("deleteAccount");
-                showBackDrop();
-                showModal();
-              }}
-              style={fetch === true ? { background: "red" } : {}}
-              className="btn  block "
-              href="#!">
-              {fetch === true ? "Deleting your Account..." : "Delete Account"}
-            </a>
-          </li>
         </ul>
       </div>
-      {utils.backdrop && utils.modal && utils.backdropType === "deleteAccount" && (
-        <Modal
-          warn={true}
-          index={90}
-          action="delete your account ,this can't be undone !!">
-          <a
-            onClick={() => deleteAccount()}
-            style={{ color: "white" }}
-            href="#!"
-            className="btn orange">
-            Confirm
-          </a>
-        </Modal>
-      )}
     </Fragment>
   );
 };
 
 const mapStateToProps = (state) => ({
-  utils: state.utils,
   profile: state.profile,
-  auth: state.auth,
 });
 export default connect(mapStateToProps, {
-  showBackDrop,
-  showModal,
-  setBackdropType,
   setCurrentProfile,
-  deleteAccount,
-  unsetFetch,
 })(Settings);

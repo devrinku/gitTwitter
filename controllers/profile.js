@@ -252,7 +252,6 @@ const gitHub = async (url, res, next) => {
     res.response = new Response(200, gitHubResponse.data);
     next();
   } catch (error) {
-    console.log(error);
     if (
       (error.response.status === 404, error.response.statusText === "Not Found")
     )
@@ -269,9 +268,14 @@ exports.deleteNotification = asyncHandler(async (req, res, next) => {
       )
     );
   }
-  const profile = await Profile.findById(req.params.id).select(
-    "+notifications"
-  );
+  const profile = await Profile.findById(req.params.id)
+    .select("+notifications")
+    .populate({
+      path: "education",
+    })
+    .populate({
+      path: "experience",
+    });
 
   let notifications = profile.notifications;
 

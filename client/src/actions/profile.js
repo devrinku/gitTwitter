@@ -383,7 +383,7 @@ export const getGithubRepos = (name) => async (dispatch) => {
   }
 };
 
-export const notifyUsers = (notifications) => async (dispatch) => {
+export const notifyUsers = (notifications, id) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -397,6 +397,40 @@ export const notifyUsers = (notifications) => async (dispatch) => {
 
     dispatch({
       type: GET_NOTIFY_USERS,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    if (error && error.response && error.response.statusText) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status,
+        },
+      });
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const clearANotification = (id, profileId) => async (dispatch) => {
+  const form = {
+    notificationId: id,
+  };
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const res = await axios.put(
+      `/api/v1/profile/${profileId}/notifications`,
+      form,
+      config
+    );
+    dispatch({
+      type: CLEAR_A_NOTIFICATION,
       payload: res.data.data,
     });
   } catch (error) {
@@ -508,39 +542,6 @@ export const searchProfiles = (text, id) => async (dispatch) => {
     dispatch({
       type: UNSET_PROGRESS,
     });
-    if (error && error.response && error.response.statusText) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: error.response.statusText,
-          status: error.response.status,
-        },
-      });
-    } else {
-      console.log(error);
-    }
-  }
-};
-export const clearANotification = (id, profileId) => async (dispatch) => {
-  const form = {
-    notificationId: id,
-  };
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const res = await axios.put(
-      `/api/v1/profile/${profileId}/notifications`,
-      form,
-      config
-    );
-    dispatch({
-      type: CLEAR_A_NOTIFICATION,
-      payload: res.data.data,
-    });
-  } catch (error) {
     if (error && error.response && error.response.statusText) {
       dispatch({
         type: PROFILE_ERROR,

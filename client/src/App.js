@@ -11,6 +11,7 @@ import PassworResetMesg from "./components/PassworResetMesg";
 import store from "./store";
 import { Provider } from "react-redux";
 import { toast } from "react-toastify";
+
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./actions/auth";
 
@@ -39,7 +40,6 @@ const App = () => {
             path="/resetpassword/:salt"
             component={ResetPasswordform}
           />
-
           <Route path="/" component={Landing} />
         </Switch>
       </Router>

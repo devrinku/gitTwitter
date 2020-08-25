@@ -9,7 +9,9 @@ import {
   SET_BACKDROP_TYPE,
   SHOW_COMPONENT,
   CLOSE_COMPONENT,
+  HIDE_DASHBOARD,
   HIDE_MODAL,
+  SHOW_DASHBOARD,
 } from "./../constants";
 
 export const showMenuBar = () => {
@@ -79,4 +81,12 @@ export const closeComponent = (param, type) => {
     type: CLOSE_COMPONENT,
     payload: { param, type },
   };
+};
+
+export const showDashboardPage = () => {
+  return { type: SHOW_DASHBOARD };
+};
+
+export const hideDashboardPage = () => {
+  return { type: HIDE_DASHBOARD };
 };

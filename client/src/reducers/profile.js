@@ -34,7 +34,6 @@ const initialState = {
   loadingProfile: false,
   error: {},
   search: [],
-
   progress: false,
   notifyUsers: null,
 };

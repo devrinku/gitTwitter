@@ -7,7 +7,6 @@ const Profile = require("./../models/Profile");
 const {
   createPost,
   getAllPosts,
-
   getPost,
   updatePost,
   deletePost,
