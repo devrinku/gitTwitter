@@ -1,7 +1,7 @@
 {
-  "name": "gittweet",
+  "name": "gittwitter",
   "version": "1.0.0",
-  "description": "Backend API for GitTweet",
+  "description": "A social network app",
   "main": "server.js",
   "scripts": {
     "start": "SET NODE_ENV=production & node server",
