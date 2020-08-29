@@ -25,11 +25,7 @@ const Login = ({ login, auth: { isLoggedIn, loadingAuth } }) => {
     return <Redirect to="/dashboard/profile" />;
   }
   return (
-    <div
-      style={
-        window.innerWidth < 768 ? { marginTop: "7rem" } : { marginTop: "2rem" }
-      }
-      className="auth card">
+    <div className="auth card login">
       {loadingAuth && <Preloader spinner={spinner} />}
       <p className="medium fw-600">Welcome Back! </p>
       <form onSubmit={(e) => onSubmit(e)} className="my-1">

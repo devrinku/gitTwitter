@@ -68,7 +68,7 @@ const Navbar = ({
             </Link>
           </li>
           <li>
-            <span className="divider small">|</span>
+            <span className="divider ">|</span>
           </li>
           <li
             className={location.pathname === "/dashboard/home" ? "active" : ""}>
@@ -77,7 +77,7 @@ const Navbar = ({
             </Link>
           </li>
           <li>
-            <span className="divider small">|</span>
+            <span className="divider ">|</span>
           </li>{" "}
           <li
             className={
@@ -88,7 +88,7 @@ const Navbar = ({
             </Link>
           </li>
           <li>
-            <span className="divider small">|</span>
+            <span className="divider ">|</span>
           </li>
         </Fragment>
       )}
@@ -115,13 +115,13 @@ const Navbar = ({
         <Link to={loadingAuth ? "#!" : "/login"}>Login</Link>
       </li>
       <li>
-        <span className="divider small">|</span>
+        <span className="divider ">|</span>
       </li>
       <li className={location.pathname === "/register" ? "active" : ""}>
         <Link to={loadingAuth ? "#!" : "/register"}>Register</Link>
       </li>
       <li>
-        <span className="divider small">|</span>
+        <span className="divider ">|</span>
       </li>
       <li className={location.pathname === "/about" ? "active" : ""}>
         <Link to="/about">About</Link>
@@ -132,8 +132,8 @@ const Navbar = ({
     <Fragment>
       <nav>
         <div className="nav-wrapper">
-          <div className="left-nav medium">
-            <Link to="/" className=" fw-700 ">
+          <div className="left-nav ">
+            <Link to="/" className="logo fw-700 ">
               <i
                 style={{ color: "teal" }}
                 className="fab fa-github-alt mx "></i>
@@ -156,23 +156,23 @@ const Navbar = ({
               </Fragment>
             ) : (
               <Fragment>
-                <Link to="/" className=" fw-700 medium">
+                <Link to="/" className=" fw-700 logo">
                   <span> Git</span>
                   <span style={{ color: "teal" }}>Tweet</span>
                 </Link>
               </Fragment>
             )}
           </div>
-          <ul className="right-nav">
+          <ul className="right-nav ">
             {utils.menubar && loggedProfile !== null && (
               <Fragment>
                 <li className="hide ">
                   <a onClick={onClick} href="#!">
-                    <i className="fas fa-bars small "></i>
+                    <i className="fas fa-bars  "></i>
                   </a>
                 </li>
                 <li className="hide">
-                  <span className="divider small">|</span>
+                  <span className="divider ">|</span>
                 </li>
               </Fragment>
             )}

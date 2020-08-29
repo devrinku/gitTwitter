@@ -4,15 +4,13 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <Fragment>
-      <div className="padding-top">
-        <main className="my-2"></main>
+      <div className="about">
         <div className="container">
-          <p className="medium ">About Us</p>
-          <p className="small  my">
+          <p className="small ">
             Gitweet helps to connect with other developers and share work
           </p>
           <p className="">Version 1.0.1</p>
-          <p className="my-1">
+          <p className="my">
             <Link className="btn" to="/">
               Back
             </Link>
@@ -22,7 +20,7 @@ const About = () => {
       <div className="footer">
         <div className="footer-content">
           <div className="left-info">
-            <p style={{ fontSize: "1.2rem" }}>Code and Design by Rajesh</p>
+            <p style={{ fontSize: "1rem" }}>Code and Design by Rajesh</p>
           </div>
           <div className="right-info">
             <p>

@@ -90,11 +90,11 @@
   font-size: 3rem;
 }
 .medium {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
 }
 
 .pencil {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 .small {
   font-size: 1.5rem;
@@ -147,6 +147,7 @@ a {
   box-shadow: 1px 1px 5px black;
   border-radius: 2px;
   transition: all 0.4s;
+  font-size: 1.1rem;
   color: white;
   outline: none;
 }
@@ -157,14 +158,16 @@ a {
   display: block;
   width: 100%;
 }
-
+.logo {
+  font-size: 2rem;
+}
 .active {
   background: teal;
 }
 
 /* -------------Navbar---------------- */
 nav {
-  height: 10vh;
+  height: 3.8rem;
   background-color: #222831;
   position: fixed;
   top: 0;
@@ -216,8 +219,9 @@ nav {
   justify-self: flex-start;
 }
 .right-nav a {
-  padding: 0.7rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   transition: all 0.3s;
+  font-size: 1.1rem;
 }
 
 .right-nav a:hover {
@@ -225,13 +229,20 @@ nav {
 }
 /* -----------Landing----------------- */
 header {
-  height: 105vh;
+  min-height: 100vh;
   background-image: url(./images/1.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-attachment: fixed;
+}
+.register,
+.login {
+  margin-top: 3rem;
 }
 .overlay {
   position: absolute;
@@ -262,7 +273,8 @@ header {
   color: wheat;
   height: 100%;
   display: flex;
-  align-items: center;
+  width: 100%;
+  align-items: flex-start;
   justify-content: center;
 }
 .card {
@@ -280,8 +292,8 @@ form {
 input {
   width: 100%;
   height: 2.5rem;
-  font-size: 1rem;
-  padding: 0 2rem 0 0.8rem;
+  font-size: 0.9rem;
+  padding: 0 2.65rem 0 0.4rem;
   margin: 1rem 0;
   background-color: transparent;
   border: none;
@@ -326,9 +338,7 @@ input[type="submit"] {
   grid-template-columns: 1fr 1fr;
   color: white;
 }
-.register {
-  margin-top: 2rem;
-}
+
 /* -----------------Side-Drawer------------------------ */
 .side-drawer {
   position: fixed;
@@ -756,10 +766,10 @@ label {
   color: white;
   background-color: #222831;
   right: 0;
-  padding: 0.7rem;
+  padding: 0.5rem 1.5rem;
 }
 .footer i {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
 }
 .copy {
   color: rgb(194, 194, 194);
@@ -767,7 +777,6 @@ label {
 .footer-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  padding: 0.5rem;
 }
 .right-info {
   display: flex;
@@ -780,17 +789,16 @@ label {
 .right-info p:hover {
   color: teal;
 }
-
+.about {
+  margin-top: 6rem;
+}
 /* --------------------------Media Queries---------------------------- */
 @media (max-width: 992px) {
-  .register {
-    margin-top: 4rem;
-  }
   .forgot-password {
     width: 70%;
   }
   .auth {
-    width: 80%;
+    width: 60%;
   }
   .aside {
     display: none;
@@ -818,10 +826,29 @@ label {
   }
 }
 
-@media (max-width: 768px) {
-  .register {
-    margin-top: 8rem;
+@media (min-width: 768px) {
+  .hide {
+    display: none;
   }
+}
+@media (max-height: 700px) {
+  .heading {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .register,
+  .login {
+    margin-top: 5rem;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  nav {
+    height: 5rem;
+  }
+
   .forgot-password {
     width: 80%;
   }
@@ -832,18 +859,11 @@ label {
   .container {
     max-width: 93%;
   }
-  nav {
-    height: 21vh;
-  }
-  header {
-    height: 110vh;
-  }
 
   .nav-wrapper {
     grid-template-columns: 1fr;
-    padding: 0.5rem 0rem;
+    padding: 0;
     align-items: center;
-    grid-gap: 0.2rem;
   }
   .left-nav,
   .right-nav {
@@ -851,22 +871,23 @@ label {
     align-self: center;
   }
 
+  .right-nav {
+    padding-bottom: 0.4rem;
+    margin-top: 0.3rem;
+  }
   .large {
     font-size: 2.2rem;
   }
   .medium {
-    font-size: 1.8rem;
-  }
-
-  .pencil {
     font-size: 1.5rem;
   }
 
-  .auth {
-    width: 90%;
+  .pencil {
+    font-size: 1.2rem;
   }
-  .padding-top {
-    padding-top: 9rem;
+
+  .auth {
+    width: 80%;
   }
 
   .modal {
@@ -879,6 +900,7 @@ label {
   .footer {
     text-align: center;
   }
+
   .footer-content {
     grid-template-columns: 1fr;
     justify-items: center;
@@ -892,12 +914,10 @@ label {
   }
 }
 
-@media (min-width: 768px) {
-  .hide {
-    display: none;
-  }
-}
 @media (max-width: 500px) {
+  .auth {
+    width: 95%;
+  }
   .forgot-password {
     width: 95%;
     padding: 1rem;

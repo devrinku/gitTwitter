@@ -130,6 +130,33 @@ export const logout = () => (dispatch) => {
   dispatch({ type: CLEAR_POSTS });
 };
 
+export const deleteAccount = (param, profileId) => async (dispatch) => {
+  dispatch({
+    type: SET_FETCH,
+  });
+  try {
+    if (param !== true) {
+      await axios.delete("/api/v1/auth/deleteprofileimage");
+    }
+    await axios.delete(`/api/v1/auth/deleteaccount/${profileId}`);
+
+    dispatch(logout());
+    dispatch({
+      type: UNSET_FETCH,
+    });
+    toast(`Account deleted successfully`, {
+      className: "black-background",
+      bodyClassName: "grow-font-size",
+      progressClassName: "Toastify__progress-bar--dark",
+    });
+  } catch (error) {
+    dispatch({
+      type: UNSET_FETCH,
+    });
+    console.log(error);
+  }
+};
+
 export const uploadDP = (data, history) => async (dispatch) => {
   dispatch({
     type: SET_PROGRESS,

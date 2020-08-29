@@ -3,6 +3,8 @@ const ErrorResponse = require("./../utils/errorClass");
 const Response = require("./../utils/reponseClass");
 const sendMail = require("./../utils/sendMails");
 const User = require("../models/User");
+const Profile = require("../models/Profile");
+const Posts = require("../models/Post");
 const crypto = require("crypto");
 const path = require("path");
 const fs = require("fs");
@@ -230,6 +232,32 @@ exports.deleteDi = asyncHandler(async (req, res, next) => {
 
 exports.deleteAccount = asyncHandler(async (req, res, next) => {
   await req.user.remove();
+
+  const profiles = await Profile.find().select("+notifications");
+
+  profiles.forEach(async (profile) => {
+    profile.notifications = profile.notifications.filter((notification) => {
+      return notification.user.toString() !== req.user.id.toString();
+    });
+    profile.followers = profile.followers.filter((follower) => {
+      return follower.toString() !== req.params.id.toString();
+    });
+    profile.followings = profile.followings.filter((following) => {
+      return following.toString() !== req.params.id.toString();
+    });
+    await profile.save();
+  });
+  const posts = await Posts.find();
+  posts.forEach(async (post) => {
+    post.likes = post.likes.filter((like) => {
+      return like.user.toString() !== req.user.id.toString();
+    });
+    post.comments = post.comments.filter((comment) => {
+      return comment.user.toString() !== req.user.id.toString();
+    });
+    await post.save();
+  });
+
   res.response = new Response(200, {});
   next();
 });

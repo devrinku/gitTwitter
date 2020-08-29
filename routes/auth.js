@@ -1,6 +1,9 @@
 const feildChecker = require("./../middlewares/feildChecker");
 const authenticate = require("./../middlewares/authenticate");
 const response = require("./../middlewares/response");
+const idChecker = require("./../middlewares/idchecker");
+const checkOwnership = require("./../middlewares/checkOwnership");
+const Profile = require("./../models/Profile");
 const User = require("./../models/User");
 const express = require("express");
 const router = express.Router();
@@ -37,6 +40,13 @@ router.delete("/deleteprofileimage", deleteDi, response);
 router
   .route("/")
   .get(getMe, response)
-  .put(feildChecker(User, "email", "user"), updateDetails, response)
-  .delete(deleteAccount, response);
+  .put(feildChecker(User, "email", "user"), updateDetails, response);
+router
+  .route("/deleteaccount/:id")
+  .delete(
+    idChecker(Profile, "profile"),
+    checkOwnership(Profile, "profile", "delete this account"),
+    deleteAccount,
+    response
+  );
 module.exports = router;

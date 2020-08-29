@@ -20,7 +20,6 @@ const response = require("../middlewares/response");
 const authenticate = require("./../middlewares/authenticate");
 const checkOwnership = require("./../middlewares/checkOwnership");
 const Post = require("../models/Post");
-const idchecker = require("./../middlewares/idchecker");
 
 //Public Routes
 router.get(
@@ -78,6 +77,6 @@ router
 
 router
   .route("/:id/comments/:commentId")
-  .delete(idchecker(Post, "post"), deleteComment, response);
+  .delete(idChecker(Post, "post"), deleteComment, response);
 
 module.exports = router;

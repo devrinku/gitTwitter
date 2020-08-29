@@ -418,6 +418,7 @@ export const clearANotification = (id, profileId) => async (dispatch) => {
   const form = {
     notificationId: id,
   };
+
   const config = {
     headers: {
       "Content-Type": "application/json",

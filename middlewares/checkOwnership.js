@@ -4,6 +4,7 @@ const asyncHandler = require("./asyncHandler");
 const checkOwnership = (model, modelname, task) =>
   asyncHandler(async (req, res, next) => {
     const resource = await model.findById(req.params.id);
+
     if (resource.user.toString() !== req.user.id) {
       return next(
         new ErrorResponse(

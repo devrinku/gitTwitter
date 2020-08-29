@@ -81,6 +81,7 @@ UserSchema.pre("remove", async function () {
   await this.model("Post").deleteMany({
     user: this.id,
   });
+
   console.log(`Posts also deleted for user ${this.id}`);
 });
 

@@ -168,7 +168,7 @@ exports.follow = asyncHandler(async (req, res, next) => {
   reqUser.setFollowing(req.params.id);
   await reqUser.save();
   resUser.setFollower(reqUser.id);
-  //
+
   const mesg = {
     user: req.user.id,
     type: "following",
@@ -260,6 +260,7 @@ const gitHub = async (url, res, next) => {
 };
 exports.deleteNotification = asyncHandler(async (req, res, next) => {
   const { notificationId } = req.body;
+
   if (!notificationId) {
     return next(
       new ErrorResponse(
