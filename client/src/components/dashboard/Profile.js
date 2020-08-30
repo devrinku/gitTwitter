@@ -235,8 +235,8 @@ const Profile = ({
           </p>
           <div className=" px-1">
             <p
-              className="py-1"
-              style={{ borderBottom: "1px solid #888888", fontSize: "1rem" }}>
+              className="py-1 text"
+              style={{ borderBottom: "1px solid #888888" }}>
               {" "}
               {myprofile.bio}
             </p>

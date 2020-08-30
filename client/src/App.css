@@ -385,6 +385,9 @@ input[type="submit"] {
   height: 250px;
   border-radius: 50%;
 }
+.text {
+  font-size: 1.3rem;
+}
 .pro-content p {
   display: flex;
   padding: 0.5rem 1rem;
@@ -843,6 +846,9 @@ label {
 }
 
 @media (max-width: 768px) {
+  .text {
+    font-size: 1rem;
+  }
   input {
     font-size: 0.9rem;
   }
