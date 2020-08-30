@@ -5,8 +5,8 @@ import { hideDashboardPage } from "./../actions/utils";
 import { connect } from "react-redux";
 
 const NotFound = ({
-  utils,
   fromDashboard,
+
   showDashboardPage,
   hideDashboardPage,
 }) => {
@@ -18,7 +18,7 @@ const NotFound = ({
     //eslint-disable-next-line
   }, []);
   return (
-    <div style={fromDashboard ? { marginTop: "10rem" } : {}}>
+    <div className={fromDashboard ? "not-found" : ""}>
       <div className="container">
         <p
           style={fromDashboard ? { color: "teal" } : {}}
@@ -28,22 +28,19 @@ const NotFound = ({
 
         <p style={{ lineHeight: "2rem" }} className="small">
           The page you are looking for does not exist.How you got here is a
-          mystery.But you can click the button below to go back to homepage.
+          mystery.But you can click the button below to go back.
         </p>
         <p>
           <Link to="/" className="btn my">
-            Home
+            Back
           </Link>
         </p>
       </div>
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  utils: state.utils,
-});
 
-export default connect(mapStateToProps, {
+export default connect(null, {
   showDashboardPage,
   hideDashboardPage,
 })(NotFound);

@@ -789,8 +789,13 @@ label {
 .right-info p:hover {
   color: teal;
 }
+/* -----------------About-------------------- */
 .about {
   margin-top: 7rem;
+}
+/* ------------------Not Found--------------------- */
+.not-found {
+  margin-top: 5rem;
 }
 /* --------------------------Media Queries---------------------------- */
 @media (max-width: 992px) {
@@ -838,6 +843,9 @@ label {
 }
 
 @media (max-width: 768px) {
+  .not-found {
+    margin-top: 10rem;
+  }
   .padding-top {
     padding-top: 8rem;
   }

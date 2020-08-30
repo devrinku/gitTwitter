@@ -14,7 +14,7 @@ const fileupload = require("express-fileupload");
 const path = require("path");
 const xss = require("xss-clean");
 const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
+
 const hpp = require("hpp");
 const mongoSanitize = require("express-mongo-sanitize");
 
@@ -28,16 +28,7 @@ connectDB();
 app.use(mongoSanitize());
 app.use(helmet());
 app.use(xss());
-//Rate Limiter
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  max: 100,
-  message: {
-    success: false,
-    data: "Too many requests,Please try again later",
-  },
-});
-app.use(limiter);
+
 app.use(hpp());
 
 //Using bodyParser

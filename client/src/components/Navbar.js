@@ -164,7 +164,7 @@ const Navbar = ({
             )}
           </div>
           <ul className="right-nav ">
-            {utils.menubar && loggedProfile !== null && (
+            {utils.menubar && utils.dashboard && loggedProfile !== null && (
               <Fragment>
                 <li className="hide ">
                   <a onClick={onClick} href="#!">
