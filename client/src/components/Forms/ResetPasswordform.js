@@ -44,7 +44,9 @@ const ResetPasswordform = ({
               marginTop: "1.5rem",
             }}
             className="border-div">
-            <p style={{ lineHeight: "1.5rem" }} className="my">
+            <p
+              style={{ lineHeight: "1.5rem", fontSize: "1.2rem" }}
+              className="my">
               Enter your new Password
             </p>
             <input

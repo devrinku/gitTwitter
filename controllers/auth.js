@@ -90,7 +90,7 @@ exports.changePassword = asyncHandler(async (req, res, next) => {
 });
 
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
-  const { email, host, protocol } = req.body;
+  const { email } = req.body;
 
   if (!email) {
     return next(new ErrorResponse("Please enter your  email", 400));
@@ -108,7 +108,9 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
   await user.save();
 
-  const link = `${protocol}//${host}/resetpassword/${resetToken}`;
+  const link = `${req.protocol}://${req.get(
+    "host"
+  )}/resetpassword/${resetToken}`;
 
   const message = `Click on the link to reset your password : ${link}`;
   try {

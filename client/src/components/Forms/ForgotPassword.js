@@ -14,8 +14,6 @@ const ForgotPassword = ({
 }) => {
   const [form, setForm] = useState({
     email: "",
-    host: window.location.host,
-    protocol: window.location.protocol,
   });
   useEffect(() => {
     return () => {
@@ -44,7 +42,9 @@ const ForgotPassword = ({
               marginTop: "1.5rem",
             }}
             className="border-div">
-            <p style={{ lineHeight: "1.5rem" }} className="my">
+            <p
+              style={{ lineHeight: "1.5rem", fontSize: "1.2rem" }}
+              className="my">
               Enter your user account's verified email address and we will send
               you a password reset link.
             </p>

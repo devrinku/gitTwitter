@@ -9,7 +9,7 @@ const PassworResetMesg = () => {
           <i className="fab fa-github-alt"></i>
         </p>
         <div className="forgot-password">
-          <p style={{ lineHeight: "1.6rem" }}>
+          <p style={{ lineHeight: "1.6rem", fontSize: "1.2rem" }}>
             Check your email for a link to reset your password. If it doesn’t
             appear within a few minutes, check your spam folder.
           </p>
