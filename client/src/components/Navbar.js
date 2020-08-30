@@ -144,7 +144,7 @@ const Navbar = ({
               <Fragment>
                 <p>
                   <Link
-                    style={{ fontSize: "1rem" }}
+                    style={{ margin: "0.5rem", fontSize: "1rem" }}
                     to="/dashboard/search"
                     type="text"
                     placeholder="Search a developer"

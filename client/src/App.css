@@ -790,7 +790,7 @@ label {
   color: teal;
 }
 .about {
-  margin-top: 6rem;
+  margin-top: 7rem;
 }
 /* --------------------------Media Queries---------------------------- */
 @media (max-width: 992px) {
@@ -838,15 +838,18 @@ label {
 }
 
 @media (max-width: 768px) {
+  .padding-top {
+    padding-top: 8rem;
+  }
   .register,
   .login {
-    margin-top: 5rem;
+    margin-top: 6rem;
   }
   .logo {
     font-size: 1.5rem;
   }
   nav {
-    height: 5rem;
+    height: 6.5rem;
   }
 
   .forgot-password {

@@ -271,7 +271,7 @@ const ProfileForm = ({
                   href="#!"
                   style={{ background: "grey" }}
                   className="btn mx-2">
-                  Go Back
+                  Back
                 </a>
               )}
             </p>
